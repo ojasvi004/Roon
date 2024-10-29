@@ -9,6 +9,10 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emotion/react": "^11.13.3",
+    "@emotion/styled": "^11.13.0",
+    "@mui/icons-material": "^6.1.5",
+    "@mui/material": "^6.1.5",
     "@radix-ui/react-slot": "^1.1.0",
     "bcryptjs": "^2.4.3",
     "class-variance-authority": "^0.7.0",
