@@ -44,7 +44,7 @@ const Profile = () => {
 
   const onSubmit = async (data) => {
     if (!user) {
-      setErrorMessage("user session is not available");
+      setErrorMessage("session not found");
       return;
     }
     setLoading(true);
@@ -59,28 +59,34 @@ const Profile = () => {
 
       if (!res.ok) {
         const errorResponse = await res.json();
-        console.log("error:", errorResponse);
-        throw new Error("failed to update profile");
+        console.log("Error:", errorResponse);
+        throw new Error("failed to update");
       }
 
       setLoading(false);
       window.location.reload();
     } catch (error) {
       console.log(data);
-      setErrorMessage("error occurred while updating");
+      setErrorMessage("error updating profile");
       setLoading(false);
     }
   };
 
   return loading ? (
-    <div>
+    <div className="flex">
       <Loader2 className="animate-spin" />
     </div>
   ) : (
-    <div>
-      <h1>Edit your profile</h1>
+    <div className="flex flex-col justify-center overflow-hidden mt-36">
+      <h1 className="text-3xl text-center mb-7 text-gray-200">
+        Edit your profile
+      </h1>
       {errorMessage && <p className="text-red-500">{errorMessage}</p>}
-      <form onSubmit={handleSubmit(onSubmit)} noValidate>
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        noValidate
+        className="flex flex-col items-center space-y-4"
+      >
         <Input
           {...register("username", {
             required: "Username is required",
@@ -89,29 +95,34 @@ const Profile = () => {
           })}
           type="text"
           placeholder="Username"
+          className="w-[250px] mx-auto bg-gray-700 rounded-full border-none text-gray-200 text-lg"
         />
         {errors.username && (
-          <p className="text-red-500">{errors.username.message}</p>
+          <p className="text-red-500 text-center">{errors.username.message}</p>
         )}
 
         <Image
           src={
             watch("profileImage") || user?.profileImage || "/assets/person.jpg"
           }
-          width={40}
-          height={40}
+          width={170}
+          height={170}
           alt="Profile Picture"
+          className="w-[170px] h-[170px] rounded-full object-cover mx-auto"
         />
 
         <CldUploadButton
           options={{ maxFiles: 1 }}
           uploadPreset="nmkeeg8v"
           onSuccess={handleUploadPfp}
+          className="mx-auto text-center text-indigo-400 underline cursor-pointer"
         >
           <p>Upload new profile picture</p>
         </CldUploadButton>
 
-        <Button type="submit">Save changes</Button>
+        <Button type="submit" className="w-[250px] mx-auto bg-indigo-500 rounded-full text-lg">
+          Save changes
+        </Button>
       </form>
     </div>
   );

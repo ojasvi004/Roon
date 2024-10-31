@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import { Loader2 } from "lucide-react";
 import { CheckCircle, RadioButtonUnchecked } from "@mui/icons-material";
-
 import Image from "next/image";
 
 const Contacts = () => {
@@ -29,35 +28,41 @@ const Contacts = () => {
 
   useEffect(() => {
     if (currentUser) getContacts();
-  }, [currentUser]);
+  }, [currentUser, search]);
 
   return loading ? (
     <Loader2 />
   ) : (
-    <div>
-      <input
-        type="text"
-        placeholder="search contact"
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-      />
-      <p>Select or Deselect</p>
-      {contacts.map((user, index) => (
-        <div key={index} className="flex items-center justify-between p-2">
-          <RadioButtonUnchecked />
+    <div className="flex justify-end">
+      <div className="border-solid border-1 bg-violet-200 rounded-xl w-[400px] p-4 ">
+        
+        <input
+          type="text"
+          placeholder="Search contact"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          className="mb-4 w-full p-2 rounded"
+        />
 
-          <Image
-            src={user.profileImage || "/assets/person.jpg"}
-            alt="pfp"
-            width={40}
-            height={40}
-          />
-          <p>{user.username}</p>
+        <p>Select or Deselect</p>
+
+        {contacts.map((user, index) => (
+          <div key={index} className="flex items-center p-2">
+            <RadioButtonUnchecked className="mr-3"/>
+            <Image
+              src={user.profileImage || "/assets/person.jpg"}
+              alt="pfp"
+              width={40}
+              height={40}
+              className="rounded-full mr-3"
+            />
+            <p>{user.username}</p>
+          </div>
+        ))}
+
+        <div className="mt-4">
+          <button>Start a new chat</button>
         </div>
-      ))}
-
-      <div>
-        <button>Start a new chat</button>
       </div>
     </div>
   );

@@ -13,8 +13,8 @@ export const PATCH = async (
     const { username, profileImage } = body;
     console.log("usernameee:", username);
     console.log("pfp:", profileImage);
-  
-  
+    console.log("userId:", userId);
+
     const updatedUser = await User.findByIdAndUpdate(
       userId,
       { username, profileImage },
@@ -22,10 +22,10 @@ export const PATCH = async (
     );
 
     if (!updatedUser) {
-      return new NextResponse(
-        JSON.stringify("user not founddd"),
-        { status: 404, headers: { "Content-Type": "application/json" } }
-      );
+      return new NextResponse(JSON.stringify("user not founddd"), {
+        status: 404,
+        headers: { "Content-Type": "application/json" },
+      });
     }
 
     return new NextResponse(JSON.stringify(updatedUser), {

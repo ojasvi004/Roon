@@ -27,8 +27,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      <body className="overflow-hidden bg-gray-900"
       >
         <Provider>
           <TopBar />
