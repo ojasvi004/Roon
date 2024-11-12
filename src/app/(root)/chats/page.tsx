@@ -3,11 +3,11 @@ import Contacts from "@/components/Contacts";
 
 const Chats = () => {
   return (
-    <div>
+    <div className="flex">
       <div className="w-1/3 max-lg:w-1/2 max-md:w-full">
         <ChatList />
       </div>
-      <div className="w-2/3 max-lg:w-1/2 max-md:hidden">
+      <div className="w-2/3 max-lg:w-1/2 max-md:hidden flex justify-end">
         <Contacts />
       </div>
     </div>

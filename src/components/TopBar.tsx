@@ -48,7 +48,7 @@ const TopBar = () => {
               alt="Profile"
               width={40}
               height={40}
-              className="rounded-full border-2 border-white hover:opacity-80"
+              className="w-[40px] h-[40px] rounded-full object-cover mx-auto"
             />
           </Link>
         )}
