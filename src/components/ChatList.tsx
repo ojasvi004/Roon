@@ -5,7 +5,7 @@ import { useSession } from "next-auth/react";
 import { Loader2 } from "lucide-react";
 import ChatBox from "./ChatBox";
 
-const ChatList = () => {
+const ChatList = ({ currentChatId }) => {
   const { data: session } = useSession();
   const currentUser = session?.user;
   const [loading, setLoading] = useState(true);
@@ -48,7 +48,12 @@ const ChatList = () => {
       />
       <div>
         {chats?.map((chat, index) => (
-          <ChatBox key={index} chat={chat} currentUser={currentUser} />
+          <ChatBox
+            key={index}
+            chat={chat}
+            currentUser={currentUser}
+            currentChatId={currentChatId}
+          />
         ))}
       </div>
     </div>
