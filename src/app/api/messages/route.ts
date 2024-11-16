@@ -10,35 +10,38 @@ export const POST = async (req: NextRequest) => {
 
     const body = await req.json();
     const { chatId, currentUserId, text, photo } = body;
+
     const currentUser = await User.findById(currentUserId);
+    if (!currentUser) {
+      return new Response("user not found", { status: 404 });
+    }
+
     const newMessage = await Message.create({
       chat: chatId,
-      sender: currentUser,
+      sender: currentUserId,
       text,
       photo,
-      seenBy: currentUserId,
+      seenBy: [currentUserId],
     });
 
     const updateChat = await Chat.findByIdAndUpdate(
       chatId,
       {
-        $push: { message: newMessage._id },
+        $push: { messages: newMessage._id },
         $set: { lastMessageAt: newMessage.createdAt },
       },
       { new: true }
     )
       .populate({
         path: "messages",
-        model: Message,
         populate: { path: "sender seenBy", model: "User" },
       })
-      .populate({
-        path: "members",
-        model: "User",
-      })
+      .populate("members")
       .exec();
+
+    return new Response(JSON.stringify(updateChat), { status: 200 });
   } catch (error) {
-    console.log(error);
+    console.log("error:", error);
     return new Response("failed to create new message", { status: 500 });
   }
 };
