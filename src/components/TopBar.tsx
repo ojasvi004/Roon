@@ -16,7 +16,7 @@ const TopBar = () => {
   };
 
   return (
-    <div className="flex items-center justify-between px-6 py-4 bg-violet-500 text-white ">
+    <div className="flex items-center justify-between px-6 py-3 bg-violet-500 text-white ">
       <Link href="/chats" className="text-2xl font-bold">
         chat-app
       </Link>

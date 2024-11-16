@@ -127,7 +127,7 @@ const ChatDetails = ({ chatId }) => {
         <div ref={bottomRef} />
       </div>
 
-      <div className="p-4 flex items-center space-x-4 bg-gray-800">
+      <div className="p-4 flex items-center space-x-4 bg-gray-800 mb-16">
         <CldUploadButton
           options={{ maxFiles: 1 }}
           onUpload={sendPhoto}
@@ -151,7 +151,7 @@ const ChatDetails = ({ chatId }) => {
               ? "Write a message"
               : `message @${otherMembers[0].username}`
           }
-          className="flex-1  rounded-lg p-2 bg-gray-600"
+          className="flex-1 rounded-lg p-2 bg-gray-600"
           value={text}
           onChange={(e) => setText(e.target.value)}
           required
