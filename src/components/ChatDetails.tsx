@@ -7,6 +7,7 @@ import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { CldUploadButton } from "next-cloudinary";
 import { IoIosSend } from "react-icons/io";
+import MessageBox from "./MessageBox";
 
 const ChatDetails = ({ chatId }) => {
   const [loading, setLoading] = useState(true);
