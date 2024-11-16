@@ -34,9 +34,12 @@ export const POST = async (req: NextRequest) => {
     )
       .populate({
         path: "messages",
-        populate: { path: "sender seenBy", model: "User" },
+        model: Message,
+        populate: {
+          path: "sender seenBy",
+          model: User,
+        },
       })
-      .populate("members")
       .exec();
 
     return new Response(JSON.stringify(updateChat), { status: 200 });
