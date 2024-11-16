@@ -19,64 +19,55 @@ const ChatBox = ({ chat, currentUser, currentChatId }) => {
 
   return (
     <div
-      className={`chat-box ${chat._id === currentChatId ? "bg-blue-2" : ""}`}
+      className={`chat-box p-2 rounded-3xl ${
+        chat._id === currentChatId ? "bg-indigo-200" : "hover:bg-gray-400"
+      } cursor-pointer mb-2`}
       onClick={() => router.push(`/chats/${chat._id}`)}
     >
-      <div className="flex hover:bg-indigo-200 rounded-lg mb-1">
+      <div className="flex gap-3 items-center">
         {chat?.isGroup ? (
           <Image
             src={chat?.groupPhoto || "/assets/group.png"}
             alt="group-pfp"
             height={50}
             width={50}
-            className="rounded-full"
+            className="w-50 h-50 rounded-full object-cover"
           />
         ) : (
           <Image
-            src={otherMembers[0].profileImage || "/assets/person.png"}
+            src={otherMembers[0]?.profileImage || "/assets/person.png"}
             alt="pfp"
             height={50}
             width={50}
-            className="rounded-full"
+            className="w-50 h-50 rounded-full object-cover"
           />
         )}
-        <div className="flex">
-          <div className="flex flex-col gap-1">
-            {chat?.isGroup ? (
-              <p className="ml-4">{chat?.name}</p>
-            ) : (
-              <p className="ml-4">{otherMembers[0]?.username}</p>
-            )}
-            {!lastMessage && <p className="ml-4">start a chat</p>}
-
+        <div className="flex-grow">
+          <div className="flex justify-between items-center">
+            <p className=" text-gray-700 font-semibold">
+              {chat?.isGroup ? chat?.name : otherMembers[0]?.username}
+            </p>
+            <p className="text-sm text-gray-600">
+              {!lastMessage
+                ? format(new Date(chat?.createdAt), "p")
+                : format(new Date(chat?.lastMessageAt), "p")}
+            </p>
+          </div>
+          <div className="text-base mt-1 text-gray-800">
+            {!lastMessage && <p>Start a chat</p>}
             {lastMessage?.photo ? (
               lastMessage?.sender?._id === currentUser._id ? (
-                <p className="text-small-medium text-gray-3">
-                  You sent a photo
-                </p>
+                <p>You sent a photo</p>
               ) : (
-                <p
-                  className={`${
-                    seen ? "text-small-medium text-grey-3" : "text-small-bold"
-                  }`}
-                >
+                <p className={`${seen ? "text-gray-600" : "font-semibold"}`}>
                   Received a photo
                 </p>
               )
             ) : (
-              <p
-                className={`last-message ${
-                  seen ? "text-small-medium text-grey-3" : "text-small-bold"
-                }`}
-              >
+              <p className={`${seen ? "text-gray-600" : "font-semibold"}`}>
                 {lastMessage?.text}
               </p>
             )}
-          </div>
-          <div>
-            {!lastMessage
-              ? format(new Date(chat?.createdAt), "p")
-              : format(new Date(chat?.lastMessageAt), "p")}
           </div>
         </div>
       </div>

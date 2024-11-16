@@ -16,7 +16,7 @@ const TopBar = () => {
   };
 
   return (
-    <div className="flex items-center justify-between px-6 py-3 bg-violet-500 text-white ">
+    <div className="flex items-center justify-between px-6 py-3 bg-gray-700 text-white ">
       <Link href="/chats" className="text-2xl font-bold">
         chat-app
       </Link>
@@ -25,15 +25,15 @@ const TopBar = () => {
         <Link
           href="/chats"
           className={`${
-            pathname === "/chats" ? "text-gray-700" : "text-white"
-          } text-lg font-semibold hover:text-gray-300`}
+            pathname === "/chats" ? "text-gray-200" : "text-gray-400"
+          } text-lg font-semibold hover:text-gray-100`}
         >
           Chats
         </Link>
         <Link
           href="/contacts"
           className={`${
-            pathname === "/contacts" ? "text-red-400" : "text-white"
+            pathname === "/contacts" ? "text-gray-200" : "text-gray-400"
           } text-lg font-semibold hover:text-gray-300`}
         >
           Contacts

@@ -36,7 +36,7 @@ const ChatList = ({ currentChatId }) => {
   return loading ? (
     <Loader2 />
   ) : (
-    <div>
+    <div className="pl-4 pr-4">
       <Input
         type="text"
         placeholder="search chat"
@@ -44,7 +44,7 @@ const ChatList = ({ currentChatId }) => {
         onChange={(e) => {
           setSearch(e.target.value);
         }}
-        className="mb-3 mt-3 text-black"
+        className="mb-3 mt-3 text-black rounded-full bg-gray-200  "
       />
       <div>
         {chats?.map((chat, index) => (
