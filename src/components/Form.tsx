@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { signIn } from "next-auth/react";
+import { sanitizeInput } from "@/utils/sanitize";
 
 interface FormProps {
   type: "login" | "register";
@@ -26,6 +27,7 @@ const Form: React.FC<FormProps> = ({ type }) => {
   const router = useRouter();
 
   const onSubmit = async (data: FormData) => {
+    const sanitizedData = sanitizeInput(data);
     if (type === "register") {
       try {
         const res = await fetch("/api/auth/register", {
@@ -33,7 +35,7 @@ const Form: React.FC<FormProps> = ({ type }) => {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(data),
+          body: JSON.stringify(sanitizedData),
         });
 
         if (res.ok) {
@@ -43,13 +45,14 @@ const Form: React.FC<FormProps> = ({ type }) => {
           toast.error("Something went wrong");
         }
       } catch (error) {
+        console.log(error);
         toast.error("An error occurred during registration");
       }
     }
 
     if (type === "login") {
       const res = await signIn("credentials", {
-        ...data,
+        ...sanitizedData,
         redirect: false,
       });
 
@@ -64,7 +67,10 @@ const Form: React.FC<FormProps> = ({ type }) => {
 
   return (
     <div className="flex p-32 justify-center h-screen bg-gray-900 ">
-      <form className="flex flex-col items-center space-y-4 w-full max-w-sm" onSubmit={handleSubmit(onSubmit)}>
+      <form
+        className="flex flex-col items-center space-y-4 w-full max-w-sm"
+        onSubmit={handleSubmit(onSubmit)}
+      >
         <h1 className="text-4xl font-bold mb-4 text-gray-200 font-serif">
           {type === "register" ? "Create Account" : "Sign In"}
         </h1>
@@ -73,8 +79,9 @@ const Form: React.FC<FormProps> = ({ type }) => {
             <Input
               {...register("username", {
                 required: "Username is required",
-                validate: (value) =>
-                  value.length >= 3 || "Username must be at least 3 characters long",
+                validate: (value: any) =>
+                  value.length >= 3 ||
+                  "Username must be at least 3 characters long",
               })}
               type="text"
               placeholder="Username"

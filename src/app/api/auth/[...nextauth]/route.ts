@@ -3,6 +3,13 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
 import User from "@/models/User";
 import dbConnect from "@/db";
+import DOMPurify from "dompurify";
+import { z } from "zod";
+
+const loginSchema = z.object({
+  email: z.string().email("invalid email format"),
+  password: z.string().min(4, "password must be at least 4 characters long"),
+});
 
 const handler = NextAuth({
   session: {
@@ -17,18 +24,33 @@ const handler = NextAuth({
       },
       async authorize(credentials, req) {
         if (!credentials || !credentials.email || !credentials.password) {
-          throw new Error("invalid email or password");
+          return null;
+        }
+
+        const normalizedEmail = credentials.email.trim().toLowerCase();
+        const password = credentials.password;
+
+        const result = loginSchema.safeParse({
+          email: normalizedEmail,
+          password: password,
+        });
+
+        if (!result.success) {
+          throw new Error(
+            "Invalid input data: " +
+              result.error.errors.map((e) => e.message).join(", ")
+          );
         }
 
         await dbConnect();
 
-        const user = await User.findOne({ email: credentials.email });
+        const user = await User.findOne({ email: normalizedEmail });
 
         if (!user || !user?.password) {
           throw new Error("invalid email or password");
         }
 
-        const isMatch = await bcrypt.compare(credentials.password, user.password);
+        const isMatch = await bcrypt.compare(password, user.password);
 
         if (!isMatch) {
           throw new Error("invalid password");
@@ -46,7 +68,7 @@ const handler = NextAuth({
       session.user = { ...session.user, ...mongodbUser._doc };
 
       return session;
-    }
+    },
   },
   secret: process.env.NEXTAUTH_SECRET,
 });
