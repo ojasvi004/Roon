@@ -1,4 +1,5 @@
 import dbConnect from "@/db";
+import { pusherServer } from "@/lib/pusher";
 import Chat from "@/models/Chat";
 import User from "@/models/User";
 import { NextRequest, NextResponse } from "next/server";
@@ -31,7 +32,9 @@ export const POST = async (req: NextRequest) => {
         );
       })
     );
-
+    chat.members.map(async (member) => {
+      await pusherServer.trigger(member._id.toString(), "new-chat", chat);
+    });
     return NextResponse.json(chat);
   } catch (error) {
     console.log(error);

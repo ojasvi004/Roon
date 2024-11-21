@@ -4,6 +4,7 @@ import { Input } from "./ui/input";
 import { useSession } from "next-auth/react";
 import { Loader2 } from "lucide-react";
 import ChatBox from "./ChatBox";
+import { pusherClient } from "@/lib/pusher";
 
 const ChatList = ({ currentChatId }) => {
   const { data: session } = useSession();
@@ -31,6 +32,37 @@ const ChatList = ({ currentChatId }) => {
       getChats();
     }
   }, [currentUser, search]);
+
+  useEffect(() => {
+    if (currentUser) {
+      pusherClient.subscribe(currentUser._id);
+
+      const handleChatUpdate = (updatedChat) => {
+        setChats((allChats) =>
+          allChats.map((chat) => {
+            if (chat._id === updatedChat.id) {
+              return { ...chat, messages: updatedChat.messages };
+            } else {
+              return chat;
+            }
+          })
+        );
+      };
+
+      const handleNewChat = (newChat) => {
+        setChats((allChats) => [...allChats, newChat]);
+      };
+
+      pusherClient.bind("update-chat", handleChatUpdate);
+      pusherClient.bind("new-chat", handleNewChat);
+
+      return () => {
+        pusherClient.unsubscribe(currentUser._id);
+        pusherClient.unbind("update-chat", handleChatUpdate);
+        pusherClient.unbind("new-chat", handleNewChat);
+      };
+    }
+  }, [currentUser]);
 
   console.log(chats);
   return loading ? (

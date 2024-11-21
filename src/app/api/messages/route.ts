@@ -1,4 +1,5 @@
 import dbConnect from "@/db";
+import { pusherServer } from "@/lib/pusher";
 import Chat from "@/models/Chat";
 import Message from "@/models/Message";
 import User from "@/models/User";
@@ -18,13 +19,13 @@ export const POST = async (req: NextRequest) => {
 
     const newMessage = await Message.create({
       chat: chatId,
-      sender: currentUserId,
+      sender: currentUser,
       text,
       photo,
       seenBy: [currentUserId],
     });
 
-    const updateChat = await Chat.findByIdAndUpdate(
+    const updatedChat = await Chat.findByIdAndUpdate(
       chatId,
       {
         $push: { messages: newMessage._id },
@@ -42,7 +43,21 @@ export const POST = async (req: NextRequest) => {
       })
       .exec();
 
-    return new Response(JSON.stringify(updateChat), { status: 200 });
+    await pusherServer.trigger(chatId, "new-message", newMessage);
+
+    const lastMessage = updatedChat.messages[updatedChat?.messages.length - 1];
+    updatedChat.members.forEach(async (member) => {
+      try {
+        await pusherServer.trigger(member._id.toString(), "update-chat", {
+          id: chatId,
+          messages: [lastMessage],
+        });
+      } catch (error) {
+        console.log(`failed to trigger update chat event`);
+      }
+    });
+
+    return new Response(JSON.stringify(newMessage), { status: 200 });
   } catch (error) {
     console.log("error:", error);
     return new Response("failed to create new message", { status: 500 });

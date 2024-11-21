@@ -8,6 +8,7 @@ import Link from "next/link";
 import { CldUploadButton } from "next-cloudinary";
 import { IoIosSend } from "react-icons/io";
 import MessageBox from "./MessageBox";
+import { pusherClient } from "@/lib/pusher";
 
 const ChatDetails = ({ chatId }) => {
   const [loading, setLoading] = useState(true);
@@ -84,6 +85,29 @@ const ChatDetails = ({ chatId }) => {
 
   const bottomRef = useRef(null);
 
+  useEffect(() => {
+    bottomRef.current?.scrollIntoView({
+      behavior: "smooth",
+    });
+  }, [chat?.messages]);
+
+  useEffect(() => {
+    pusherClient.subscribe(chatId);
+    const handleMessage = async (newMessage) => {
+      setChat((prevChat) => {
+        return {
+          ...prevChat,
+          messages: [...prevChat.messages, newMessage],
+        };
+      });
+    };
+    pusherClient.bind("new-message", handleMessage);
+    return () => {
+      pusherClient.unsubscribe(chatId);
+      pusherClient.unbind("new-message", handleMessage);
+    };
+  }, [chatId]);
+
   return loading ? (
     <Loader2 className="mx-auto mt-20" />
   ) : (
@@ -91,7 +115,7 @@ const ChatDetails = ({ chatId }) => {
       <div className="flex items-center p-2 border-b bg-gray-700">
         {chat?.isGroup ? (
           <>
-            <Link href={`/chats/${chatId}/group-info`}>
+            <Link href={`/chatchatIds/${chatId}/group-info`}>
               <img
                 src={chat?.groupPhoto || "/assets/group.png"}
                 alt="group-photo"
