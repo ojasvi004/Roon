@@ -115,7 +115,7 @@ const ChatDetails = ({ chatId }) => {
       <div className="flex items-center p-2 border-b bg-gray-700">
         {chat?.isGroup ? (
           <>
-            <Link href={`/chatchatIds/${chatId}/group-info`}>
+            <Link href={`/chats/${chatId}/group-info`}>
               <img
                 src={chat?.groupPhoto || "/assets/group.png"}
                 alt="group-photo"
