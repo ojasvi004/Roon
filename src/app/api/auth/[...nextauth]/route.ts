@@ -3,7 +3,6 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
 import User from "@/models/User";
 import dbConnect from "@/db";
-import DOMPurify from "dompurify";
 import { z } from "zod";
 
 const loginSchema = z.object({
@@ -14,6 +13,8 @@ const loginSchema = z.object({
 const handler = NextAuth({
   session: {
     strategy: "jwt",
+    maxAge: 24 * 60 * 60,
+    updateAge: 12 * 60 * 60,
   },
   providers: [
     CredentialsProvider({
@@ -22,7 +23,7 @@ const handler = NextAuth({
         email: { label: "Email", type: "text", placeholder: "email" },
         password: { label: "Password", type: "password" },
       },
-      async authorize(credentials, req) {
+      async authorize(credentials) {
         if (!credentials || !credentials.email || !credentials.password) {
           return null;
         }
@@ -32,7 +33,7 @@ const handler = NextAuth({
 
         const result = loginSchema.safeParse({
           email: normalizedEmail,
-          password: password,
+          password,
         });
 
         if (!result.success) {
@@ -45,29 +46,41 @@ const handler = NextAuth({
         await dbConnect();
 
         const user = await User.findOne({ email: normalizedEmail });
-
-        if (!user || !user?.password) {
-          throw new Error("invalid email or password");
+        if (!user || !user.password) {
+          throw new Error("invalid password");
         }
 
         const isMatch = await bcrypt.compare(password, user.password);
-
         if (!isMatch) {
           throw new Error("invalid password");
         }
 
-        return user;
+        return { id: user._id.toString(), email: user.email, name: user.name };
       },
     }),
   ],
   callbacks: {
-    async session({ session }) {
+    async session({ session, token }) {
       const mongodbUser = await User.findOne({ email: session.user.email });
-      session.user.id = mongodbUser._id.toString();
 
-      session.user = { ...session.user, ...mongodbUser._doc };
+      if (mongodbUser) {
+        session.user.id = mongodbUser._id.toString();
+        session.user = { ...session.user, ...mongodbUser._doc };
+      }
 
       return session;
+    },
+  },
+  cookies: {
+    sessionToken: {
+      name: "next-auth.session-token",
+      options: {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: "lax",
+        maxAge: 60 * 60 * 24 * 30,
+        path: "/",
+      },
     },
   },
   secret: process.env.NEXTAUTH_SECRET,
