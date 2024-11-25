@@ -1,13 +1,20 @@
-import Contacts from "@/components/Contacts";
-import ChatList from "@/components/ChatList";
+import Contacts from '@/components/Contacts';
+import ChatList from '@/components/ChatList';
+
 const Chats = () => {
   return (
-    <div className="flex">
-      <div className="w-1/3 max-lg:w-1/2 max-md:w-full bg-indigo-50 bg-opacity-50 min-h-screen backdrop-blur-2xl">
+    <div className="grid grid-cols-12 min-h-screen overflow-hidden">
+
+      <div className="col-span-4 min-w-96 bg-indigo-50 bg-opacity-50 backdrop-blur-2xl">
         <ChatList />
       </div>
-      <div className="w-2/3 max-lg:w-1/2 max-md:hidden flex justify-end">
-        <Contacts />
+
+      {/* 
+      <div className="col-span-4 flex items-center justify-center">
+        <p> </p>
+      </div> */}
+      <div className="col-span-5 flex items-center text-center justify-end">
+        <p>Start chat</p>
       </div>
     </div>
   );

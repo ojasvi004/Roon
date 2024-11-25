@@ -1,14 +1,14 @@
-"use client";
+'use client';
 
-import { useState, useEffect, useRef } from "react";
-import { Loader2 } from "lucide-react";
-import { AddPhotoAlternate } from "@mui/icons-material";
-import { useSession } from "next-auth/react";
-import Link from "next/link";
-import { CldUploadButton } from "next-cloudinary";
-import { IoIosSend } from "react-icons/io";
-import MessageBox from "./MessageBox";
-import { pusherClient } from "@/lib/pusher";
+import { useState, useEffect, useRef } from 'react';
+import { Loader2 } from 'lucide-react';
+import { AddPhotoAlternate } from '@mui/icons-material';
+import { useSession } from 'next-auth/react';
+import Link from 'next/link';
+import { CldUploadButton } from 'next-cloudinary';
+import { IoIosSend } from 'react-icons/io';
+import MessageBox from './MessageBox';
+import { pusherClient } from '@/lib/pusher';
 
 const ChatDetails = ({ chatId }) => {
   const [loading, setLoading] = useState(true);
@@ -18,14 +18,14 @@ const ChatDetails = ({ chatId }) => {
   const { data: session } = useSession();
   const currentUser = session?.user;
 
-  const [text, setText] = useState("");
+  const [text, setText] = useState('');
 
   const getChatDetails = async () => {
     try {
       const res = await fetch(`/api/chats/${chatId}`, {
-        method: "GET",
+        method: 'GET',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
       });
       const data = await res.json();
@@ -45,10 +45,10 @@ const ChatDetails = ({ chatId }) => {
 
   const sendText = async () => {
     try {
-      const res = await fetch("/api/messages", {
-        method: "POST",
+      const res = await fetch('/api/messages', {
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           chatId,
@@ -58,7 +58,7 @@ const ChatDetails = ({ chatId }) => {
       });
 
       if (res.ok) {
-        setText("");
+        setText('');
       }
     } catch (error) {
       console.log(error);
@@ -67,10 +67,10 @@ const ChatDetails = ({ chatId }) => {
 
   const sendPhoto = async (result) => {
     try {
-      const res = await fetch("/api/messages", {
-        method: "POST",
+      const res = await fetch('/api/messages', {
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           chatId,
@@ -87,7 +87,7 @@ const ChatDetails = ({ chatId }) => {
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({
-      behavior: "smooth",
+      behavior: 'smooth',
     });
   }, [chat?.messages]);
 
@@ -101,30 +101,30 @@ const ChatDetails = ({ chatId }) => {
         };
       });
     };
-    pusherClient.bind("new-message", handleMessage);
+    pusherClient.bind('new-message', handleMessage);
     return () => {
       pusherClient.unsubscribe(chatId);
-      pusherClient.unbind("new-message", handleMessage);
+      pusherClient.unbind('new-message', handleMessage);
     };
   }, [chatId]);
 
   return loading ? (
     <Loader2 className="mx-auto mt-20" />
   ) : (
-    <div className="flex flex-col min-h-screen">
-      <div className="flex items-center p-2 border-b bg-gray-700">
+    <div className="flex flex-col w-full h-screen">
+      <div className="flex items-center p-4 border-b bg-gray-700">
         {chat?.isGroup ? (
           <>
             <Link href={`/chats/${chatId}/group-info`}>
               <img
-                src={chat?.groupPhoto || "/assets/group.png"}
+                src={chat?.groupPhoto || '/assets/group.png'}
                 alt="group-photo"
                 className="w-12 h-12 rounded-full cursor-pointer"
               />
             </Link>
             <div className="ml-4">
               <p className="text-lg font-semibold text-gray-200">
-                {chat?.name} &#160; &#183; &#160; {chat?.members?.length}{" "}
+                {chat?.name} &#160; &#183; &#160; {chat?.members?.length}{' '}
                 members
               </p>
             </div>
@@ -132,27 +132,27 @@ const ChatDetails = ({ chatId }) => {
         ) : (
           <>
             <img
-              src={otherMembers[0].profileImage || "/assets/person.jpg"}
+              src={otherMembers[0]?.profileImage || '/assets/person.jpg'}
               alt="profile photo"
               className="w-12 h-12 rounded-full"
             />
             <div className="ml-4">
               <p className="text-lg font-semibold">
-                {otherMembers[0].username}
+                {otherMembers[0]?.username}
               </p>
             </div>
           </>
         )}
       </div>
 
-      <div className="flex-1 overflow-y-auto p-4">
+      <div className="flex-grow overflow-y-auto p-4 bg-gray-900">
         {chat?.messages?.map((message, index) => (
           <MessageBox key={index} message={message} currentUser={currentUser} />
         ))}
         <div ref={bottomRef} />
       </div>
 
-      <div className="p-4 flex items-center space-x-4 bg-gray-800 mb-16">
+      <div className="flex items-center p-4 bg-gray-800 sticky bottom-0">
         <CldUploadButton
           options={{ maxFiles: 1 }}
           onUpload={sendPhoto}
@@ -160,10 +160,10 @@ const ChatDetails = ({ chatId }) => {
         >
           <AddPhotoAlternate
             sx={{
-              fontSize: "35px",
-              color: "#737373",
-              cursor: "pointer",
-              "&:hover": { color: "gray" },
+              fontSize: '35px',
+              color: '#737373',
+              cursor: 'pointer',
+              '&:hover': { color: 'gray' },
             }}
             className="text-gray-500 hover:text-indigo-500"
           />
@@ -173,8 +173,8 @@ const ChatDetails = ({ chatId }) => {
           type="text"
           placeholder={
             chat?.isGroup
-              ? "Write a message"
-              : `message @${otherMembers[0].username}`
+              ? 'Write a message'
+              : `message @${otherMembers[0]?.username}`
           }
           className="flex-1 rounded-lg p-2 bg-gray-600"
           value={text}

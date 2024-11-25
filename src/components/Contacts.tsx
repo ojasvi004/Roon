@@ -74,12 +74,12 @@ const Contacts: React.FC = () => {
   };
 
   return loading ? (
-    <div className="flex items-center justify-center min-h-screen">
+    <div className="flex">
       <Loader2 className="w-8 h-8 animate-spin text-gray-500" />
     </div>
   ) : (
-    <div className="flex justify-end p-4">
-      <div className="w-96 max-w-lg mr-16 mt-8">
+    <div >
+      <div className="w-96 max-w-lg mt-8">
         <Input
           placeholder="Search contact"
           className="w-full p-2 mb-4  bg-gray-700 rounded-md  border-null focus:outline-none "

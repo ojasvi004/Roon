@@ -1,10 +1,10 @@
-"use client";
-import ChatDetails from "@/components/ChatDetails";
-import ChatList from "@/components/ChatList";
-import { useSession } from "next-auth/react";
-import { useParams } from "next/navigation";
+'use client';
+import ChatDetails from '@/components/ChatDetails';
+import ChatList from '@/components/ChatList';
+import { useSession } from 'next-auth/react';
+import { useParams } from 'next/navigation';
 
-import React, { useEffect } from "react";
+import React, { useEffect } from 'react';
 
 const ChatPage = () => {
   const { chatId } = useParams();
@@ -14,9 +14,9 @@ const ChatPage = () => {
   const seenMessages = async () => {
     try {
       await fetch(`/api/chats/${chatId}`, {
-        method: "POST",
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           currentUserId: currentUser._id,
@@ -32,12 +32,12 @@ const ChatPage = () => {
   }, [currentUser, chatId]);
 
   return (
-    <div className="main-container flex flex-row overflow-hidden">
-      <div className="w-1/3  max-lg:w-1/2 max-md:w-full bg-indigo-50 bg-opacity-50 min-h-screen backdrop-blur-2xl">
+    <div className="grid grid-cols-12 min-h-screen">
+      <div className="col-span-4 min-w-96 bg-indigo-50 bg-opacity-50 backdrop-blur-2xl">
         <ChatList currentChatId={chatId} />
       </div>
 
-      <div className="w-2/3 max-lg:w-1/2 max-md:hidden ">
+      <div className="col-span-8 flex min-w-full">
         <ChatDetails chatId={chatId} />
       </div>
     </div>
