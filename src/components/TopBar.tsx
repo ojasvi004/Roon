@@ -7,6 +7,7 @@ import Image from 'next/image';
 import { IoIosLogOut } from 'react-icons/io';
 import { BsChatLeftTextFill } from 'react-icons/bs';
 import { RiContactsBook2Fill } from 'react-icons/ri';
+import { PiCatFill } from "react-icons/pi";
 
 const TopBar = () => {
   const pathname = usePathname();
@@ -19,8 +20,8 @@ const TopBar = () => {
 
   return (
     <div className="flex flex-col items-center px-3 py-3 bg-gray-700 text-white h-screen">
-      <Link href="/chats" className="text-2xl font-bold">
-        chat
+      <Link href="/chats" className="text-5xl text-gray-300 font-bold">
+      <PiCatFill />
       </Link>
 
       <div className="flex flex-col mt-6">
@@ -28,9 +29,9 @@ const TopBar = () => {
           href="/chats"
           className={`${
             pathname === '/chats'
-              ? 'text-gray-200 bg-gray-500 w-12 h-12 rounded-full flex items-center justify-center'
-              : 'text-gray-400'
-          } text-2xl font-semibold hover:text-gray-100`}
+              ? 'text-gray-200 bg-indigo-500 w-12 h-12 rounded-full '
+              : 'text-gray-400  bg-gray-700 w-12 h-12 rounded-full '
+          } text-2xl flex items-center justify-center font-semibold hover:text-gray-100`}
         >
           <BsChatLeftTextFill />
         </Link>
@@ -39,9 +40,9 @@ const TopBar = () => {
           href="/contacts"
           className={`${
             pathname === '/contacts'
-              ? 'text-gray-200 bg-gray-500 w-12 h-12 rounded-full flex items-center justify-center'
-              : 'text-gray-400'
-          } text-2xl font-semibold hover:text-gray-100`}
+              ? 'text-gray-200 bg-indigo-500 w-12 h-12 rounded-full '
+              : 'text-gray-400  bg-gray-700 w-12 h-12 rounded-full '
+          } text-2xl flex items-center justify-center font-semibold hover:text-gray-100 mt-2`}
         >
           <RiContactsBook2Fill />
         </Link>

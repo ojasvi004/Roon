@@ -119,7 +119,7 @@ const ChatDetails = ({ chatId }) => {
               <img
                 src={chat?.groupPhoto || '/assets/group.png'}
                 alt="group-photo"
-                className="w-12 h-12 rounded-full cursor-pointer"
+                className="w-12 h-12 rounded-full cursor-pointer object-cover"
               />
             </Link>
             <div className="ml-4">

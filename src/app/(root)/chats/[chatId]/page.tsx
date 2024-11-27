@@ -32,12 +32,12 @@ const ChatPage = () => {
   }, [currentUser, chatId]);
 
   return (
-    <div className="grid grid-cols-12 min-h-screen">
-      <div className="col-span-4 min-w-96 bg-indigo-50 bg-opacity-50 backdrop-blur-2xl">
+    <div className="grid grid-cols-[1fr,3fr] min-h-screen">
+      <div className="min-w-96 bg-indigo-50 bg-opacity-50 backdrop-blur-2xl">
         <ChatList currentChatId={chatId} />
       </div>
 
-      <div className="col-span-8 flex min-w-full">
+      <div className="w-full">
         <ChatDetails chatId={chatId} />
       </div>
     </div>
