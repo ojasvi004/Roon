@@ -21,12 +21,10 @@ const SideBar = () => {
 
   return (
     <div className="flex flex-col items-center px-4 py-6 bg-gray-900 text-white h-screen">
-      {/* Logo */}
       <Link href="/chats" className="text-4xl text-gray-300 font-bold">
         <PiCatFill />
       </Link>
 
-      {/* Navigation Links */}
       <div className="flex flex-col mt-8 space-y-4">
         <Link
           href="/chats"
@@ -47,7 +45,6 @@ const SideBar = () => {
         </Link>
       </div>
 
-      {/* User Profile and Logout */}
       <div className="flex items-center mt-auto">
         {user && (
           <Popover>
@@ -61,7 +58,6 @@ const SideBar = () => {
               />
             </PopoverTrigger>
             <PopoverContent className="bg-gray-800 text-white rounded-lg shadow-md p-4 flex flex-col gap-2">
-              {/* Profile Update */}
               <Link
                 href="/profile"
                 className="text-sm text-gray-300 hover:text-gray-100 transition duration-200"
@@ -69,7 +65,6 @@ const SideBar = () => {
                 Update Profile
               </Link>
 
-              {/* Logout Button */}
               <button
                 onClick={handleLogout}
                 className="text-sm text-gray-300 hover:text-gray-100 transition duration-200 flex items-center"
