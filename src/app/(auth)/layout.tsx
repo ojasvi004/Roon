@@ -1,14 +1,23 @@
+import { Inter } from "next/font/google"; // Import the Inter font from Google
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "../globals.css";
 import ToasterContext from "@/components/ToasterContext";
 import Provider from "@/components/Provider";
 
+// Load Inter font with Next.js font optimization
+const inter = Inter({
+  subsets: ["latin"],  // You can add more subsets if needed
+  weight: ["400", "600"],  // Specify the font weights you want to use
+});
+
+// Load local fonts (Geist Sans and Geist Mono)
 const geistSans = localFont({
   src: "../fonts/GeistVF.woff",
   variable: "--font-geist-sans",
   weight: "100 900",
 });
+
 const geistMono = localFont({
   src: "../fonts/GeistMonoVF.woff",
   variable: "--font-geist-mono",
@@ -28,7 +37,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${inter.className} ${geistSans.variable} ${geistMono.variable} antialiased font-sans`}
       >
         <Provider>
           <ToasterContext />

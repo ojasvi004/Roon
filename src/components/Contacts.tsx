@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import React, { useEffect, useState } from "react";
-import { useSession } from "next-auth/react";
-import { CheckCircle, RadioButtonUnchecked } from "@mui/icons-material";
-import { useRouter } from "next/navigation";
-import { Loader2 } from "lucide-react";
-import { Input } from "./ui/input";
+import React, { useEffect, useState } from 'react';
+import { useSession } from 'next-auth/react';
+import { CheckCircle, RadioButtonUnchecked } from '@mui/icons-material';
+import { useRouter } from 'next/navigation';
+import { Input } from './ui/input';
+import Loader from './Loader';
 
 type Contact = {
   _id: string;
@@ -16,9 +16,9 @@ type Contact = {
 const Contacts: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [contacts, setContacts] = useState<Contact[]>([]);
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState('');
   const [selectedContacts, setSelectedContacts] = useState<Contact[]>([]);
-  const [name, setName] = useState("");
+  const [name, setName] = useState('');
   const isGroup = selectedContacts.length > 1;
 
   const { data: session } = useSession();
@@ -28,7 +28,7 @@ const Contacts: React.FC = () => {
   const getContacts = async () => {
     try {
       const res = await fetch(
-        search !== "" ? `/api/users/searchContact/${search}` : "/api/users"
+        search !== '' ? `/api/users/searchContact/${search}` : '/api/users'
       );
       const data = await res.json();
       if (currentUser) {
@@ -57,8 +57,8 @@ const Contacts: React.FC = () => {
   };
 
   const createChat = async () => {
-    const res = await fetch("/api/chats", {
-      method: "POST",
+    const res = await fetch('/api/chats', {
+      method: 'POST',
       body: JSON.stringify({
         currentUserId: currentUser._id,
         members: selectedContacts.map((contact) => contact._id),
@@ -75,10 +75,10 @@ const Contacts: React.FC = () => {
 
   return loading ? (
     <div className="flex">
-      <Loader2 className="w-8 h-8 animate-spin text-gray-500" />
+      <Loader />
     </div>
   ) : (
-    <div >
+    <div>
       <div className="w-96 max-w-lg mt-8">
         <Input
           placeholder="Search contact"
@@ -99,12 +99,12 @@ const Contacts: React.FC = () => {
                   onClick={() => handleSelect(user)}
                 >
                   {selectedContacts.some((item) => item._id === user._id) ? (
-                    <CheckCircle sx={{ color: "red" }} />
+                    <CheckCircle sx={{ color: 'red' }} />
                   ) : (
                     <RadioButtonUnchecked />
                   )}
                   <img
-                    src={user.profileImage || "/assets/person.jpg"}
+                    src={user.profileImage || '/assets/person.jpg'}
                     alt="profile"
                     className="w-8 h-8 rounded-full"
                   />
@@ -145,8 +145,8 @@ const Contacts: React.FC = () => {
             <button
               className={`w-full py-2 mt-6 font-semibold text-white rounded-full ${
                 selectedContacts.length === 0
-                  ? "bg-gray-400 cursor-not-allowed"
-                  : "bg-indigo-500 hover:bg-indigo-600"
+                  ? 'bg-gray-400 cursor-not-allowed'
+                  : 'bg-indigo-500 hover:bg-indigo-600'
               }`}
               onClick={createChat}
               disabled={selectedContacts.length === 0}

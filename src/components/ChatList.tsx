@@ -1,22 +1,22 @@
-"use client";
-import React, { useEffect, useState } from "react";
-import { Input } from "./ui/input";
-import { useSession } from "next-auth/react";
-import { Loader2 } from "lucide-react";
-import ChatBox from "./ChatBox";
-import { pusherClient } from "@/lib/pusher";
+'use client';
+import React, { useEffect, useState } from 'react';
+import { Input } from './ui/input';
+import { useSession } from 'next-auth/react';
+import ChatBox from './ChatBox';
+import { pusherClient } from '@/lib/pusher';
+import Loader from './Loader';
 
 const ChatList = ({ currentChatId }) => {
   const { data: session } = useSession();
   const currentUser = session?.user;
   const [loading, setLoading] = useState(true);
   const [chats, setChats] = useState([]);
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState('');
 
   const getChats = async () => {
     try {
       const response = await fetch(
-        search !== ""
+        search !== ''
           ? `/api/users/${currentUser._id}/searchChat/${search}`
           : `/api/users/${currentUser._id}`
       );
@@ -53,20 +53,20 @@ const ChatList = ({ currentChatId }) => {
         setChats((allChats) => [...allChats, newChat]);
       };
 
-      pusherClient.bind("update-chat", handleChatUpdate);
-      pusherClient.bind("new-chat", handleNewChat);
+      pusherClient.bind('update-chat', handleChatUpdate);
+      pusherClient.bind('new-chat', handleNewChat);
 
       return () => {
         pusherClient.unsubscribe(currentUser._id);
-        pusherClient.unbind("update-chat", handleChatUpdate);
-        pusherClient.unbind("new-chat", handleNewChat);
+        pusherClient.unbind('update-chat', handleChatUpdate);
+        pusherClient.unbind('new-chat', handleNewChat);
       };
     }
   }, [currentUser]);
 
   console.log(chats);
   return loading ? (
-    <Loader2 />
+   <Loader />
   ) : (
     <div className="pl-4 pr-4">
       <Input
@@ -76,7 +76,7 @@ const ChatList = ({ currentChatId }) => {
         onChange={(e) => {
           setSearch(e.target.value);
         }}
-        className="mb-3 mt-3 text-black rounded-full bg-gray-200  "
+        className="mb-3 mt-3 text-black rounded-full bg-gray-300  "
       />
       <div>
         {chats?.map((chat, index) => (

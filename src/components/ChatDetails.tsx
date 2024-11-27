@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import { Loader2 } from 'lucide-react';
 import { AddPhotoAlternate } from '@mui/icons-material';
 import { useSession } from 'next-auth/react';
 import Link from 'next/link';
@@ -9,6 +8,7 @@ import { CldUploadButton } from 'next-cloudinary';
 import { IoIosSend } from 'react-icons/io';
 import MessageBox from './MessageBox';
 import { pusherClient } from '@/lib/pusher';
+import Loader from './Loader';
 
 const ChatDetails = ({ chatId }) => {
   const [loading, setLoading] = useState(true);
@@ -109,7 +109,7 @@ const ChatDetails = ({ chatId }) => {
   }, [chatId]);
 
   return loading ? (
-    <Loader2 className="mx-auto mt-20" />
+    <Loader />
   ) : (
     <div className="flex flex-col w-full h-screen">
       <div className="flex items-center p-4 border-b bg-gray-700">

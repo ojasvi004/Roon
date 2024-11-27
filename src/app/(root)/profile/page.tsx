@@ -1,13 +1,12 @@
-"use client";
-import React, { useState, useEffect } from "react";
-import { Input } from "@/components/ui/input";
-import { useSession } from "next-auth/react";
-import Image from "next/image";
-import { Button } from "@/components/ui/button";
-import { useForm } from "react-hook-form";
-import { CldUploadButton } from "next-cloudinary";
-import { Loader2 } from "lucide-react";
-
+'use client';
+import React, { useState, useEffect } from 'react';
+import { Input } from '@/components/ui/input';
+import { useSession } from 'next-auth/react';
+import Image from 'next/image';
+import { Button } from '@/components/ui/button';
+import { useForm } from 'react-hook-form';
+import { CldUploadButton } from 'next-cloudinary';
+import Loader from '@/components/Loader';
 interface User {
   username: string;
   profileImage: string;
@@ -26,7 +25,7 @@ const Profile = () => {
     formState: { errors },
   } = useForm();
   const [loading, setLoading] = useState(true);
-  const [errorMessage, setErrorMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
     if (user) {
@@ -39,42 +38,42 @@ const Profile = () => {
   }, [user, reset]);
 
   const handleUploadPfp = (result: any) => {
-    setValue("profileImage", result?.info?.secure_url);
+    setValue('profileImage', result?.info?.secure_url);
   };
 
   const onSubmit = async (data) => {
     if (!user) {
-      setErrorMessage("session not found");
+      setErrorMessage('session not found');
       return;
     }
     setLoading(true);
     try {
       const res = await fetch(`/api/users/${user._id}/update`, {
-        method: "PATCH",
+        method: 'PATCH',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify(data),
       });
 
       if (!res.ok) {
         const errorResponse = await res.json();
-        console.log("Error:", errorResponse);
-        throw new Error("failed to update");
+        console.log('Error:', errorResponse);
+        throw new Error('failed to update');
       }
 
       setLoading(false);
       window.location.reload();
     } catch (error) {
       console.log(data);
-      setErrorMessage("error updating profile");
+      setErrorMessage('error updating profile');
       setLoading(false);
     }
   };
 
   return loading ? (
     <div className="flex">
-      <Loader2 className="animate-spin" />
+      <Loader />
     </div>
   ) : (
     <div className="flex flex-col justify-center overflow-hidden mt-36">
@@ -88,10 +87,10 @@ const Profile = () => {
         className="flex flex-col items-center space-y-4"
       >
         <Input
-          {...register("username", {
-            required: "Username is required",
+          {...register('username', {
+            required: 'Username is required',
             validate: (value) =>
-              value.length >= 3 || "Username must be at least 3 characters",
+              value.length >= 3 || 'Username must be at least 3 characters',
           })}
           type="text"
           placeholder="Username"
@@ -103,7 +102,7 @@ const Profile = () => {
 
         <Image
           src={
-            watch("profileImage") || user?.profileImage || "/assets/person.jpg"
+            watch('profileImage') || user?.profileImage || '/assets/person.jpg'
           }
           width={170}
           height={170}
@@ -120,7 +119,10 @@ const Profile = () => {
           <p>Upload new profile picture</p>
         </CldUploadButton>
 
-        <Button type="submit" className="w-[250px] mx-auto bg-indigo-500 rounded-full text-lg">
+        <Button
+          type="submit"
+          className="w-[250px] mx-auto bg-indigo-500 rounded-full text-lg"
+        >
           Save changes
         </Button>
       </form>

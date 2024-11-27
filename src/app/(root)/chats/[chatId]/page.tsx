@@ -33,7 +33,7 @@ const ChatPage = () => {
 
   return (
     <div className="grid grid-cols-[1fr,3fr] min-h-screen">
-      <div className="min-w-96 bg-indigo-50 bg-opacity-50 backdrop-blur-2xl">
+      <div className="min-w-96 bg-gray-500 bg-opacity-50 backdrop-blur-2xl">
         <ChatList currentChatId={chatId} />
       </div>
 
