@@ -25,7 +25,7 @@ const MessageBox = ({ message, currentUser }) => {
           <img
             src={message?.photo}
             alt="message"
-            className="rounded-lg max-w-xs shadow-sm"
+            className="max-w-[200px] max-h-[200px] object-contain"
           />
         )}
       </div>
@@ -41,7 +41,7 @@ const MessageBox = ({ message, currentUser }) => {
           <img
             src={message?.photo}
             alt="message"
-            className="rounded-lg max-w-xs shadow-sm"
+            className="max-w-[200px] max-h-[200px] object-contain rounded-lg shadow-sm"
           />
         )}
         <p className="text-xs text-gray-500 mb-1">

@@ -170,8 +170,9 @@ const ChatDetails = ({ chatId }) => {
       <div className="flex items-center p-4 bg-gray-800 sticky bottom-0">
         <CldUploadButton
           options={{ maxFiles: 1 }}
-          onUpload={sendPhoto}
-          uploadPreset="upecg01j"
+          uploadPreset="nmkeeg8v"
+          onSuccess={sendPhoto}
+          W
         >
           <AddPhotoAlternate
             sx={{
