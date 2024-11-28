@@ -1,12 +1,15 @@
 import { format } from 'date-fns';
+import Image from 'next/image';
 
 const MessageBox = ({ message, currentUser }) => {
   return message?.sender?._id !== currentUser._id ? (
     <div className="flex items-start gap-3 mb-4">
-      <img
+      <Image
         src={message?.sender?.profileImage || '/assets/person.jpg'}
         alt="profile photo"
         className="w-10 h-10 rounded-full object-cover"
+        height={50}
+        width={50}
       />
       <div className="flex flex-col">
         <p className="text-xs text-gray-500 mb-1">

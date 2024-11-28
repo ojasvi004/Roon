@@ -6,6 +6,7 @@ import { CheckCircle, RadioButtonUnchecked } from '@mui/icons-material';
 import { useRouter } from 'next/navigation';
 import { Input } from './ui/input';
 import Loader from './Loader';
+import Image from 'next/image';
 
 type Contact = {
   _id: string;
@@ -101,12 +102,14 @@ const Contacts: React.FC = () => {
                   {selectedContacts.some((item) => item._id === user._id) ? (
                     <CheckCircle sx={{ color: 'red' }} />
                   ) : (
-                    <RadioButtonUnchecked />
+                    <RadioButtonUnchecked className="text-indigo-500" />
                   )}
-                  <img
+                  <Image
                     src={user.profileImage || '/assets/person.jpg'}
                     alt="profile"
-                    className="w-8 h-8 rounded-full"
+                    className="w-8 h-8 rounded-full object-cover"
+                    height={50}
+                    width={50}
                   />
                   <p className="font-medium  text-gray-400">{user.username}</p>
                 </div>

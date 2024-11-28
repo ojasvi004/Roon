@@ -1,17 +1,15 @@
-import { Inter } from 'next/font/google'; // Import the Inter font from Google
+import { Inter } from 'next/font/google';
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import '../globals.css';
 import Provider from '@/components/Provider';
 import SideBar from '@/components/SideBar';
 
-// Load Inter font with Next.js font optimization
 const inter = Inter({
-  subsets: ['latin'],  // Specify the subset you need (e.g., latin)
-  weights: ['400', '600'],  // Specify the font weights (e.g., regular and bold)
+  subsets: ['latin'],
+  weights: ['400', '600'],
 });
 
-// Load custom local fonts (Geist Sans and Geist Mono)
 const geistSans = localFont({
   src: '../fonts/GeistVF.woff',
   variable: '--font-geist-sans',
@@ -35,7 +33,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.className} ${geistSans.variable} ${geistMono.variable} flex bg-gray-900 text-white overflow-hidden font-sans`}>
+      <body
+        className={`${inter.className} ${geistSans.variable} ${geistMono.variable} flex bg-gray-900 text-white overflow-hidden font-sans`}
+      >
         <Provider>
           <SideBar />
           {children}
@@ -44,4 +44,3 @@ export default function RootLayout({
     </html>
   );
 }
-

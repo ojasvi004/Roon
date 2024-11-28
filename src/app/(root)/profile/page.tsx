@@ -76,7 +76,7 @@ const Profile = () => {
       <Loader />
     </div>
   ) : (
-    <div className="flex flex-col justify-center overflow-hidden mt-36">
+    <div className="flex flex-col justify-center mr-auto ml-auto">
       <h1 className="text-3xl text-center mb-7 text-gray-200">
         Edit your profile
       </h1>

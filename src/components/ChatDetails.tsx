@@ -9,6 +9,8 @@ import { IoIosSend } from 'react-icons/io';
 import MessageBox from './MessageBox';
 import { pusherClient } from '@/lib/pusher';
 import Loader from './Loader';
+import { Input } from './ui/input';
+import Image from 'next/image';
 
 const ChatDetails = ({ chatId }) => {
   const [loading, setLoading] = useState(true);
@@ -44,6 +46,8 @@ const ChatDetails = ({ chatId }) => {
   }, [currentUser, chatId]);
 
   const sendText = async () => {
+    if (text.trim() === '') return;
+
     try {
       const res = await fetch('/api/messages', {
         method: 'POST',
@@ -108,6 +112,13 @@ const ChatDetails = ({ chatId }) => {
     };
   }, [chatId]);
 
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      sendText();
+    }
+  };
+
   return loading ? (
     <Loader />
   ) : (
@@ -116,10 +127,12 @@ const ChatDetails = ({ chatId }) => {
         {chat?.isGroup ? (
           <>
             <Link href={`/chats/${chatId}/group-info`}>
-              <img
+              <Image
                 src={chat?.groupPhoto || '/assets/group.png'}
                 alt="group-photo"
                 className="w-12 h-12 rounded-full cursor-pointer object-cover"
+                height={50}
+                width={50}
               />
             </Link>
             <div className="ml-4">
@@ -131,10 +144,12 @@ const ChatDetails = ({ chatId }) => {
           </>
         ) : (
           <>
-            <img
+            <Image
               src={otherMembers[0]?.profileImage || '/assets/person.jpg'}
               alt="profile photo"
-              className="w-12 h-12 rounded-full"
+              className="w-12 h-12 rounded-full object-cover"
+              height={50}
+              width={50}
             />
             <div className="ml-4">
               <p className="text-lg font-semibold">
@@ -165,11 +180,11 @@ const ChatDetails = ({ chatId }) => {
               cursor: 'pointer',
               '&:hover': { color: 'gray' },
             }}
-            className="text-gray-500 hover:text-indigo-500"
+            className="text-gray-500 mr-4"
           />
         </CldUploadButton>
 
-        <input
+        <Input
           type="text"
           placeholder={
             chat?.isGroup
@@ -180,10 +195,11 @@ const ChatDetails = ({ chatId }) => {
           value={text}
           onChange={(e) => setText(e.target.value)}
           required
+          onKeyDown={handleKeyDown}
         />
 
         <div onClick={sendText} className="cursor-pointer">
-          <IoIosSend className="text-2xl text-gray-300" />
+          <IoIosSend className="text-3xl ml-4 text-gray-300" />
         </div>
       </div>
     </div>

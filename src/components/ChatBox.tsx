@@ -20,7 +20,7 @@ const ChatBox = ({ chat, currentUser, currentChatId }) => {
   return (
     <div
       className={`chat-box p-2 rounded-3xl ${
-        chat._id === currentChatId ? 'bg-gray-500 ' : 'hover:bg-gray-400'
+        chat._id === currentChatId ? 'bg-gray-500/75 ' : 'hover:bg-gray-500'
       } cursor-pointer mb-2`}
       onClick={() => router.push(`/chats/${chat._id}`)}
     >
@@ -53,7 +53,7 @@ const ChatBox = ({ chat, currentUser, currentChatId }) => {
                 : format(new Date(chat?.lastMessageAt), 'p')}
             </p>
           </div>
-          <div className="text-base mt-1 text-gray-800">
+          <div className="text-base mt-1 text-gray-200">
             {!lastMessage && <p>Start a chat</p>}
             {lastMessage?.photo ? (
               lastMessage?.sender?._id === currentUser._id ? (

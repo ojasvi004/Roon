@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { Input } from './ui/input';
 import { useSession } from 'next-auth/react';
 import ChatBox from './ChatBox';
@@ -12,6 +12,14 @@ const ChatList = ({ currentChatId }) => {
   const [loading, setLoading] = useState(true);
   const [chats, setChats] = useState([]);
   const [search, setSearch] = useState('');
+
+  const sortedChats = useMemo(() => {
+    return [...chats].sort(
+      (a, b) =>
+        new Date(b.lastMessageAt).getTime() -
+        new Date(a.lastMessageAt).getTime()
+    );
+  }, [chats]);
 
   const getChats = async () => {
     try {
@@ -27,6 +35,7 @@ const ChatList = ({ currentChatId }) => {
       console.log(error);
     }
   };
+
   useEffect(() => {
     if (currentUser) {
       getChats();
@@ -66,7 +75,7 @@ const ChatList = ({ currentChatId }) => {
 
   console.log(chats);
   return loading ? (
-   <Loader />
+    <Loader />
   ) : (
     <div className="pl-4 pr-4">
       <Input
@@ -76,10 +85,10 @@ const ChatList = ({ currentChatId }) => {
         onChange={(e) => {
           setSearch(e.target.value);
         }}
-        className="mb-3 mt-3 text-black rounded-full bg-gray-300  "
+        className="mb-3 mt-3 text-black rounded-full bg-gray-300"
       />
       <div>
-        {chats?.map((chat, index) => (
+        {sortedChats?.map((chat, index) => (
           <ChatBox
             key={index}
             chat={chat}

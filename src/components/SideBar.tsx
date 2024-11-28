@@ -45,7 +45,7 @@ const SideBar = () => {
         </Link>
       </div>
 
-      <div className="flex items-center mt-auto">
+      <div className="flex text-2xl items-center mt-auto">
         {user && (
           <Popover>
             <PopoverTrigger>
@@ -57,20 +57,20 @@ const SideBar = () => {
                 className="w-10 h-10 rounded-full object-cover border-2 border-gray-600"
               />
             </PopoverTrigger>
-            <PopoverContent className="bg-gray-800 text-white rounded-lg shadow-md p-4 flex flex-col gap-2">
+            <PopoverContent className="bg-gray-800/70  border-none rounded-lg shadow-md p-4 flex flex-col gap-2 w-48 ml-2 mb-1">
               <Link
                 href="/profile"
                 className="text-sm text-gray-300 hover:text-gray-100 transition duration-200"
               >
                 Update Profile
               </Link>
-
+              <hr />
               <button
                 onClick={handleLogout}
                 className="text-sm text-gray-300 hover:text-gray-100 transition duration-200 flex items-center"
                 title="Logout"
               >
-                <IoIosLogOut className="inline-block mr-1" />
+                <IoIosLogOut className="inline-block mr-1 text-xl" />
                 Logout
               </button>
             </PopoverContent>

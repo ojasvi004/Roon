@@ -1,13 +1,13 @@
-"use client";
-import React, { useState, useEffect } from "react";
-import { Input } from "@/components/ui/input";
-import Image from "next/image";
-import { Button } from "@/components/ui/button";
-import { useForm } from "react-hook-form";
-import { CldUploadButton } from "next-cloudinary";
-import { Loader2 } from "lucide-react";
-import { useParams } from "next/navigation";
-import { useRouter } from "next/navigation";
+'use client';
+import React, { useState, useEffect } from 'react';
+import { Input } from '@/components/ui/input';
+import Image from 'next/image';
+import { Button } from '@/components/ui/button';
+import { useForm } from 'react-hook-form';
+import { CldUploadButton } from 'next-cloudinary';
+import { Loader2 } from 'lucide-react';
+import { useParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 
 interface User {
   username: string;
@@ -31,7 +31,7 @@ const GroupInfo = () => {
     formState: { errors },
   } = useForm();
   const [loading, setLoading] = useState(true);
-  const [errorMessage, setErrorMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState('');
   const [chat, setChat] = useState<Chat | null>(null);
 
   const { chatId } = useParams();
@@ -39,7 +39,7 @@ const GroupInfo = () => {
   const getChatDetails = async () => {
     try {
       const response = await fetch(`/api/chats/${chatId}`);
-      if (!response.ok) throw new Error("failed to fetch chat details");
+      if (!response.ok) throw new Error('failed to fetch chat details');
       const data = await response.json();
       setChat(data);
       reset({
@@ -48,8 +48,8 @@ const GroupInfo = () => {
       });
       setLoading(false);
     } catch (error) {
-      console.log("error fetching chat details:", error);
-      setErrorMessage("Failed to load chat details. Please try again");
+      console.log('error fetching chat details:', error);
+      setErrorMessage('Failed to load chat details. Please try again');
       setLoading(false);
     }
   };
@@ -61,29 +61,29 @@ const GroupInfo = () => {
   }, [chatId]);
 
   const handleUploadPfp = (result: any) => {
-    setValue("groupPhoto", result?.info?.secure_url);
+    setValue('groupPhoto', result?.info?.secure_url);
   };
 
   const onSubmit = async (data: any) => {
     setLoading(true);
     try {
       const res = await fetch(`/api/chats/${chatId}/update`, {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
       });
 
       if (!res.ok) {
         const errorResponse = await res.json();
-        console.log("error:", errorResponse);
-        throw new Error("failed to update group info");
+        console.log('error:', errorResponse);
+        throw new Error('failed to update group info');
       }
       router.push(`/chats/${chatId}`);
       setLoading(false);
       window.location.reload();
     } catch (error) {
-      console.log("error updating group info:", error);
-      setErrorMessage("Error updating group information. Please try again");
+      console.log('error updating group info:', error);
+      setErrorMessage('Error updating group information. Please try again');
       setLoading(false);
     }
   };
@@ -93,7 +93,7 @@ const GroupInfo = () => {
       <Loader2 className="animate-spin" />
     </div>
   ) : (
-    <div className="flex flex-col justify-center overflow-hidden mt-36">
+    <div className="flex flex-col justify-center mr-auto ml-auto ">
       <h1 className="text-3xl text-center mb-7 text-gray-200">
         Edit Group Info
       </h1>
@@ -104,7 +104,7 @@ const GroupInfo = () => {
         className="flex flex-col items-center space-y-4"
       >
         <Input
-          {...register("name", { required: "Group chat name is required" })}
+          {...register('name', { required: 'Group chat name is required' })}
           type="text"
           placeholder="Group chat name"
           className="w-[250px] mx-auto bg-gray-700 rounded-full border-none text-gray-200 text-lg"
@@ -114,7 +114,7 @@ const GroupInfo = () => {
         )}
 
         <Image
-          src={watch("groupPhoto") || chat?.groupPhoto || "/assets/group.png"}
+          src={watch('groupPhoto') || chat?.groupPhoto || '/assets/group.png'}
           width={170}
           height={170}
           alt="Profile Picture"
@@ -141,7 +141,7 @@ const GroupInfo = () => {
           className="w-[250px] mx-auto bg-indigo-500 rounded-full text-lg"
           disabled={loading}
         >
-          {loading ? <Loader2 className="animate-spin" /> : "Save changes"}
+          {loading ? <Loader2 className="animate-spin" /> : 'Save changes'}
         </Button>
       </form>
     </div>
