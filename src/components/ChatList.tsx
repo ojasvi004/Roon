@@ -5,6 +5,7 @@ import { useSession } from 'next-auth/react';
 import ChatBox from './ChatBox';
 import { pusherClient } from '@/lib/pusher';
 import Loader from './Loader';
+import { ScrollArea } from './ui/scroll-area';
 
 const ChatList = ({ currentChatId }) => {
   const { data: session } = useSession();
@@ -77,7 +78,7 @@ const ChatList = ({ currentChatId }) => {
   return loading ? (
     <Loader />
   ) : (
-    <div className="pl-4 pr-4">
+    <div className="pl-4 pr-4  max-h-screen overflow-y-auto">
       <Input
         type="text"
         placeholder="search chat"

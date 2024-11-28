@@ -44,7 +44,7 @@ const ChatBox = ({ chat, currentUser, currentChatId }) => {
         )}
         <div className="flex-grow">
           <div className="flex justify-between items-center">
-            <p className=" text-gray-300 font-semibold">
+            <p className="text-gray-300 font-semibold">
               {chat?.isGroup ? chat?.name : otherMembers[0]?.username}
             </p>
             <p className="text-sm text-gray-300">
@@ -64,7 +64,11 @@ const ChatBox = ({ chat, currentUser, currentChatId }) => {
                 </p>
               )
             ) : (
-              <p className={`${seen ? 'text-gray-400' : 'font-semibold'}`}>
+              <p
+                className={`${
+                  seen ? 'text-gray-400' : 'font-semibold'
+                }  max-h-6 max-w-13 overflow-hidden `}
+              >
                 {lastMessage?.text}
               </p>
             )}
