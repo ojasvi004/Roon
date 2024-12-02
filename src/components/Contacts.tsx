@@ -83,7 +83,7 @@ const Contacts: React.FC = () => {
       <div className="w-96 max-w-lg mt-8">
         <Input
           placeholder="Search contact"
-          className="w-full p-2 mb-4  bg-gray-700 rounded-md  border-null focus:outline-none "
+          className="w-full p-2 mb-4  bg-gray-700 rounded-md border-null focus:outline-none "
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
@@ -96,7 +96,7 @@ const Contacts: React.FC = () => {
               {contacts.map((user) => (
                 <div
                   key={user._id}
-                  className="flex gap-2 p-2 bg-gray-100 rounded-md cursor-pointer hover:bg-indigo-100"
+                  className="flex gap-2 p-2 bg-gray-600  hover:bg-gray-500 rounded-md cursor-pointer"
                   onClick={() => handleSelect(user)}
                 >
                   {selectedContacts.some((item) => item._id === user._id) ? (
