@@ -22,10 +22,12 @@ const MessageBox = ({ message, currentUser }) => {
             {message?.text}
           </p>
         ) : (
-          <img
+          <Image
             src={message?.photo}
             alt="message"
             className="max-w-[200px] max-h-[200px] object-contain"
+            height={50}
+            width={50}
           />
         )}
       </div>
@@ -38,10 +40,12 @@ const MessageBox = ({ message, currentUser }) => {
             {message?.text}
           </p>
         ) : (
-          <img
+          <Image
             src={message?.photo}
             alt="message"
             className="max-w-[200px] max-h-[200px] object-contain rounded-lg shadow-sm"
+            height={50}
+            width={50}
           />
         )}
         <p className="text-xs text-gray-500 mb-1">

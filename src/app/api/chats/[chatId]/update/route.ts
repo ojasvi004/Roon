@@ -1,11 +1,8 @@
-import dbConnect from "@/db";
-import Chat from "@/models/Chat";
-import { NextRequest } from "next/server";
+import dbConnect from '@/db';
+import Chat from '@/models/Chat';
+import { NextRequest } from 'next/server';
 
-export const PATCH = async (
-  req: NextRequest,
-  { params }: { params: { chatId: string } }
-) => {
+export const PATCH = async (req: NextRequest, { params }) => {
   try {
     dbConnect();
     const body = await req.json();
@@ -22,6 +19,6 @@ export const PATCH = async (
     return new Response(JSON.stringify(updatedGroupChat), { status: 200 });
   } catch (error) {
     console.log(error);
-    return new Response("failed to update group chat info", { status: 500 });
+    return new Response('failed to update group chat info', { status: 500 });
   }
 };

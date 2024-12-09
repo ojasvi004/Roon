@@ -8,7 +8,15 @@ import React, { useEffect } from 'react';
 const ChatPage = () => {
   const { chatId } = useParams();
   const { data: session } = useSession();
-  const currentUser = session?.user;
+  
+  interface ExtendedUser {
+    name?: string;
+    email?: string;
+    image?: string;
+    _id?: string;
+  }
+
+  const currentUser = session?.user as ExtendedUser;
 
   const seenMessages = async () => {
     try {
@@ -33,7 +41,7 @@ const ChatPage = () => {
   return (
     <div className=" min-h-screen">
       <div className="w-full">
-        <ChatDetails chatId={chatId} />
+        {chatId && <ChatDetails chatId={Array.isArray(chatId) ? chatId[0] : chatId} />}
       </div>
     </div>
   );

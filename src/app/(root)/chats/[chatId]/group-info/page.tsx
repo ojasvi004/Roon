@@ -1,5 +1,6 @@
 'use client';
-import React, { useState, useEffect } from 'react';
+
+import React, { useState, useEffect, useCallback } from 'react';
 import { Input } from '@/components/ui/input';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
@@ -36,9 +37,13 @@ const GroupInfo = () => {
 
   const { chatId } = useParams();
   const router = useRouter();
-  const getChatDetails = async () => {
+
+  const getChatDetails = useCallback(async () => {
+    const controller = new AbortController();
     try {
-      const response = await fetch(`/api/chats/${chatId}`);
+      const response = await fetch(`/api/chats/${chatId}`, {
+        signal: controller.signal,
+      });
       if (!response.ok) throw new Error('failed to fetch chat details');
       const data = await response.json();
       setChat(data);
@@ -47,24 +52,29 @@ const GroupInfo = () => {
         groupPhoto: data?.groupPhoto,
       });
       setLoading(false);
-    } catch (error) {
-      console.log('error fetching chat details:', error);
-      setErrorMessage('Failed to load chat details. Please try again');
+    } catch (error: unknown) {
+      if ((error as Error).name !== 'AbortError') {
+        console.log('error fetching chat details:', error);
+        setErrorMessage('failed to load chat details');
+      }
       setLoading(false);
     }
-  };
+
+    return () => controller.abort();
+  }, [chatId, reset]);
 
   useEffect(() => {
     if (chatId) {
       getChatDetails();
     }
-  }, [chatId]);
+  }, [chatId, getChatDetails]);
 
-  const handleUploadPfp = (result: any) => {
-    setValue('groupPhoto', result?.info?.secure_url);
+  const handleUploadPfp = (results: any) => {
+    const secureUrl = results.info.secure_url || results.info;
+    setValue('groupPhoto', secureUrl);
   };
 
-  const onSubmit = async (data: any) => {
+  const onSubmit = async (data: unknown) => {
     setLoading(true);
     try {
       const res = await fetch(`/api/chats/${chatId}/update`, {
@@ -83,7 +93,7 @@ const GroupInfo = () => {
       window.location.reload();
     } catch (error) {
       console.log('error updating group info:', error);
-      setErrorMessage('Error updating group information. Please try again');
+      setErrorMessage('error updating group information');
       setLoading(false);
     }
   };
@@ -93,7 +103,7 @@ const GroupInfo = () => {
       <Loader2 className="animate-spin" />
     </div>
   ) : (
-    <div className="flex flex-col justify-center mr-auto ml-auto ">
+    <div className="flex flex-col justify-center mr-auto ml-auto">
       <h1 className="text-3xl text-center mb-7 text-gray-200">
         Edit Group Info
       </h1>
@@ -110,7 +120,9 @@ const GroupInfo = () => {
           className="w-[250px] mx-auto bg-gray-700 rounded-full border-none text-gray-200 text-lg"
         />
         {errors.name && (
-          <p className="text-red-500 text-center">{errors.name.message}</p>
+          <p className="text-red-500 text-center">
+            {typeof errors.name.message === 'string' && errors.name.message}
+          </p>
         )}
 
         <Image

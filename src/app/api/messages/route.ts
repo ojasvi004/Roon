@@ -54,6 +54,7 @@ export const POST = async (req: NextRequest) => {
         });
       } catch (error) {
         console.log(`failed to trigger update chat event`);
+        console.log(error)
       }
     });
 

@@ -1,7 +1,7 @@
 import DOMPurify from 'dompurify';
 
-export const sanitizeInput = (data: Record<string, any>): Record<string, any> => {
-  const sanitizedData: Record<string, any> = {};
+export const sanitizeInput = (data: Record<string, unknown>): Record<string, unknown> => {
+  const sanitizedData: Record<string, unknown> = {};
 
   for (const key in data) {
     if (typeof data[key] === 'string') {

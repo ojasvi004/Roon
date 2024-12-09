@@ -5,8 +5,9 @@ import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { useForm } from 'react-hook-form';
-import { CldUploadButton } from 'next-cloudinary';
+import { CldUploadButton, CloudinaryUploadWidgetResults } from 'next-cloudinary';
 import Loader from '@/components/Loader';
+
 interface User {
   username: string;
   profileImage: string;
@@ -22,7 +23,6 @@ const Profile = () => {
     setValue,
     reset,
     handleSubmit,
-    formState: { errors },
   } = useForm();
   const [loading, setLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState('');
@@ -37,8 +37,9 @@ const Profile = () => {
     setLoading(false);
   }, [user, reset]);
 
-  const handleUploadPfp = (result: any) => {
-    setValue('profileImage', result?.info?.secure_url);
+  const handleUploadPfp = (result: CloudinaryUploadWidgetResults) => {
+    const secureUrl = typeof result.info === 'string' ? result.info : result.info?.secure_url;
+    setValue('profileImage', secureUrl);
   };
 
   const onSubmit = async (data) => {
@@ -65,7 +66,7 @@ const Profile = () => {
       setLoading(false);
       window.location.reload();
     } catch (error) {
-      console.log(data);
+      console.log(error);
       setErrorMessage('error updating profile');
       setLoading(false);
     }
@@ -96,9 +97,7 @@ const Profile = () => {
           placeholder="Username"
           className="w-[250px] mx-auto bg-gray-700 rounded-full border-none text-gray-200 text-lg"
         />
-        {errors.username && (
-          <p className="text-red-500 text-center">{errors.username.message}</p>
-        )}
+      
 
         <Image
           src={

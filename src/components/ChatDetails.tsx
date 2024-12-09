@@ -1,5 +1,3 @@
-'use client';
-
 import { useState, useEffect, useRef } from 'react';
 import { AddPhotoAlternate } from '@mui/icons-material';
 import { useSession } from 'next-auth/react';
@@ -12,13 +10,41 @@ import Loader from './Loader';
 import { Input } from './ui/input';
 import Image from 'next/image';
 
-const ChatDetails = ({ chatId }) => {
-  const [loading, setLoading] = useState(true);
-  const [chat, setChat] = useState({});
-  const [otherMembers, setOtherMembers] = useState([]);
+interface Member {
+  _id: string;
+  username: string;
+  profileImage?: string;
+}
 
+interface Chat {
+  _id: string;
+  name: string;
+  isGroup: boolean;
+  groupPhoto?: string;
+  members: Member[];
+  messages: any[]; 
+}
+
+interface ChatDetailsProps {
+  chatId: string;
+}
+
+interface CloudinaryUploadWidgetInfo {
+  secure_url: string;
+  public_id: string;
+  [key: string]: any; 
+}
+
+interface CloudinaryUploadWidgetResults {
+  info?: string | CloudinaryUploadWidgetInfo;
+}
+
+const ChatDetails: React.FC<ChatDetailsProps> = ({ chatId }) => {
+  const [loading, setLoading] = useState(true);
+  const [chat, setChat] = useState<Chat | null>(null);
+  const [otherMembers, setOtherMembers] = useState<Member[]>([]);
   const { data: session } = useSession();
-  const currentUser = session?.user;
+  const currentUser = session?.user as { _id: string; name?: string; email?: string; image?: string };
 
   const [text, setText] = useState('');
 
@@ -30,7 +56,7 @@ const ChatDetails = ({ chatId }) => {
           'Content-Type': 'application/json',
         },
       });
-      const data = await res.json();
+      const data: Chat = await res.json();
       setChat(data);
       setOtherMembers(
         data?.members?.filter((member) => member._id !== currentUser._id)
@@ -69,9 +95,11 @@ const ChatDetails = ({ chatId }) => {
     }
   };
 
-  const sendPhoto = async (result) => {
+  const sendPhoto = async (result: CloudinaryUploadWidgetResults) => {
+    const photoUrl = typeof result.info === 'string' ? result.info : result.info.secure_url;
+
     try {
-      const res = await fetch('/api/messages', {
+      await fetch('/api/messages', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -79,7 +107,7 @@ const ChatDetails = ({ chatId }) => {
         body: JSON.stringify({
           chatId,
           currentUserId: currentUser._id,
-          photo: result?.info?.secure_url,
+          photo: photoUrl,
         }),
       });
     } catch (error) {
@@ -96,23 +124,26 @@ const ChatDetails = ({ chatId }) => {
   }, [chat?.messages]);
 
   useEffect(() => {
-    pusherClient.subscribe(chatId);
-    const handleMessage = async (newMessage) => {
-      setChat((prevChat) => {
-        return {
-          ...prevChat,
-          messages: [...prevChat.messages, newMessage],
-        };
-      });
-    };
-    pusherClient.bind('new-message', handleMessage);
-    return () => {
-      pusherClient.unsubscribe(chatId);
-      pusherClient.unbind('new-message', handleMessage);
-    };
+    if (chatId && pusherClient) {
+      pusherClient.subscribe(chatId);
+      const handleMessage = (newMessage: any) => {
+        setChat((prevChat) => {
+          return {
+            ...prevChat,
+            messages: [...prevChat.messages, newMessage],
+          };
+        });
+      };
+      pusherClient.bind('new-message', handleMessage);
+
+      return () => {
+        pusherClient.unsubscribe(chatId);
+        pusherClient.unbind('new-message', handleMessage);
+      };
+    }
   }, [chatId]);
 
-  const handleKeyDown = (e) => {
+  const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
       sendText();
@@ -123,7 +154,7 @@ const ChatDetails = ({ chatId }) => {
     <Loader />
   ) : (
     <div className="flex flex-col w-full h-screen">
-        <div className="flex items-center p-4 border-b bg-gray-700">
+      <div className="flex items-center p-4 border-b bg-gray-700">
         {chat?.isGroup ? (
           <>
             <Link href={`/chats/${chatId}/group-info`}>
@@ -172,7 +203,6 @@ const ChatDetails = ({ chatId }) => {
           options={{ maxFiles: 1 }}
           uploadPreset="nmkeeg8v"
           onSuccess={sendPhoto}
-          W
         >
           <AddPhotoAlternate
             sx={{

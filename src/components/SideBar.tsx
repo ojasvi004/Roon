@@ -50,7 +50,7 @@ const SideBar = () => {
           <Popover>
             <PopoverTrigger>
               <Image
-                src={user.profileImage || '/assets/person.jpg'}
+                src={user.image || '/assets/person.jpg'}
                 alt="Profile"
                 width={40}
                 height={40}

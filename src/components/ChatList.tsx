@@ -5,21 +5,38 @@ import { useSession } from 'next-auth/react';
 import ChatBox from './ChatBox';
 import { pusherClient } from '@/lib/pusher';
 import Loader from './Loader';
-import { ScrollArea } from './ui/scroll-area';
 
-const ChatList = ({ currentChatId }) => {
+interface Chat {
+  _id: string;
+  members: Array<{ _id: string; name: string }>;
+  lastMessageAt: string;
+  messages: Array<{ senderId: string; content: string; timestamp: string }>;
+}
+
+interface ChatListProps {
+  currentChatId: string;
+}
+
+const ChatList: React.FC<ChatListProps> = ({ currentChatId }) => {
   const { data: session } = useSession();
-  const currentUser = session?.user;
+  const currentUser = session?.user as {
+    _id: string;
+    name?: string;
+    email?: string;
+    image?: string;
+  };
   const [loading, setLoading] = useState(true);
-  const [chats, setChats] = useState([]);
+  const [chats, setChats] = useState<Chat[]>([]);
   const [search, setSearch] = useState('');
 
   const sortedChats = useMemo(() => {
-    return [...chats].sort(
-      (a, b) =>
-        new Date(b.lastMessageAt).getTime() -
-        new Date(a.lastMessageAt).getTime()
-    );
+    return chats
+      .slice()
+      .sort(
+        (a, b) =>
+          new Date(b.lastMessageAt).getTime() -
+          new Date(a.lastMessageAt).getTime()
+      );
   }, [chats]);
 
   const getChats = async () => {
@@ -29,17 +46,20 @@ const ChatList = ({ currentChatId }) => {
           ? `/api/users/${currentUser._id}/searchChat/${search}`
           : `/api/users/${currentUser._id}`
       );
-      const data = await response.json();
+      const data: Chat[] = await response.json();
       setChats(data);
       setLoading(false);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 
   useEffect(() => {
     if (currentUser) {
-      getChats();
+      const delayDebounce = setTimeout(() => {
+        getChats();
+      }, 300);
+      return () => clearTimeout(delayDebounce);
     }
   }, [currentUser, search]);
 
@@ -47,19 +67,15 @@ const ChatList = ({ currentChatId }) => {
     if (currentUser) {
       pusherClient.subscribe(currentUser._id);
 
-      const handleChatUpdate = (updatedChat) => {
+      const handleChatUpdate = (updatedChat: Chat) => {
         setChats((allChats) =>
-          allChats.map((chat) => {
-            if (chat._id === updatedChat.id) {
-              return { ...chat, messages: updatedChat.messages };
-            } else {
-              return chat;
-            }
-          })
+          allChats.map((chat) =>
+            chat._id === updatedChat._id ? { ...chat, ...updatedChat } : chat
+          )
         );
       };
 
-      const handleNewChat = (newChat) => {
+      const handleNewChat = (newChat: Chat) => {
         setChats((allChats) => [...allChats, newChat]);
       };
 
@@ -74,24 +90,25 @@ const ChatList = ({ currentChatId }) => {
     }
   }, [currentUser]);
 
-  console.log(chats);
+  if (!currentUser) {
+    return <div>Please log in to view chats</div>;
+  }
+
   return loading ? (
     <Loader />
   ) : (
-    <div className="pl-4 pr-4  max-h-screen overflow-y-auto">
+    <div className="pl-4 pr-4 max-h-screen overflow-y-auto">
       <Input
         type="text"
         placeholder="search chat"
         value={search}
-        onChange={(e) => {
-          setSearch(e.target.value);
-        }}
+        onChange={(e) => setSearch(e.target.value)}
         className="mb-3 mt-3 text-black rounded-full bg-gray-300"
       />
       <div>
-        {sortedChats?.map((chat, index) => (
+        {sortedChats?.map((chat) => (
           <ChatBox
-            key={index}
+            key={chat._id}
             chat={chat}
             currentUser={currentUser}
             currentChatId={currentChatId}
