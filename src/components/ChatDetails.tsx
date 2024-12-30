@@ -22,7 +22,7 @@ interface Chat {
   isGroup: boolean;
   groupPhoto?: string;
   members: Member[];
-  messages: any[]; 
+  messages: any[];
 }
 
 interface ChatDetailsProps {
@@ -32,7 +32,7 @@ interface ChatDetailsProps {
 interface CloudinaryUploadWidgetInfo {
   secure_url: string;
   public_id: string;
-  [key: string]: any; 
+  [key: string]: any;
 }
 
 interface CloudinaryUploadWidgetResults {
@@ -44,7 +44,13 @@ const ChatDetails: React.FC<ChatDetailsProps> = ({ chatId }) => {
   const [chat, setChat] = useState<Chat | null>(null);
   const [otherMembers, setOtherMembers] = useState<Member[]>([]);
   const { data: session } = useSession();
-  const currentUser = session?.user as { _id: string; name?: string; email?: string; image?: string };
+  const currentUser = session?.user as {
+    _id: string;
+    name?: string;
+    email?: string;
+    image?: string;
+    profileImage?: string;
+  };
 
   const [text, setText] = useState('');
 
@@ -96,7 +102,8 @@ const ChatDetails: React.FC<ChatDetailsProps> = ({ chatId }) => {
   };
 
   const sendPhoto = async (result: CloudinaryUploadWidgetResults) => {
-    const photoUrl = typeof result.info === 'string' ? result.info : result.info.secure_url;
+    const photoUrl =
+      typeof result.info === 'string' ? result.info : result.info.secure_url;
 
     try {
       await fetch('/api/messages', {
@@ -151,7 +158,9 @@ const ChatDetails: React.FC<ChatDetailsProps> = ({ chatId }) => {
   };
 
   return loading ? (
-    <Loader />
+    <div className="flex justify-center items-center h-screen">
+      <Loader />
+    </div>
   ) : (
     <div className="flex flex-col w-full h-screen">
       <div className="flex items-center p-4 border-b bg-gray-700">

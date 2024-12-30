@@ -103,8 +103,8 @@ const GroupInfo = () => {
       <Loader2 className="animate-spin" />
     </div>
   ) : (
-    <div className="flex flex-col justify-center mr-auto ml-auto">
-      <h1 className="text-3xl text-center mb-7 text-gray-200">
+    <div className="flex flex-col justify-center mr-auto ml-auto items-center h-screen ">
+      <h1 className="text-3xl text-center mb-7 text-gray-200 items-center ">
         Edit Group Info
       </h1>
       {errorMessage && <p className="text-red-500">{errorMessage}</p>}

@@ -24,6 +24,7 @@ const ChatList: React.FC<ChatListProps> = ({ currentChatId }) => {
     name?: string;
     email?: string;
     image?: string;
+    profileImage?: string;
   };
   const [loading, setLoading] = useState(true);
   const [chats, setChats] = useState<Chat[]>([]);

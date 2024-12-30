@@ -1,11 +1,12 @@
-"use client";
-import { SessionProvider } from "next-auth/react";
-import React, { ReactNode } from "react";
+'use client';
+import { SessionProvider } from 'next-auth/react';
+import React, { ReactNode } from 'react';
 
 interface User {
   name?: string;
   email?: string;
   image?: string;
+  profileImage: string;
 }
 
 interface Session {
@@ -15,7 +16,7 @@ interface Session {
 
 interface ProviderProps {
   children: ReactNode;
-  session?: Session; 
+  session?: Session;
 }
 
 const Provider: React.FC<ProviderProps> = ({ children, session }) => {

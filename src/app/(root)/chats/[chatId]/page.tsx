@@ -13,6 +13,7 @@ const ChatPage = () => {
     name?: string;
     email?: string;
     image?: string;
+    profileImage?: string;
     _id?: string;
   }
 

@@ -9,10 +9,17 @@ import { BsChatLeftTextFill } from 'react-icons/bs';
 import { RiContactsBook2Fill } from 'react-icons/ri';
 import { PiCatFill } from 'react-icons/pi';
 import { Popover, PopoverContent, PopoverTrigger } from './ui/popover';
+import { Session } from 'next-auth';
+interface User {
+  name?: string;
+  email?: string;
+  image?: string;
+  profileImage?: string;
+}
 
 const SideBar = () => {
   const pathname = usePathname();
-  const { data: session } = useSession();
+  const { data: session } = useSession(); 
   const user = session?.user;
 
   const handleLogout = async () => {
@@ -50,7 +57,7 @@ const SideBar = () => {
           <Popover>
             <PopoverTrigger>
               <Image
-                src={user.image || '/assets/person.jpg'}
+                src={(user as any).profileImage || '/assets/person.jpg'}  
                 alt="Profile"
                 width={40}
                 height={40}

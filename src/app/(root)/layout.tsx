@@ -41,7 +41,7 @@ export default function RootLayout({
         <Provider>
           <SideBar />
 
-          <div className="grid grid-cols-12 min-h-screen">
+          <div className="grid grid-cols-12 min-h-screen w-full">
             {!hideChatList && (
               <div className="col-span-4 min-w-96 bg-gray-500 bg-opacity-50 backdrop-blur-2xl">
                 <ChatList currentChatId={Array.isArray(chatId) ? chatId[0] : chatId || null} />
@@ -49,7 +49,11 @@ export default function RootLayout({
             )}
 
             <div
-              className={`${hideChatList ? 'flex flex-col justify-center items-center  mr-auto ' : 'col-span-8'} flex-1 overflow-auto`}
+              className={`${
+                hideChatList
+                  ? 'col-span-12 flex justify-center items-center h-screen'
+                  : 'col-span-8'
+              } flex-1 overflow-auto`}
             >
               {children}
             </div>

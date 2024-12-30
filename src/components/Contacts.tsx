@@ -23,7 +23,13 @@ const Contacts: React.FC = () => {
   const isGroup = selectedContacts.length > 1;
 
   const { data: session } = useSession();
-  const currentUser = session?.user as { _id: string; name?: string; email?: string; image?: string };
+  const currentUser = session?.user as {
+    _id: string;
+    name?: string;
+    email?: string;
+    image?: string;
+    profileImage?: string;
+  };
   const router = useRouter();
 
   const getContacts = async () => {
@@ -111,7 +117,7 @@ const Contacts: React.FC = () => {
                     height={50}
                     width={50}
                   />
-                  <p className="font-medium  text-gray-400">{user.name}</p>
+                  <p className="font-medium  text-gray-400">{(user as any).username}</p>
                 </div>
               ))}
             </div>

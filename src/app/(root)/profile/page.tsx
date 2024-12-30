@@ -77,7 +77,7 @@ const Profile = () => {
       <Loader />
     </div>
   ) : (
-    <div className="">
+    <div className="flex flex-col space-y-4 items-center justify-center">
       <h1 className="text-3xl text-center mb-7 text-gray-200">
         Edit your profile
       </h1>
