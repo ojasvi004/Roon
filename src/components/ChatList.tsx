@@ -67,6 +67,7 @@ const ChatList: React.FC<ChatListProps> = ({ currentChatId }) => {
   useEffect(() => {
     if (currentUser) {
       pusherClient.subscribe(currentUser._id);
+      console.log("hello", currentUser);
 
       const handleChatUpdate = (updatedChat: Chat) => {
         setChats((allChats) =>
@@ -98,7 +99,7 @@ const ChatList: React.FC<ChatListProps> = ({ currentChatId }) => {
   return loading ? (
     <Loader />
   ) : (
-    <div className="pl-4 pr-4 max-h-screen overflow-y-auto">
+    <div className="pl-4 pr-4 max-h-screen overflow-y-auto sm:max-h-screen sm:overflow-hidden pt-16 sm:pt-16">
       <Input
         type="text"
         placeholder="search chat"

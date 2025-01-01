@@ -9,6 +9,7 @@ import { pusherClient } from '@/lib/pusher';
 import Loader from './Loader';
 import { Input } from './ui/input';
 import Image from 'next/image';
+import BackButton from './BackButton';
 
 interface Member {
   _id: string;
@@ -162,8 +163,9 @@ const ChatDetails: React.FC<ChatDetailsProps> = ({ chatId }) => {
       <Loader />
     </div>
   ) : (
-    <div className="flex flex-col w-full h-screen">
-      <div className="flex items-center p-4 border-b bg-gray-700">
+    <div className="flex flex-col w-full h-screen relative"> 
+        <BackButton />
+      <div className="flex items-center p-4 border-b bg-gray-700 sticky top-0 z-50">
         {chat?.isGroup ? (
           <>
             <Link href={`/chats/${chatId}/group-info`}>
@@ -200,14 +202,14 @@ const ChatDetails: React.FC<ChatDetailsProps> = ({ chatId }) => {
         )}
       </div>
 
-      <div className="flex-grow overflow-y-auto p-4 bg-gray-900">
+      <div className="flex-grow overflow-y-auto p-4 bg-gray-900 pb-16">
         {chat?.messages?.map((message, index) => (
           <MessageBox key={index} message={message} currentUser={currentUser} />
         ))}
         <div ref={bottomRef} />
       </div>
 
-      <div className="flex items-center p-4 bg-gray-800 sticky bottom-0">
+      <div className="flex items-center p-4 bg-gray-800 sticky bottom-0 z-10">
         <CldUploadButton
           options={{ maxFiles: 1 }}
           uploadPreset="nmkeeg8v"

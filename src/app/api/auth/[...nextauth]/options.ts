@@ -1,4 +1,4 @@
-import { NextAuthOptions } from 'next-auth/index'
+import { NextAuthOptions } from 'next-auth/index';
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
 import User from "@/models/User";
@@ -12,9 +12,9 @@ const loginSchema = z.object({
 
 export const authOptions: NextAuthOptions = {
   session: {
-    strategy: 'jwt', 
-    maxAge: 24 * 60 * 60,
-    updateAge: 12 * 60 * 60,
+    strategy: 'jwt',
+    maxAge: 60 * 60,
+    updateAge: 30 * 60, 
   },
   providers: [
     CredentialsProvider({
@@ -47,12 +47,12 @@ export const authOptions: NextAuthOptions = {
 
         const user = await User.findOne({ email: normalizedEmail });
         if (!user || !user.password) {
-          throw new Error("invalid password");
+          throw new Error("Invalid email or password");
         }
 
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) {
-          throw new Error("invalid password");
+          throw new Error("Invalid email or password");
         }
 
         return { id: user._id.toString(), email: user.email, name: user.name };
@@ -60,7 +60,11 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
   callbacks: {
-    async session({ session }) {
+    async session({ session, token }) {
+      if (!token) {
+        throw new Error("invalid session, redirecting");
+      }
+
       const mongodbUser = await User.findOne({ email: session.user.email });
       if (mongodbUser) {
         session.user.name = mongodbUser._id.toString();
@@ -83,7 +87,7 @@ export const authOptions: NextAuthOptions = {
         httpOnly: true,
         secure: process.env.NODE_ENV === "production",
         sameSite: "lax",
-        maxAge: 60 * 60 * 24 * 30,
+        maxAge: 60 * 60, 
         path: "/",
       },
     },
