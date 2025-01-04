@@ -44,8 +44,8 @@ const MessageBox = ({ message, currentUser }) => {
             src={message?.photo}
             alt="message"
             className="max-w-[200px] max-h-[200px] object-contain rounded-lg shadow-sm"
-            height={50}
-            width={50}
+            height={350}
+            width={350}
           />
         )}
         <p className="text-xs text-gray-500 mb-1">

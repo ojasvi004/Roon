@@ -20,7 +20,15 @@ const SideBar = () => {
     signOut({ callbackUrl: '/' });
   };
 
-  const NavLink = ({ href, icon: Icon, isActive }: { href: string; icon: React.ElementType; isActive: boolean }) => (
+  const NavLink = ({
+    href,
+    icon: Icon,
+    isActive,
+  }: {
+    href: string;
+    icon: React.ElementType;
+    isActive: boolean;
+  }) => (
     <Link
       href={href}
       className={`${
@@ -34,13 +42,24 @@ const SideBar = () => {
   return (
     <div className="flex flex-col bg-gray-900 text-white h-full">
       <div className="hidden sm:flex flex-col h-screen w-16 py-4">
-        <Link href="/chats" className="text-2xl text-gray-300 font-bold mb-8 flex justify-center">
+        <Link
+          href="/chats"
+          className="text-4xl text-gray-300 font-bold mb-8 flex justify-center"
+        >
           <PiCatFill />
         </Link>
 
         <div className="flex-1 flex flex-col items-center space-y-4">
-          <NavLink href="/chats" icon={BsChatLeftTextFill} isActive={pathname === '/chats'} />
-          <NavLink href="/contacts" icon={RiContactsBook2Fill} isActive={pathname === '/contacts'} />
+          <NavLink
+            href="/chats"
+            icon={BsChatLeftTextFill}
+            isActive={pathname === '/chats'}
+          />
+          <NavLink
+            href="/contacts"
+            icon={RiContactsBook2Fill}
+            isActive={pathname === '/contacts'}
+          />
         </div>
 
         {user && (
@@ -51,7 +70,7 @@ const SideBar = () => {
                 alt="Profile"
                 width={40}
                 height={40}
-                className="w-10 h-10 rounded-full object-cover border-2 border-gray-600"
+                className="w-10 h-10 rounded-full object-cover ml-2 border-2 border-gray-600"
               />
             </PopoverTrigger>
             <PopoverContent className="bg-gray-800/70 border-none rounded-lg shadow-md p-4 flex flex-col gap-2 w-48 ml-2 mb-1">
@@ -76,8 +95,16 @@ const SideBar = () => {
       </div>
 
       <div className="sm:hidden fixed top-0 left-0 right-0 bg-gray-900 z-50 flex justify-around items-center py-2 px-4 border-b border-gray-800">
-        <NavLink href="/chats" icon={BsChatLeftTextFill} isActive={pathname === '/chats'} />
-        <NavLink href="/contacts" icon={RiContactsBook2Fill} isActive={pathname === '/contacts'} />
+        <NavLink
+          href="/chats"
+          icon={BsChatLeftTextFill}
+          isActive={pathname === '/chats'}
+        />
+        <NavLink
+          href="/contacts"
+          icon={RiContactsBook2Fill}
+          isActive={pathname === '/contacts'}
+        />
         {user && (
           <Popover>
             <PopoverTrigger>

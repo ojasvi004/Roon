@@ -9,7 +9,6 @@ import { pusherClient } from '@/lib/pusher';
 import Loader from './Loader';
 import { Input } from './ui/input';
 import Image from 'next/image';
-import BackButton from './BackButton';
 
 interface Member {
   _id: string;
@@ -164,7 +163,6 @@ const ChatDetails: React.FC<ChatDetailsProps> = ({ chatId }) => {
     </div>
   ) : (
     <div className="flex flex-col w-full h-screen relative"> 
-        <BackButton />
       <div className="flex items-center p-4 border-b bg-gray-700 sticky top-0 z-50">
         {chat?.isGroup ? (
           <>
