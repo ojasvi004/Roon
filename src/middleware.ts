@@ -8,9 +8,6 @@ export function middleware(request: NextRequest) {
 
   const token = request.cookies.get('next-auth.session-token')?.value || '';
 
-  if (isPublicPath && token) {
-    return NextResponse.redirect(new URL('/chats', request.nextUrl));
-  }
 
   if ((path.startsWith('/chats') || path === '/profile') && !token) {
     return NextResponse.redirect(new URL('/', request.nextUrl));
