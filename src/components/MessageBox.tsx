@@ -18,7 +18,7 @@ const MessageBox = ({ message, currentUser }) => {
             : 'invalid date'}
         </p>
         {message?.text ? (
-          <p className="bg-gray-100 text-wrap text-balance text-gray-800 py-1 px-4 rounded-lg shadow-sm max-w-xs">
+          <p className="bg-gray-100 text-wrap text-balance text-gray-800 py-1 px-4 rounded-lg shadow-sm max-w-xs break-words">
             {message?.text}
           </p>
         ) : (
@@ -36,7 +36,7 @@ const MessageBox = ({ message, currentUser }) => {
     <div className="flex justify-end gap-3 mb-4">
       <div className="flex flex-col items-end">
         {message?.text ? (
-          <p className="bg-indigo-500 text-wrap text-balance text-white py-1 px-4 rounded-lg shadow-sm max-w-xs">
+          <p className="bg-indigo-500 text-wrap text-balance text-white py-1 px-4 rounded-lg shadow-sm max-w-xs break-words">
             {message?.text}
           </p>
         ) : (
