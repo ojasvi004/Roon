@@ -7,10 +7,10 @@ import Message from '@/models/Message';
 export const GET = async (req: NextRequest, { params }) => {
   try {
     await dbConnect();
-    const userId = params.userId;
+    const { userId } = await params;
 
     const allChats = await Chat.find({ members: userId })
-      .sort({ updatedAt: -1 })
+      .sort({ lastMessageAt: -1 })
       .populate({ path: 'members', model: User })
       .populate({
         path: 'messages',
@@ -24,7 +24,7 @@ export const GET = async (req: NextRequest, { params }) => {
 
     return NextResponse.json(allChats, { status: 200 });
   } catch (error) {
-    console.error(error);
+    console.error('Error fetching chats:', error);
     return new NextResponse('failed to get chats of current user', {
       status: 500,
     });

@@ -25,6 +25,18 @@ export const POST = async (req: NextRequest) => {
       seenBy: [currentUserId],
     });
 
+    const populatedMessage = await Message.findById(newMessage._id)
+      .populate({
+        path: "sender",
+        model: User,
+        select: "_id username profileImage",
+      })
+      .populate({
+        path: "seenBy",
+        model: User,
+        select: "_id username profileImage",
+      });
+
     const updatedChat = await Chat.findByIdAndUpdate(
       chatId,
       {
@@ -43,22 +55,25 @@ export const POST = async (req: NextRequest) => {
       })
       .exec();
 
-    await pusherServer.trigger(chatId, "new-message", newMessage);
+    await pusherServer.trigger(chatId, "new-message", populatedMessage);
 
     const lastMessage = updatedChat.messages[updatedChat?.messages.length - 1];
-    updatedChat.members.forEach(async (member) => {
+    
+    const memberPromises = updatedChat.members.map(async (member) => {
       try {
         await pusherServer.trigger(member._id.toString(), "update-chat", {
           id: chatId,
           messages: [lastMessage],
+          lastMessageAt: newMessage.createdAt,
         });
       } catch (error) {
-        console.log(`failed to trigger update chat event`);
-        console.log(error)
+        console.log(`Failed to trigger update chat event for member ${member._id}:`, error);
       }
     });
 
-    return new Response(JSON.stringify(newMessage), { status: 200 });
+    await Promise.all(memberPromises);
+
+    return new Response(JSON.stringify(populatedMessage), { status: 200 });
   } catch (error) {
     console.log("error:", error);
     return new Response("failed to create new message", { status: 500 });

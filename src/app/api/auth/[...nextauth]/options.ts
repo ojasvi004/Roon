@@ -65,10 +65,16 @@ export const authOptions: NextAuthOptions = {
         throw new Error("invalid session, redirecting");
       }
 
+      await dbConnect();
       const mongodbUser = await User.findOne({ email: session.user.email });
       if (mongodbUser) {
-        session.user.name = mongodbUser._id.toString();
-        session.user = { ...session.user, ...mongodbUser._doc };
+        session.user = {
+          ...session.user,
+          _id: mongodbUser._id.toString(),
+          username: mongodbUser.username,
+          email: mongodbUser.email,
+          profileImage: mongodbUser.profileImage || "",
+        };
       }
       return session;
     },

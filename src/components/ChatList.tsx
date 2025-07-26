@@ -41,37 +41,56 @@ const ChatList: React.FC<ChatListProps> = ({ currentChatId }) => {
   }, [chats]);
 
   const getChats = async () => {
+    if (!currentUser || !currentUser._id) {
+      setLoading(false);
+      return;
+    }
+
     try {
       const response = await fetch(
         search !== ''
           ? `/api/users/${currentUser._id}/searchChat/${search}`
           : `/api/users/${currentUser._id}`
       );
+      
+      if (!response.ok) {
+        setLoading(false);
+        return;
+      }
+      
       const data: Chat[] = await response.json();
       setChats(data);
       setLoading(false);
     } catch (error) {
-      console.error(error);
+      console.error('Error fetching chats:', error);
+      setLoading(false);
     }
   };
 
   useEffect(() => {
-    if (currentUser) {
+    if (currentUser && currentUser._id) {
       const delayDebounce = setTimeout(() => {
         getChats();
       }, 300);
       return () => clearTimeout(delayDebounce);
+    } else {
+      setLoading(false);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentUser, search]);
 
   useEffect(() => {
-    if (currentUser) {
+    if (currentUser && currentUser._id) {
       pusherClient.subscribe(currentUser._id);
 
-      const handleChatUpdate = (updatedChat: Chat) => {
+      const handleChatUpdate = (updatedChat: any) => {
         setChats((allChats) =>
           allChats.map((chat) =>
-            chat._id === updatedChat._id ? { ...chat, ...updatedChat } : chat
+            chat._id === updatedChat.id ? { 
+              ...chat, 
+              messages: updatedChat.messages || chat.messages,
+              lastMessageAt: updatedChat.lastMessageAt || chat.lastMessageAt
+            } : chat
           )
         );
       };
@@ -91,8 +110,12 @@ const ChatList: React.FC<ChatListProps> = ({ currentChatId }) => {
     }
   }, [currentUser]);
 
-  if (!currentUser) {
-    return <div>Please log in to view chats</div>;
+  if (!currentUser || !currentUser._id) {
+    return (
+      <div className="p-4 text-center text-gray-400">
+        <p>Please log in to view chats</p>
+      </div>
+    );
   }
 
   return loading ? (
@@ -107,14 +130,23 @@ const ChatList: React.FC<ChatListProps> = ({ currentChatId }) => {
         className="mb-3 mt-3 text-black rounded-full bg-gray-300"
       />
       <div>
-        {sortedChats?.map((chat) => (
-          <ChatBox
-            key={chat._id}
-            chat={chat}
-            currentUser={currentUser}
-            currentChatId={currentChatId}
-          />
-        ))}
+        {sortedChats?.length === 0 ? (
+          <div className="text-center text-gray-400 py-8">
+            <p>No chats found</p>
+            <p className="text-xs mt-2">
+              Try starting a conversation or check if you're part of any groups
+            </p>
+          </div>
+        ) : (
+          sortedChats.map((chat) => (
+            <ChatBox
+              key={chat._id}
+              chat={chat}
+              currentUser={currentUser}
+              currentChatId={currentChatId}
+            />
+          ))
+        )}
       </div>
     </div>
   );

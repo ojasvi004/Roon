@@ -54,26 +54,26 @@ const ChatDetails: React.FC<ChatDetailsProps> = ({ chatId }) => {
 
   const [text, setText] = useState('');
 
-  const getChatDetails = async () => {
-    try {
-      const res = await fetch(`/api/chats/${chatId}`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-      const data: Chat = await res.json();
-      setChat(data);
-      setOtherMembers(
-        data?.members?.filter((member) => member._id !== currentUser._id)
-      );
-      setLoading(false);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   useEffect(() => {
+    const getChatDetails = async () => {
+      try {
+        const res = await fetch(`/api/chats/${chatId}`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+        const data: Chat = await res.json();
+        setChat(data);
+        setOtherMembers(
+          data?.members?.filter((member) => member._id !== currentUser._id)
+        );
+        setLoading(false);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
     if (currentUser && chatId) getChatDetails();
   }, [currentUser, chatId]);
 
@@ -97,13 +97,15 @@ const ChatDetails: React.FC<ChatDetailsProps> = ({ chatId }) => {
         setText('');
       }
     } catch (error) {
-      console.log(error);
+      console.error('Error sending message:', error);
     }
   };
 
   const sendPhoto = async (result: CloudinaryUploadWidgetResults) => {
     const photoUrl =
-      typeof result.info === 'string' ? result.info : result.info.secure_url;
+      typeof result.info === 'string' ? result.info : result.info?.secure_url;
+
+    if (!photoUrl) return;
 
     try {
       await fetch('/api/messages', {
@@ -118,7 +120,7 @@ const ChatDetails: React.FC<ChatDetailsProps> = ({ chatId }) => {
         }),
       });
     } catch (error) {
-      console.log(error);
+      console.error('Error sending photo:', error);
     }
   };
 
@@ -133,14 +135,17 @@ const ChatDetails: React.FC<ChatDetailsProps> = ({ chatId }) => {
   useEffect(() => {
     if (chatId && pusherClient) {
       pusherClient.subscribe(chatId);
+      
       const handleMessage = (newMessage: any) => {
         setChat((prevChat) => {
+          if (!prevChat) return prevChat;
           return {
             ...prevChat,
             messages: [...prevChat.messages, newMessage],
           };
         });
       };
+
       pusherClient.bind('new-message', handleMessage);
 
       return () => {
