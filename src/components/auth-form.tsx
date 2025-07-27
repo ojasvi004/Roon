@@ -79,11 +79,11 @@ export default function AuthForm({ type }: FormProps) {
   }
 
   return (
-    <div className="min-h-screen bg-gray-900 flex items-center justify-center p-6">
-      <Card className="mx-auto w-full max-w-md bg-gray-800 border-gray-700">
+    <div className="min-h-screen bg-transparent flex items-center justify-center p-6 relative z-10">
+      <Card className="mx-auto w-full max-w-lg bg-zinc-800/60 backdrop-blur-lg border-zinc-600/70 shadow-2xl shadow-black/50">
         <CardHeader className="space-y-3 pb-6">
-          <CardTitle className="text-3xl text-gray-200 text-center">{type === "register" ? "Create Account" : "Sign In"}</CardTitle>
-          <CardDescription className="text-gray-400 text-center text-base">
+          <CardTitle className="text-3xl text-zinc-200 text-center">{type === "register" ? "Create Account" : "Sign In"}</CardTitle>
+          <CardDescription className="text-zinc-400 text-center text-base">
             {type === "register"
               ? "Enter your information to create an account"
               : "Enter your email below to login to your account"}
@@ -93,7 +93,7 @@ export default function AuthForm({ type }: FormProps) {
           <form onSubmit={handleSubmit(onSubmit)} className="grid gap-6">
             {type === "register" && (
               <div className="grid gap-3">
-                <Label htmlFor="username" className="text-gray-300 text-sm font-medium">
+                <Label htmlFor="username" className="text-zinc-300 text-sm font-medium">
                   Username
                 </Label>
                 <Input
@@ -105,14 +105,14 @@ export default function AuthForm({ type }: FormProps) {
                     validate: (value: unknown) =>
                       (typeof value === "string" && value.length >= 3) || "Username must be at least 3 characters long",
                   })}
-                  className="bg-gray-700 border-gray-600 text-white placeholder:text-gray-400 focus:border-indigo-500 focus:ring-indigo-500 h-12 text-base"
+                  className="bg-zinc-700 border-zinc-600 text-white placeholder:text-zinc-400 focus:border-indigo-500 focus:ring-indigo-500 h-12 text-base"
                 />
                 {errors.username && <p className="text-red-400 text-sm">{errors.username.message}</p>}
               </div>
             )}
 
             <div className="grid gap-3">
-              <Label htmlFor="email" className="text-gray-300 text-sm font-medium">
+              <Label htmlFor="email" className="text-zinc-300 text-sm font-medium">
                 Email
               </Label>
               <Input
@@ -120,14 +120,14 @@ export default function AuthForm({ type }: FormProps) {
                 type="email"
                 placeholder="m@example.com"
                 {...register("email", { required: "Email is required" })}
-                className="bg-gray-700 border-gray-600 text-white placeholder:text-gray-400 focus:border-indigo-500 focus:ring-indigo-500 h-12 text-base"
+                className="bg-zinc-700 border-zinc-600 text-white placeholder:text-zinc-400 focus:border-indigo-500 focus:ring-indigo-500 h-12 text-base"
               />
               {errors.email && <p className="text-red-400 text-sm">{errors.email.message}</p>}
             </div>
 
             <div className="grid gap-3">
               <div className="flex items-center">
-                <Label htmlFor="password" className="text-gray-300 text-sm font-medium">
+                <Label htmlFor="password" className="text-zinc-300 text-sm font-medium">
                   Password
                 </Label>
                 {type === "login" && (
@@ -142,12 +142,12 @@ export default function AuthForm({ type }: FormProps) {
                   type={showPassword ? "text" : "password"}
                   placeholder="Enter your password"
                   {...register("password", { required: "Password is required" })}
-                  className="bg-gray-700 border-gray-600 text-white placeholder:text-gray-400 focus:border-indigo-500 focus:ring-indigo-500 pr-12 h-12 text-base"
+                  className="bg-zinc-700 border-zinc-600 text-white placeholder:text-zinc-400 focus:border-indigo-500 focus:ring-indigo-500 pr-12 h-12 text-base"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-300"
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-zinc-300"
                 >
                   {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
                 </button>
@@ -169,7 +169,7 @@ export default function AuthForm({ type }: FormProps) {
             </Button>
           </form>
 
-          <div className="mt-6 text-center text-sm text-gray-400">
+          <div className="mt-6 text-center text-sm text-zinc-400">
             {type === "register" ? (
               <>
                 Already have an account?{" "}

@@ -4,6 +4,8 @@ import localFont from 'next/font/local';
 import '../globals.css';
 import ToasterContext from '@/components/ToasterContext';
 import Provider from '@/components/Provider';
+import MouseMoveEffect from '@/components/mouse-move-effect';
+import GradientBackground from '@/components/gradient-background';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -41,6 +43,8 @@ export default function RootLayout({
         className={`${inter.className} ${geistSans.variable} ${geistMono.variable} antialiased font-sans`}
       >
         <Provider>
+          <GradientBackground />
+          <MouseMoveEffect />
           <ToasterContext />
           {children}
         </Provider>

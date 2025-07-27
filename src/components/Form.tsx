@@ -77,7 +77,6 @@ const Form: React.FC<FormProps> = ({ type }) => {
   return (
     <div className="min-h-screen bg-gray-950 flex items-center justify-center p-6">
       <div className="w-full max-w-md">
-        {/* Header */}
         <div className="mb-10">
           <h1 className="text-2xl font-semibold text-white mb-2 tracking-tight">
             {type === "register" ? "Create account" : "Sign in"}
@@ -90,7 +89,6 @@ const Form: React.FC<FormProps> = ({ type }) => {
         </div>
 
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-          {/* Username field for register */}
           {type === "register" && (
             <div className="space-y-2">
               <label className="text-sm font-medium text-gray-300">Username</label>
@@ -108,7 +106,6 @@ const Form: React.FC<FormProps> = ({ type }) => {
             </div>
           )}
 
-          {/* Email field */}
           <div className="space-y-2">
             <label className="text-sm font-medium text-gray-300">Email</label>
             <Input
@@ -120,7 +117,6 @@ const Form: React.FC<FormProps> = ({ type }) => {
             {errors.email && <p className="text-red-400 text-sm">{errors.email.message}</p>}
           </div>
 
-          {/* Password field */}
           <div className="space-y-2">
             <label className="text-sm font-medium text-gray-300">Password</label>
             <div className="relative">
@@ -141,7 +137,6 @@ const Form: React.FC<FormProps> = ({ type }) => {
             {errors.password && <p className="text-red-400 text-sm">{errors.password.message}</p>}
           </div>
 
-          {/* Submit button */}
           <button
             type="submit"
             disabled={isLoading}
@@ -160,7 +155,6 @@ const Form: React.FC<FormProps> = ({ type }) => {
             )}
           </button>
 
-          {/* Switch form link */}
           <div className="pt-4 border-t border-gray-800">
             {type === "register" ? (
               <Link href="/" className="block text-center">
