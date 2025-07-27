@@ -169,6 +169,41 @@ const ChatDetails: React.FC<ChatDetailsProps> = ({ chatId }) => {
     }
   };
 
+  const shouldShowTimestamp = (
+    currentMessage: any,
+    nextMessage: any,
+    index: number
+  ) => {
+    if (index === chat?.messages?.length - 1) return true;
+
+    if (currentMessage?.sender?._id !== nextMessage?.sender?._id) return true;
+
+    const currentTime = new Date(currentMessage?.createdAt);
+    const nextTime = new Date(nextMessage?.createdAt);
+    const timeDifference = nextTime.getTime() - currentTime.getTime();
+    const oneMinute = 1 * 60 * 1000;
+
+    return timeDifference > oneMinute;
+  };
+
+  const shouldShowAvatar = (
+    currentMessage: any,
+    previousMessage: any,
+    index: number
+  ) => {
+    if (index === 0) return true;
+
+    if (currentMessage?.sender?._id !== previousMessage?.sender?._id)
+      return true;
+
+    const currentTime = new Date(currentMessage?.createdAt);
+    const previousTime = new Date(previousMessage?.createdAt);
+    const timeDifference = currentTime.getTime() - previousTime.getTime();
+    const oneMinute = 1 * 60 * 1000;
+
+    return timeDifference > oneMinute;
+  };
+
   return loading ? (
     <div className="flex justify-center items-center h-screen bg-gray-900">
       <div className="flex flex-col items-center gap-3">
@@ -238,7 +273,7 @@ const ChatDetails: React.FC<ChatDetailsProps> = ({ chatId }) => {
         </button>
       </div>
 
-      <div className="flex-1 overflow-y-auto p-4 space-y-4 scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-transparent">
+      <div className="flex-1 overflow-y-auto p-4 scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-transparent">
         {chat?.messages?.length === 0 ? (
           <div className="flex flex-col items-center justify-center h-full text-center">
             <div className="bg-gray-800/50 rounded-full p-6 mb-4">
@@ -272,6 +307,16 @@ const ChatDetails: React.FC<ChatDetailsProps> = ({ chatId }) => {
                 key={index}
                 message={message}
                 currentUser={currentUser}
+                showTimestamp={shouldShowTimestamp(
+                  message,
+                  chat?.messages?.[index + 1],
+                  index
+                )}
+                showAvatar={shouldShowAvatar(
+                  message,
+                  chat?.messages?.[index - 1],
+                  index
+                )}
               />
             ))}
             <div ref={bottomRef} />

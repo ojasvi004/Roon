@@ -1,25 +1,41 @@
 import { format } from 'date-fns';
 import Image from 'next/image';
 
-const MessageBox = ({ message, currentUser }) => {
+interface MessageBoxProps {
+  message: any;
+  currentUser: any;
+  showTimestamp?: boolean;
+  showAvatar?: boolean;
+}
+
+const MessageBox: React.FC<MessageBoxProps> = ({
+  message,
+  currentUser,
+  showTimestamp = true,
+  showAvatar = true,
+}) => {
   const isOwnMessage = message?.sender?._id === currentUser._id;
 
   return (
     <div
-      className={`flex ${isOwnMessage ? 'justify-end' : 'justify-start'} mb-4`}
+      className={`flex ${isOwnMessage ? 'justify-end' : 'justify-start'} ${showTimestamp ? 'mb-3' : 'mb-0.5'}`}
     >
       <div
         className={`flex ${isOwnMessage ? 'flex-row-reverse' : 'flex-row'} items-end gap-2 max-w-[70%]`}
       >
         {!isOwnMessage && (
           <div className="flex-shrink-0">
-            <Image
-              src={message?.sender?.profileImage || '/assets/person.jpg'}
-              alt="profile photo"
-              className="w-8 h-8 rounded-full object-cover ring-2 ring-gray-600"
-              height={32}
-              width={32}
-            />
+            {showAvatar ? (
+              <Image
+                src={message?.sender?.profileImage || '/assets/person.jpg'}
+                alt="profile photo"
+                className="w-8 h-8 rounded-full object-cover ring-2 ring-gray-600"
+                height={32}
+                width={32}
+              />
+            ) : (
+              <div className="w-8 h-8" />
+            )}
           </div>
         )}
 
@@ -48,13 +64,15 @@ const MessageBox = ({ message, currentUser }) => {
             )}
           </div>
 
-          <p
-            className={`text-xs text-gray-500 mt-1 px-1 ${isOwnMessage ? 'text-right' : 'text-left'}`}
-          >
-            {message?.createdAt
-              ? format(new Date(message.createdAt), 'p')
-              : 'invalid date'}
-          </p>
+          {showTimestamp && (
+            <p
+              className={`text-xs text-gray-500 mt-1 px-1 ${isOwnMessage ? 'text-right' : 'text-left'}`}
+            >
+              {message?.createdAt
+                ? format(new Date(message.createdAt), 'p')
+                : 'invalid date'}
+            </p>
+          )}
         </div>
       </div>
     </div>

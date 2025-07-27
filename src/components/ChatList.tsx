@@ -67,23 +67,21 @@ const ChatList: React.FC<ChatListProps> = ({ currentChatId }) => {
     }
 
     try {
-      setLoading(true); // Ensure loading is set to true
+      setLoading(true);
       const response = await fetch(
         search !== ''
           ? `/api/users/${currentUser._id}/searchChat/${search}`
           : `/api/users/${currentUser._id}`
       );
-      
+
       if (!response.ok) {
         setLoading(false);
         return;
       }
-      
+
       const data: Chat[] = await response.json();
-      
-      // Add minimum loading time to see skeleton
-      await new Promise(resolve => setTimeout(resolve, 500));
-      
+      await new Promise((resolve) => setTimeout(resolve, 500));
+
       setChats(data);
       setLoading(false);
     } catch (error) {
@@ -111,11 +109,14 @@ const ChatList: React.FC<ChatListProps> = ({ currentChatId }) => {
       const handleChatUpdate = (updatedChat: any) => {
         setChats((allChats) =>
           allChats.map((chat) =>
-            chat._id === updatedChat.id ? { 
-              ...chat, 
-              messages: updatedChat.messages || chat.messages,
-              lastMessageAt: updatedChat.lastMessageAt || chat.lastMessageAt
-            } : chat
+            chat._id === updatedChat.id
+              ? {
+                  ...chat,
+                  messages: updatedChat.messages || chat.messages,
+                  lastMessageAt:
+                    updatedChat.lastMessageAt || chat.lastMessageAt,
+                }
+              : chat
           )
         );
       };
@@ -135,8 +136,6 @@ const ChatList: React.FC<ChatListProps> = ({ currentChatId }) => {
     }
   }, [currentUser]);
 
-
-
   return loading ? (
     <div className="flex flex-col h-full bg-gray-900/50 backdrop-blur-sm">
       <div className="flex-shrink-0 px-4 py-4 border-b border-gray-800/50">
@@ -149,7 +148,7 @@ const ChatList: React.FC<ChatListProps> = ({ currentChatId }) => {
             <Skeleton className="h-3 w-20 mt-1" />
           </div>
         </div>
-        
+
         <div className="relative">
           <div className="absolute inset-y-0 left-3 flex items-center pointer-events-none">
             <Search className="h-4 w-4 text-gray-400" />
@@ -172,11 +171,12 @@ const ChatList: React.FC<ChatListProps> = ({ currentChatId }) => {
           <div>
             <h2 className="text-lg font-semibold text-white">Messages</h2>
             <p className="text-xs text-gray-400">
-              {sortedChats.length} {sortedChats.length === 1 ? 'conversation' : 'conversations'}
+              {sortedChats.length}{' '}
+              {sortedChats.length === 1 ? 'conversation' : 'conversations'}
             </p>
           </div>
         </div>
-        
+
         <div className="relative">
           <div className="absolute inset-y-0 left-3 flex items-center pointer-events-none">
             <Search className="h-4 w-4 text-gray-400" />
@@ -213,10 +213,9 @@ const ChatList: React.FC<ChatListProps> = ({ currentChatId }) => {
               {search ? 'No matches found' : 'No conversations yet'}
             </h3>
             <p className="text-sm text-gray-500 text-center max-w-xs">
-              {search 
+              {search
                 ? `No conversations match "${search}". Try a different search term.`
-                : 'Start chatting by creating a new conversation or joining an existing group.'
-              }
+                : 'Start chatting by creating a new conversation or joining an existing group.'}
             </p>
             {search && (
               <button
@@ -231,7 +230,8 @@ const ChatList: React.FC<ChatListProps> = ({ currentChatId }) => {
           <div className="px-3 py-2 space-y-1">
             {search && (
               <div className="px-3 py-2 text-sm text-gray-400 border-b border-gray-800/30 mb-2">
-                {sortedChats.length} result{sortedChats.length !== 1 ? 's' : ''} for "{search}"
+                {sortedChats.length} result{sortedChats.length !== 1 ? 's' : ''}{' '}
+                for "{search}"
               </div>
             )}
             {sortedChats.map((chat, index) => (
