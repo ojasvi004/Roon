@@ -22,13 +22,17 @@ const ChatBox = ({ chat, currentUser, currentChatId }) => {
 
   return (
     <div
-      className={`group cursor-pointer transition-all duration-200 rounded-xl p-3 mb-2 ${
+      className={`group cursor-pointer transition-all duration-300 ease-out rounded-xl p-3 mb-1 relative overflow-hidden ${
         isActive
-          ? 'bg-indigo-600/20 border border-indigo-500/30 shadow-lg'
-          : 'hover:bg-gray-800/50 border border-transparent'
+          ? 'bg-indigo-600/15 border border-indigo-500/30 shadow-lg shadow-indigo-500/10 scale-[1.02]'
+          : 'hover:bg-gray-800/40 hover:shadow-md hover:shadow-gray-900/20 border border-transparent hover:border-gray-700/30'
       }`}
       onClick={() => router.push(`/chats/${chat._id}`)}
     >
+      {isActive && (
+        <div className="absolute left-0 top-0 bottom-0 w-1 bg-indigo-500 rounded-r-full" />
+      )}
+      
       <div className="flex gap-3 items-center">
         <div className="relative flex-shrink-0">
           {chat?.isGroup ? (
@@ -38,10 +42,16 @@ const ChatBox = ({ chat, currentUser, currentChatId }) => {
                 alt="group-pfp"
                 height={48}
                 width={48}
-                className="w-12 h-12 rounded-full object-cover ring-2 ring-gray-600"
+                className={`w-12 h-12 rounded-full object-cover transition-all duration-200 ${
+                  isActive 
+                    ? 'ring-2 ring-indigo-400/50 shadow-lg shadow-indigo-500/20' 
+                    : 'ring-2 ring-gray-600/50 group-hover:ring-gray-500/70'
+                }`}
               />
-              <div className="absolute -bottom-1 -right-1 bg-gray-800 rounded-full p-1">
-                <Users className="w-3 h-3 text-indigo-400" />
+              <div className={`absolute -bottom-1 -right-1 rounded-full p-1 transition-colors ${
+                isActive ? 'bg-indigo-600' : 'bg-gray-700 group-hover:bg-gray-600'
+              }`}>
+                <Users className={`w-3 h-3 ${isActive ? 'text-white' : 'text-indigo-400'}`} />
               </div>
             </div>
           ) : (
@@ -51,8 +61,13 @@ const ChatBox = ({ chat, currentUser, currentChatId }) => {
                 alt="pfp"
                 height={48}
                 width={48}
-                className="w-12 h-12 rounded-full object-cover ring-2 ring-gray-600"
+                className={`w-12 h-12 rounded-full object-cover transition-all duration-200 ${
+                  isActive 
+                    ? 'ring-2 ring-indigo-400/50 shadow-lg shadow-indigo-500/20' 
+                    : 'ring-2 ring-gray-600/50 group-hover:ring-gray-500/70'
+                }`}
               />
+
             </div>
           )}
         </div>
@@ -60,16 +75,16 @@ const ChatBox = ({ chat, currentUser, currentChatId }) => {
         <div className="flex-1 min-w-0">
           <div className="flex justify-between items-start mb-1">
             <h3
-              className={`font-semibold truncate ${
-                isActive ? 'text-white' : 'text-gray-200'
+              className={`font-semibold truncate transition-colors ${
+                isActive ? 'text-white' : 'text-gray-200 group-hover:text-white'
               }`}
             >
               {chat?.isGroup ? chat?.name : otherMembers[0]?.username}
             </h3>
 
             <span
-              className={`text-xs flex-shrink-0 ml-2 ${
-                isActive ? 'text-indigo-300' : 'text-gray-400'
+              className={`text-xs flex-shrink-0 ml-2 font-medium transition-colors ${
+                isActive ? 'text-indigo-300' : 'text-gray-400 group-hover:text-gray-300'
               }`}
             >
               {!lastMessage
@@ -80,12 +95,14 @@ const ChatBox = ({ chat, currentUser, currentChatId }) => {
 
           <div className="flex items-center justify-between">
             <div
-              className={`text-sm truncate ${
-                seen ? 'text-gray-400' : 'text-gray-300 font-medium'
+              className={`text-sm truncate transition-colors ${
+                seen 
+                  ? 'text-gray-400 group-hover:text-gray-300' 
+                  : 'text-gray-300 font-medium group-hover:text-white'
               }`}
             >
               {!lastMessage ? (
-                <span className="text-gray-500 italic">
+                <span className="text-gray-500 italic group-hover:text-gray-400">
                   Start a conversation
                 </span>
               ) : lastMessage?.photo ? (
@@ -99,7 +116,9 @@ const ChatBox = ({ chat, currentUser, currentChatId }) => {
                 </div>
               ) : (
                 <span className="line-clamp-1">
-                  {lastMessage?.sender?._id === currentUser._id && 'You: '}
+                  {lastMessage?.sender?._id === currentUser._id && (
+                    <span className="text-gray-400">You: </span>
+                  )}
                   {lastMessage?.text}
                 </span>
               )}
@@ -108,7 +127,9 @@ const ChatBox = ({ chat, currentUser, currentChatId }) => {
             {!seen &&
               lastMessage &&
               lastMessage?.sender?._id !== currentUser._id && (
-                <div className="w-2 h-2 bg-indigo-500 rounded-full flex-shrink-0 ml-2"></div>
+                <div className={`w-2 h-2 rounded-full flex-shrink-0 ml-2 transition-all duration-200 ${
+                  isActive ? 'bg-white shadow-lg' : 'bg-indigo-500 group-hover:bg-indigo-400'
+                }`}></div>
               )}
           </div>
         </div>

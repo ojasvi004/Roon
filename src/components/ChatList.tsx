@@ -5,6 +5,7 @@ import { useSession } from 'next-auth/react';
 import ChatBox from './ChatBox';
 import { pusherClient } from '@/lib/pusher';
 import Loader from './Loader';
+import { Search, MessageCircle, Users, X } from 'lucide-react';
 
 interface Chat {
   _id: string;
@@ -120,33 +121,95 @@ const ChatList: React.FC<ChatListProps> = ({ currentChatId }) => {
   }
 
   return loading ? (
-    <Loader />
+    <div className="flex items-center justify-center h-64">
+      <Loader />
+    </div>
   ) : (
-    <div className="pl-4 pr-4 max-h-screen overflow-y-auto">
-      <Input
-        type="text"
-        placeholder="search chat"
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-        className="mb-3 mt-3 text-black rounded-full bg-gray-300"
-      />
-      <div>
-        {sortedChats?.length === 0 ? (
-          <div className="text-center text-gray-400 py-8">
-            <p>No chats found</p>
-            <p className="text-xs mt-2">
-              Try starting a conversation or check if you're part of any groups
+    <div className="flex flex-col h-full bg-gray-900/50 backdrop-blur-sm">
+      <div className="flex-shrink-0 px-4 py-4 border-b border-gray-800/50">
+        <div className="flex items-center gap-3 mb-4">
+          <div className="p-2 bg-indigo-600/10 rounded-lg">
+            <MessageCircle className="w-5 h-5 text-indigo-400" />
+          </div>
+          <div>
+            <h2 className="text-lg font-semibold text-white">Messages</h2>
+            <p className="text-xs text-gray-400">
+              {sortedChats.length} {sortedChats.length === 1 ? 'conversation' : 'conversations'}
             </p>
           </div>
+        </div>
+        
+        <div className="relative">
+          <div className="absolute inset-y-0 left-3 flex items-center pointer-events-none">
+            <Search className="h-4 w-4 text-gray-400" />
+          </div>
+          <Input
+            type="text"
+            placeholder="Search conversations..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            className="pl-10 pr-10 py-2.5 bg-gray-800/60 border-gray-700/50 text-white placeholder-gray-400 rounded-xl focus:bg-gray-800/80 focus:border-indigo-500/50 focus:ring-1 focus:ring-indigo-500/25 transition-all duration-200"
+          />
+          {search && (
+            <button
+              onClick={() => setSearch('')}
+              className="absolute inset-y-0 right-3 flex items-center text-gray-400 hover:text-white transition-colors"
+            >
+              <X className="h-4 w-4" />
+            </button>
+          )}
+        </div>
+      </div>
+
+      <div className="flex-1 overflow-y-auto">
+        {sortedChats?.length === 0 ? (
+          <div className="flex flex-col items-center justify-center h-full px-6 py-12">
+            <div className="p-4 bg-gray-800/30 rounded-full mb-4">
+              {search ? (
+                <Search className="w-8 h-8 text-gray-500" />
+              ) : (
+                <Users className="w-8 h-8 text-gray-500" />
+              )}
+            </div>
+            <h3 className="text-lg font-medium text-gray-300 mb-2">
+              {search ? 'No matches found' : 'No conversations yet'}
+            </h3>
+            <p className="text-sm text-gray-500 text-center max-w-xs">
+              {search 
+                ? `No conversations match "${search}". Try a different search term.`
+                : 'Start chatting by creating a new conversation or joining an existing group.'
+              }
+            </p>
+            {search && (
+              <button
+                onClick={() => setSearch('')}
+                className="mt-4 px-4 py-2 bg-indigo-600/20 hover:bg-indigo-600/30 text-indigo-400 rounded-lg transition-colors text-sm font-medium"
+              >
+                Clear search
+              </button>
+            )}
+          </div>
         ) : (
-          sortedChats.map((chat) => (
-            <ChatBox
-              key={chat._id}
-              chat={chat}
-              currentUser={currentUser}
-              currentChatId={currentChatId}
-            />
-          ))
+          <div className="px-3 py-2 space-y-1">
+            {search && (
+              <div className="px-3 py-2 text-sm text-gray-400 border-b border-gray-800/30 mb-2">
+                {sortedChats.length} result{sortedChats.length !== 1 ? 's' : ''} for "{search}"
+              </div>
+            )}
+            {sortedChats.map((chat, index) => (
+              <div
+                key={chat._id}
+                className="animate-in slide-in-from-left duration-200"
+                style={{ animationDelay: `${index * 50}ms` }}
+              >
+                <ChatBox
+                  chat={chat}
+                  currentUser={currentUser}
+                  currentChatId={currentChatId}
+                />
+              </div>
+            ))}
+          </div>
         )}
       </div>
     </div>
