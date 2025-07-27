@@ -178,54 +178,54 @@ const ChatDetails: React.FC<ChatDetailsProps> = ({ chatId }) => {
     </div>
   ) : (
     <div className="flex flex-col w-full h-screen bg-gray-900">
-      <div className="flex items-center justify-between p-4 bg-gray-800/80 backdrop-blur-sm border-b border-gray-700 sticky top-0 z-50">
-        <div className="flex items-center gap-3">
+      <div className="flex items-center justify-between px-4 py-3 bg-gray-800/80 backdrop-blur-sm border-b border-gray-700 sticky top-0 z-50">
+        <div className="flex items-center gap-2">
           <button
             onClick={() => router.back()}
-            className="lg:hidden p-2 hover:bg-gray-700 rounded-full transition-colors"
+            className="lg:hidden p-1.5 hover:bg-gray-700 rounded-full transition-colors"
           >
-            <ArrowLeft className="w-5 h-5 text-gray-400" />
+            <ArrowLeft className="w-4 h-4 text-gray-400" />
           </button>
 
           {chat?.isGroup ? (
             <Link
               href={`/chats/${chatId}/group-info`}
-              className="flex items-center gap-3 hover:bg-gray-700/50 p-2 rounded-xl transition-colors"
+              className="flex items-center gap-2 hover:bg-gray-700/50 px-2 py-1 rounded-lg transition-colors"
             >
               <div className="relative">
                 <Image
                   src={chat?.groupPhoto || '/assets/group.png'}
                   alt="group-photo"
-                  className="w-12 h-12 rounded-full object-cover ring-2 ring-gray-600"
-                  height={48}
-                  width={48}
+                  className="w-9 h-9 rounded-full object-cover ring-1 ring-gray-600"
+                  height={36}
+                  width={36}
                 />
-                <div className="absolute -bottom-1 -right-1 bg-gray-800 rounded-full p-1">
-                  <Users className="w-3 h-3 text-indigo-400" />
+                <div className="absolute -bottom-0.5 -right-0.5 bg-gray-800 rounded-full p-0.5">
+                  <Users className="w-2.5 h-2.5 text-indigo-400" />
                 </div>
               </div>
               <div className="flex-1 min-w-0">
-                <p className="text-lg font-semibold text-white truncate">
+                <p className="text-base font-semibold text-white truncate">
                   {chat?.name}
                 </p>
-                <p className="text-sm text-gray-400">
+                <p className="text-xs text-gray-400">
                   {chat?.members?.length} members
                 </p>
               </div>
             </Link>
           ) : (
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2">
               <div className="relative">
                 <Image
                   src={otherMembers[0]?.profileImage || '/assets/person.jpg'}
                   alt="profile photo"
-                  className="w-12 h-12 rounded-full object-cover ring-2 ring-gray-600"
-                  height={48}
-                  width={48}
+                  className="w-9 h-9 rounded-full object-cover ring-1 ring-gray-600"
+                  height={36}
+                  width={36}
                 />
               </div>
               <div className="flex-1 min-w-0">
-                <p className="text-lg font-semibold text-white truncate">
+                <p className="text-base font-semibold text-white truncate">
                   {otherMembers[0]?.username}
                 </p>
               </div>
@@ -233,8 +233,8 @@ const ChatDetails: React.FC<ChatDetailsProps> = ({ chatId }) => {
           )}
         </div>
 
-        <button className="p-2 hover:bg-gray-700 rounded-full transition-colors">
-          <MoreVertical className="w-5 h-5 text-gray-400" />
+        <button className="p-1.5 hover:bg-gray-700 rounded-full transition-colors">
+          <MoreVertical className="w-4 h-4 text-gray-400" />
         </button>
       </div>
 

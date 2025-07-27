@@ -53,7 +53,7 @@ const SideBar = () => {
 
   return (
     <div className="flex flex-col bg-gray-950 border-r border-gray-800/50 text-white h-full">
-      <div className="hidden sm:flex flex-col h-screen w-24 py-6">
+      <div className="hidden sm:flex flex-col h-screen w-16 py-6">
         <div className="flex items-center justify-center mb-8">
           <Link
             href="/chats"
