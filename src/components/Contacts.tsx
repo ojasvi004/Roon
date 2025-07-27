@@ -86,7 +86,6 @@ const Contacts: React.FC = () => {
     </div>
   ) : (
     <div className="max-w-2xl mx-auto p-6 max-h-[800px] h-[800px] flex flex-col w-full overflow-hidden">
-      {/* Header */}
       <div className="text-center space-y-2 mb-6">
         <div className="flex items-center justify-center gap-2 text-2xl font-semibold text-white">
           <Users className="w-6 h-6 text-indigo-400" />
@@ -97,7 +96,6 @@ const Contacts: React.FC = () => {
         </p>
       </div>
 
-      {/* Search Bar */}
       <div className="relative mb-4">
         <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
         <Input
@@ -108,7 +106,6 @@ const Contacts: React.FC = () => {
         />
       </div>
 
-      {/* Selected Contacts Pills - Fixed Height */}
       {selectedContacts.length > 0 && (
         <div className="bg-gray-800/30 rounded-xl p-4 border border-gray-700 mb-4 h-24 overflow-y-auto flex-shrink-0 w-full">
           <div className="flex items-center gap-2 mb-2">
@@ -143,7 +140,6 @@ const Contacts: React.FC = () => {
         </div>
       )}
 
-      {/* Group Name Input - Fixed Height */}
       {isGroup && (
         <div className="bg-gray-800/30 rounded-xl p-4 border border-gray-700 mb-4 flex-shrink-0">
           <label className="block text-sm font-medium text-gray-300 mb-2">
@@ -158,30 +154,35 @@ const Contacts: React.FC = () => {
         </div>
       )}
 
-      {/* Contacts List - Flexible Height */}
       <div className="bg-gray-800/30 rounded-xl border border-gray-700 overflow-hidden flex-1 flex flex-col">
         <div className="p-4 border-b border-gray-700 flex-shrink-0">
           <h3 className="font-medium text-gray-300">Available Contacts</h3>
         </div>
-        
+
         <div className="flex-1 overflow-y-auto">
           {contacts.length === 0 ? (
             <div className="p-8 text-center h-full flex flex-col justify-center">
               <Users className="w-12 h-12 text-gray-600 mx-auto mb-3" />
               <p className="text-gray-400">No contacts found</p>
               <p className="text-gray-500 text-sm mt-1">
-                {search ? 'Try adjusting your search' : 'Add some friends to get started'}
+                {search
+                  ? 'Try adjusting your search'
+                  : 'Add some friends to get started'}
               </p>
             </div>
           ) : (
             <div className="divide-y divide-gray-700/50">
               {contacts.map((user) => {
-                const isSelected = selectedContacts.some((item) => item._id === user._id);
+                const isSelected = selectedContacts.some(
+                  (item) => item._id === user._id
+                );
                 return (
                   <div
                     key={user._id}
                     className={`p-4 cursor-pointer transition-all duration-200 hover:bg-gray-700/30 ${
-                      isSelected ? 'bg-indigo-500/10 border-r-2 border-indigo-500' : ''
+                      isSelected
+                        ? 'bg-indigo-500/10 border-r-2 border-indigo-500'
+                        : ''
                     }`}
                     onClick={() => handleSelect(user)}
                   >
@@ -200,21 +201,25 @@ const Contacts: React.FC = () => {
                           </div>
                         )}
                       </div>
-                      
+
                       <div className="flex-1 min-w-0">
                         <p className="font-medium text-white truncate">
                           {(user as any).username || user.name}
                         </p>
                         <p className="text-sm text-gray-400 truncate">
-                          {user.name !== (user as any).username ? user.name : 'Available'}
+                          {user.name !== (user as any).username
+                            ? user.name
+                            : 'Available'}
                         </p>
                       </div>
 
-                      <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center transition-all ${
-                        isSelected 
-                          ? 'bg-indigo-500 border-indigo-500' 
-                          : 'border-gray-500 hover:border-indigo-400'
-                      }`}>
+                      <div
+                        className={`w-5 h-5 rounded-full border-2 flex items-center justify-center transition-all ${
+                          isSelected
+                            ? 'bg-indigo-500 border-indigo-500'
+                            : 'border-gray-500 hover:border-indigo-400'
+                        }`}
+                      >
                         {isSelected && <Check className="w-3 h-3 text-white" />}
                       </div>
                     </div>
@@ -226,7 +231,6 @@ const Contacts: React.FC = () => {
         </div>
       </div>
 
-      {/* Action Button - Fixed at Bottom */}
       <div className="flex-shrink-0 mt-4">
         <button
           className={`w-full py-4 rounded-xl font-medium transition-all duration-200 flex items-center justify-center gap-2 ${
@@ -238,10 +242,9 @@ const Contacts: React.FC = () => {
           disabled={selectedContacts.length === 0}
         >
           <MessageCircle className="w-5 h-5" />
-          {selectedContacts.length === 0 
-            ? 'Select contacts to continue' 
-            : `Start ${isGroup ? 'Group ' : ''}Chat${selectedContacts.length > 1 ? ` (${selectedContacts.length})` : ''}`
-          }
+          {selectedContacts.length === 0
+            ? 'Select contacts to continue'
+            : `Start ${isGroup ? 'Group ' : ''}Chat${selectedContacts.length > 1 ? ` (${selectedContacts.length})` : ''}`}
         </button>
       </div>
     </div>

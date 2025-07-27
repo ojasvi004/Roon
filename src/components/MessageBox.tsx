@@ -2,55 +2,60 @@ import { format } from 'date-fns';
 import Image from 'next/image';
 
 const MessageBox = ({ message, currentUser }) => {
-  return message?.sender?._id !== currentUser._id ? (
-    <div className="flex items-start gap-3 mb-4">
-      <Image
-        src={message?.sender?.profileImage || '/assets/person.jpg'}
-        alt="profile photo"
-        className="w-10 h-10 rounded-full object-cover"
-        height={50}
-        width={50}
-      />
-      <div className="flex flex-col">
-        <p className="text-xs text-gray-500 mb-1">
-          {message?.createdAt
-            ? format(new Date(message.createdAt), 'p')
-            : 'invalid date'}
-        </p>
-        {message?.text ? (
-          <p className="bg-gray-100 text-wrap text-balance text-gray-800 py-1 px-4 rounded-lg shadow-sm max-w-xs break-words">
-            {message?.text}
-          </p>
-        ) : (
-          <Image
-            src={message?.photo}
-            alt="message"
-            className="max-w-[200px] max-h-[200px] object-contain"
-            height={50}
-            width={50}
-          />
+  const isOwnMessage = message?.sender?._id === currentUser._id;
+
+  return (
+    <div
+      className={`flex ${isOwnMessage ? 'justify-end' : 'justify-start'} mb-4`}
+    >
+      <div
+        className={`flex ${isOwnMessage ? 'flex-row-reverse' : 'flex-row'} items-end gap-2 max-w-[70%]`}
+      >
+        {!isOwnMessage && (
+          <div className="flex-shrink-0">
+            <Image
+              src={message?.sender?.profileImage || '/assets/person.jpg'}
+              alt="profile photo"
+              className="w-8 h-8 rounded-full object-cover ring-2 ring-gray-600"
+              height={32}
+              width={32}
+            />
+          </div>
         )}
-      </div>
-    </div>
-  ) : (
-    <div className="flex justify-end gap-3 mb-4">
-      <div className="flex flex-col items-end">
-        {message?.text ? (
-          <p className="bg-indigo-500 text-wrap text-balance text-white py-1 px-4 rounded-lg shadow-sm max-w-xs break-words">
-            {message?.text}
+
+        <div
+          className={`flex flex-col ${isOwnMessage ? 'items-end' : 'items-start'}`}
+        >
+          <div
+            className={`px-4 py-2 rounded-2xl shadow-sm ${
+              isOwnMessage
+                ? 'bg-indigo-600 text-white rounded-br-md'
+                : 'bg-gray-800 text-gray-100 rounded-bl-md border border-gray-700'
+            } max-w-full break-words`}
+          >
+            {message?.text ? (
+              <p className="text-sm leading-relaxed">{message.text}</p>
+            ) : (
+              <div className="relative">
+                <Image
+                  src={message?.photo}
+                  alt="message"
+                  className="max-w-[280px] max-h-[280px] object-cover rounded-xl"
+                  height={280}
+                  width={280}
+                />
+              </div>
+            )}
+          </div>
+
+          <p
+            className={`text-xs text-gray-500 mt-1 px-1 ${isOwnMessage ? 'text-right' : 'text-left'}`}
+          >
+            {message?.createdAt
+              ? format(new Date(message.createdAt), 'p')
+              : 'invalid date'}
           </p>
-        ) : (
-          <Image
-            src={message?.photo}
-            alt="message"
-            className="max-w-[200px] max-h-[200px] object-contain rounded-lg shadow-sm"
-            height={350}
-            width={350}
-          />
-        )}
-        <p className="text-xs text-gray-500 mb-1">
-          {format(new Date(message?.createdAt), 'p')}
-        </p>
+        </div>
       </div>
     </div>
   );
