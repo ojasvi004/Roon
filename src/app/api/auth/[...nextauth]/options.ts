@@ -1,7 +1,7 @@
 import { NextAuthOptions } from 'next-auth/index';
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
-import User from "@/models/User";
+import User from '@/models/User';
 import dbConnect from "@/db";
 import { z } from "zod";
 
@@ -55,7 +55,7 @@ export const authOptions: NextAuthOptions = {
           throw new Error("Invalid email or password");
         }
 
-        return { id: user._id.toString(), email: user.email, name: user.name };
+        return { id: user._id.toString(), email: user.email, username: user.username };
       },
     }),
   ],
@@ -68,13 +68,8 @@ export const authOptions: NextAuthOptions = {
       await dbConnect();
       const mongodbUser = await User.findOne({ email: session.user.email });
       if (mongodbUser) {
-        session.user = {
-          ...session.user,
-          _id: mongodbUser._id.toString(),
-          username: mongodbUser.username,
-          email: mongodbUser.email,
-          profileImage: mongodbUser.profileImage || "",
-        };
+        session.user.name = mongodbUser._id.toString();
+        session.user = { ...session.user, ...mongodbUser.toObject() };
       }
       return session;
     },
