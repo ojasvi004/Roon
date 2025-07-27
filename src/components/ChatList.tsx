@@ -1,6 +1,7 @@
 'use client';
 import React, { useEffect, useMemo, useState } from 'react';
 import { Input } from './ui/input';
+import { Skeleton } from './ui/skeleton';
 import { useSession } from 'next-auth/react';
 import ChatBox from './ChatBox';
 import { pusherClient } from '@/lib/pusher';
@@ -17,6 +18,23 @@ interface Chat {
 interface ChatListProps {
   currentChatId: string;
 }
+
+const ChatSkeleton = () => (
+  <div className="px-3 py-2 space-y-1">
+    {Array.from({ length: 10 }).map((_, i) => (
+      <div key={i} className="flex items-center gap-3 p-3 rounded-xl">
+        <Skeleton className="h-12 w-12 rounded-full" />
+        <div className="flex-1 space-y-2">
+          <div className="flex items-center justify-between">
+            <Skeleton className="h-4 w-24" />
+            <Skeleton className="h-3 w-12" />
+          </div>
+          <Skeleton className="h-3 w-32" />
+        </div>
+      </div>
+    ))}
+  </div>
+);
 
 const ChatList: React.FC<ChatListProps> = ({ currentChatId }) => {
   const { data: session } = useSession();
@@ -49,6 +67,7 @@ const ChatList: React.FC<ChatListProps> = ({ currentChatId }) => {
     }
 
     try {
+      setLoading(true); // Ensure loading is set to true
       const response = await fetch(
         search !== ''
           ? `/api/users/${currentUser._id}/searchChat/${search}`
@@ -61,6 +80,10 @@ const ChatList: React.FC<ChatListProps> = ({ currentChatId }) => {
       }
       
       const data: Chat[] = await response.json();
+      
+      // Add minimum loading time to see skeleton
+      await new Promise(resolve => setTimeout(resolve, 500));
+      
       setChats(data);
       setLoading(false);
     } catch (error) {
@@ -112,17 +135,32 @@ const ChatList: React.FC<ChatListProps> = ({ currentChatId }) => {
     }
   }, [currentUser]);
 
-  if (!currentUser || !currentUser._id) {
-    return (
-      <div className="p-4 text-center text-gray-400">
-        <p>Please log in to view chats</p>
-      </div>
-    );
-  }
+
 
   return loading ? (
-    <div className="flex items-center justify-center h-64">
-      <Loader />
+    <div className="flex flex-col h-full bg-gray-900/50 backdrop-blur-sm">
+      <div className="flex-shrink-0 px-4 py-4 border-b border-gray-800/50">
+        <div className="flex items-center gap-3 mb-4">
+          <div className="p-2 bg-indigo-600/10 rounded-lg">
+            <MessageCircle className="w-5 h-5 text-indigo-400" />
+          </div>
+          <div>
+            <h2 className="text-lg font-semibold text-white">Messages</h2>
+            <Skeleton className="h-3 w-20 mt-1" />
+          </div>
+        </div>
+        
+        <div className="relative">
+          <div className="absolute inset-y-0 left-3 flex items-center pointer-events-none">
+            <Search className="h-4 w-4 text-gray-400" />
+          </div>
+          <Skeleton className="h-10 w-full rounded-xl" />
+        </div>
+      </div>
+
+      <div className="flex-1 overflow-y-auto">
+        <ChatSkeleton />
+      </div>
     </div>
   ) : (
     <div className="flex flex-col h-full bg-gray-900/50 backdrop-blur-sm">
@@ -197,17 +235,12 @@ const ChatList: React.FC<ChatListProps> = ({ currentChatId }) => {
               </div>
             )}
             {sortedChats.map((chat, index) => (
-              <div
+              <ChatBox
                 key={chat._id}
-                className="animate-in slide-in-from-left duration-200"
-                style={{ animationDelay: `${index * 50}ms` }}
-              >
-                <ChatBox
-                  chat={chat}
-                  currentUser={currentUser}
-                  currentChatId={currentChatId}
-                />
-              </div>
+                chat={chat}
+                currentUser={currentUser}
+                currentChatId={currentChatId}
+              />
             ))}
           </div>
         )}

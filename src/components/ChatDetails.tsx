@@ -279,37 +279,39 @@ const ChatDetails: React.FC<ChatDetailsProps> = ({ chatId }) => {
         )}
       </div>
 
-      <div className="p-4 bg-gray-800/80 backdrop-blur-sm border-t border-gray-700 sticky bottom-0 z-10">
-        <div className="flex items-center gap-3 bg-gray-800/50 rounded-2xl p-2 border border-gray-700">
+      <div className="p-4 bg-gray-900/95 backdrop-blur-sm border-t border-gray-700/50 sticky bottom-0 z-10">
+        <div className="flex items-end gap-3 max-w-4xl mx-auto">
           <CldUploadButton
             options={{ maxFiles: 1 }}
             uploadPreset="nmkeeg8v"
             onSuccess={sendPhoto}
-            className="p-2 hover:bg-gray-700 rounded-full transition-colors group"
+            className="flex-shrink-0 p-2.5 bg-gray-800 hover:bg-gray-700 rounded-full transition-all duration-200 group border border-gray-600 hover:border-gray-500"
           >
-            <ImageIcon className="w-5 h-5 text-gray-400 group-hover:text-indigo-400 transition-colors" />
+            <ImageIcon className="w-5 h-5 text-gray-300 group-hover:text-indigo-400 transition-colors" />
           </CldUploadButton>
 
-          <Input
-            type="text"
-            placeholder={
-              chat?.isGroup
-                ? 'Type a message...'
-                : `Message ${otherMembers[0]?.username}...`
-            }
-            className="flex-1 bg-transparent border-none text-white placeholder-gray-400 focus:ring-0 focus:outline-none text-base"
-            value={text}
-            onChange={(e) => setText(e.target.value)}
-            onKeyDown={handleKeyDown}
-          />
+          <div className="flex-1 bg-gray-800/80 border border-gray-600 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-200 focus-within:border-indigo-500/50 focus-within:bg-gray-800">
+            <Input
+              type="text"
+              placeholder={
+                chat?.isGroup
+                  ? 'Type a message...'
+                  : `Message ${otherMembers[0]?.username}...`
+              }
+              className="w-full bg-transparent border-none text-white placeholder-gray-400 focus:ring-0 focus:outline-none text-base px-4 py-3 resize-none"
+              value={text}
+              onChange={(e) => setText(e.target.value)}
+              onKeyDown={handleKeyDown}
+            />
+          </div>
 
           <button
             onClick={sendText}
             disabled={!text.trim()}
-            className={`p-2 rounded-full transition-all ${
+            className={`flex-shrink-0 p-2.5 rounded-full transition-all duration-200 ${
               text.trim()
-                ? 'bg-indigo-600 hover:bg-indigo-700 text-white shadow-lg hover:shadow-indigo-500/25'
-                : 'bg-gray-700 text-gray-400 cursor-not-allowed'
+                ? 'bg-indigo-600 hover:bg-indigo-700 text-white shadow-lg hover:shadow-indigo-600/30 scale-100 hover:scale-105'
+                : 'bg-gray-700 text-gray-500 cursor-not-allowed scale-95'
             }`}
           >
             <Send className="w-5 h-5" />
