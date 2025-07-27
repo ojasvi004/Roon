@@ -49,6 +49,7 @@ const ChatDetails: React.FC<ChatDetailsProps> = ({ chatId }) => {
   const [loading, setLoading] = useState(true);
   const [chat, setChat] = useState<Chat | null>(null);
   const [otherMembers, setOtherMembers] = useState<Member[]>([]);
+  const [isInitialLoad, setIsInitialLoad] = useState(true);
   const { data: session } = useSession();
   const router = useRouter();
   const currentUser = session?.user as {
@@ -64,6 +65,8 @@ const ChatDetails: React.FC<ChatDetailsProps> = ({ chatId }) => {
   useEffect(() => {
     const getChatDetails = async () => {
       try {
+        setLoading(true);
+        setIsInitialLoad(true);
         const res = await fetch(`/api/chats/${chatId}`, {
           method: 'GET',
           headers: {
@@ -76,6 +79,7 @@ const ChatDetails: React.FC<ChatDetailsProps> = ({ chatId }) => {
           data?.members?.filter((member) => member._id !== currentUser._id)
         );
         setLoading(false);
+        setIsInitialLoad(true);
       } catch (error) {
         console.log(error);
       }
@@ -134,10 +138,15 @@ const ChatDetails: React.FC<ChatDetailsProps> = ({ chatId }) => {
   const bottomRef = useRef(null);
 
   useEffect(() => {
-    bottomRef.current?.scrollIntoView({
-      behavior: 'smooth',
-    });
-  }, [chat?.messages]);
+    if (chat?.messages) {
+      bottomRef.current?.scrollIntoView({
+        behavior: isInitialLoad ? 'auto' : 'smooth',
+      });
+      if (isInitialLoad) {
+        setIsInitialLoad(false);
+      }
+    }
+  }, [chat?.messages, isInitialLoad]);
 
   useEffect(() => {
     if (chatId && pusherClient) {
@@ -151,6 +160,7 @@ const ChatDetails: React.FC<ChatDetailsProps> = ({ chatId }) => {
             messages: [...prevChat.messages, newMessage],
           };
         });
+        setIsInitialLoad(false);
       };
 
       pusherClient.bind('new-message', handleMessage);
