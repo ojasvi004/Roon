@@ -1,28 +1,7 @@
-import { Inter } from 'next/font/google';
 import type { Metadata } from 'next';
-import localFont from 'next/font/local';
 import '../globals.css';
-import ToasterContext from '@/components/ToasterContext';
-import Provider from '@/components/Provider';
 import MouseMoveEffect from '@/components/mouse-move-effect';
 import GradientBackground from '@/components/gradient-background';
-
-const inter = Inter({
-  subsets: ['latin'],
-  weight: ['400', '600'],
-});
-
-const geistSans = localFont({
-  src: '../fonts/GeistVF.woff',
-  variable: '--font-geist-sans',
-  weight: '100 900',
-});
-
-const geistMono = localFont({
-  src: '../fonts/GeistMonoVF.woff',
-  variable: '--font-geist-mono',
-  weight: '100 900',
-});
 
 export const metadata: Metadata = {
   title: 'roon',
@@ -32,23 +11,16 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default function AuthLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${inter.className} ${geistSans.variable} ${geistMono.variable} antialiased font-sans`}
-      >
-        <Provider>
-          <GradientBackground />
-          <MouseMoveEffect />
-          <ToasterContext />
-          {children}
-        </Provider>
-      </body>
-    </html>
+    <>
+      <GradientBackground />
+      <MouseMoveEffect />
+      {children}
+    </>
   );
 }

@@ -173,7 +173,7 @@ export default function AuthForm({ type }: FormProps) {
             {type === "register" ? (
               <>
                 Already have an account?{" "}
-                <Link href="/" className="text-indigo-400 hover:text-indigo-300 font-medium">
+                <Link href="/login" className="text-indigo-400 hover:text-indigo-300 font-medium">
                   Sign in
                 </Link>
               </>

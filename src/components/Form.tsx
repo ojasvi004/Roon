@@ -157,7 +157,7 @@ const Form: React.FC<FormProps> = ({ type }) => {
 
           <div className="pt-4 border-t border-gray-800">
             {type === "register" ? (
-              <Link href="/" className="block text-center">
+              <Link href="/login" className="block text-center">
                 <span className="text-gray-400 text-sm">
                   Already have an account? <span className="text-white hover:underline">Sign in</span>
                 </span>

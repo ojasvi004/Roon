@@ -24,6 +24,7 @@ const config: Config = {
       fontFamily: {
         sans: ['var(--font-geist-sans)', ...fontFamily.sans],
         mono: ['var(--font-geist-mono)', ...fontFamily.mono],
+        playwrite: ['var(--font-playwrite-hu)', 'cursive'],
       },
       colors: {
         background: 'hsl(var(--background))',
