@@ -4,10 +4,10 @@ import Message from '@/models/Message';
 import User from '@/models/User';
 import { NextResponse, NextRequest } from 'next/server';
 
-export async function GET(request: Request, { params }) {
+export async function GET(request: Request, { params }: { params: Promise<{ chatId: string }> }) {
   try {
     await dbConnect();
-    const { chatId } = params;
+    const { chatId } = await params;
 
     const response = await Chat.findById(chatId)
       .populate({
@@ -34,11 +34,11 @@ export async function GET(request: Request, { params }) {
   }
 }
 
-export const POST = async (req: NextRequest, { params }): Promise<Response> => {
+export const POST = async (req: NextRequest, { params }: { params: Promise<{ chatId: string }> }): Promise<Response> => {
   try {
     await dbConnect();
 
-    const { chatId } = params;
+    const { chatId } = await params;
     const body = await req.json();
 
     const { currentUserId } = body;

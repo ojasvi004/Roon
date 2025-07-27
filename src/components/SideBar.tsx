@@ -53,13 +53,13 @@ const SideBar = () => {
 
   return (
     <div className="flex flex-col bg-gray-950 border-r border-gray-800/50 text-white h-full">
-      <div className="hidden sm:flex flex-col h-screen w-20 py-6">
+      <div className="hidden sm:flex flex-col h-screen w-24 py-6">
         <div className="flex items-center justify-center mb-8">
           <Link
             href="/chats"
-            className="group flex items-center justify-center w-12 h-12 bg-gray-900 rounded-xl transition-all duration-200 hover:bg-indigo-600 hover:scale-105"
+            className="group flex items-center justify-center w-14 h-14 bg-gray-900 rounded-xl transition-all duration-200 hover:bg-indigo-600 hover:scale-105"
           >
-            <PiCatFill className="text-2xl text-indigo-400 group-hover:text-white transition-colors duration-200" />
+            <PiCatFill className="text-4xl text-indigo-400 group-hover:text-white transition-colors duration-200" />
           </Link>
         </div>
 

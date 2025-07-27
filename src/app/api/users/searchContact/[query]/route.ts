@@ -2,11 +2,11 @@ import User from "@/models/User";
 import dbConnect from "@/db";
 import { NextRequest } from "next/server";
 
-export const GET = async (req: NextRequest, { params }) => {
+export const GET = async (req: NextRequest, { params }: { params: Promise<{ query: string }> }) => {
   try {
     await dbConnect();
 
-    const query = params.query;
+    const { query } = await params;
 
     const searchedContacts = await User.find({
       $or: [

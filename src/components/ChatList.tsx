@@ -8,7 +8,7 @@ import Loader from './Loader';
 
 interface Chat {
   _id: string;
-  members: Array<{ _id: string; name: string }>;
+  members: Array<{ _id: string; username: string; name?: string }>;
   lastMessageAt: string;
   messages: Array<{ senderId: string; content: string; timestamp: string }>;
 }
@@ -21,6 +21,7 @@ const ChatList: React.FC<ChatListProps> = ({ currentChatId }) => {
   const { data: session } = useSession();
   const currentUser = session?.user as {
     _id: string;
+    username?: string;
     name?: string;
     email?: string;
     image?: string;

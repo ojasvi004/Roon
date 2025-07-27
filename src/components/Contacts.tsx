@@ -10,7 +10,8 @@ import Image from 'next/image';
 
 type Contact = {
   _id: string;
-  name: string;
+  username: string;
+  name?: string;
   profileImage?: string;
 };
 
@@ -25,6 +26,7 @@ const Contacts: React.FC = () => {
   const { data: session } = useSession();
   const currentUser = session?.user as {
     _id: string;
+    username?: string;
     name?: string;
     email?: string;
     image?: string;
@@ -122,12 +124,12 @@ const Contacts: React.FC = () => {
               >
                 <Image
                   src={contact.profileImage || '/assets/person.jpg'}
-                  alt={contact.name}
+                  alt={contact.username || contact.name || 'Contact'}
                   className="w-4 h-4 rounded-full object-cover flex-shrink-0"
                   height={16}
                   width={16}
                 />
-                <span className="truncate max-w-20">{contact.name}</span>
+                <span className="truncate max-w-20">{contact.username || contact.name}</span>
                 <button
                   onClick={() => handleSelect(contact)}
                   className="hover:bg-indigo-400/20 rounded-full p-0.5 flex-shrink-0"
@@ -190,7 +192,7 @@ const Contacts: React.FC = () => {
                       <div className="relative">
                         <Image
                           src={user.profileImage || '/assets/person.jpg'}
-                          alt={user.name}
+                          alt={user.username || user.name || 'User'}
                           className="w-12 h-12 rounded-full object-cover ring-2 ring-gray-600"
                           height={48}
                           width={48}
@@ -204,12 +206,10 @@ const Contacts: React.FC = () => {
 
                       <div className="flex-1 min-w-0">
                         <p className="font-medium text-white truncate">
-                          {(user as any).username || user.name}
+                          {(user as any).username || user.name || 'User'}
                         </p>
                         <p className="text-sm text-gray-400 truncate">
-                          {user.name !== (user as any).username
-                            ? user.name
-                            : 'Available'}
+                          {(user as any).email || 'Available'}
                         </p>
                       </div>
 
