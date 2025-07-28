@@ -83,47 +83,52 @@ const Profile = () => {
       </div>
     </div>
   ) : (
-    <div className="h-screen bg-gray-900 flex flex-col overflow-hidden">
-      <div className="max-w-2xl mx-auto w-full flex flex-col h-full p-6">
-        <div className="flex-shrink-0 mb-8">
-          <button
-            onClick={() => router.back()}
-            className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors mb-6"
-          >
-            <ArrowLeft className="w-5 h-5" />
-            Back
-          </button>
-          
-          <div className="text-center">
-            <div className="flex items-center justify-center gap-2 text-3xl font-bold text-white mb-2">
-              Edit Profile
+    <div className="h-screen bg-gray-900 flex flex-col">
+      <div className="flex-shrink-0 border-b border-gray-800">
+        <div className="px-6 py-4">
+          <div className="flex items-center gap-4">
+            <button
+              onClick={() => router.back()}
+              className="flex items-center justify-center w-10 h-10 rounded-full hover:bg-gray-800 transition-colors"
+            >
+              <ArrowLeft className="w-5 h-5 text-gray-400" />
+            </button>
+            <div>
+              <h1 className="text-xl font-semibold text-white">Settings</h1>
+              <p className="text-sm text-gray-400">Manage your account settings</p>
             </div>
-            <p className="text-gray-400">Update your username and profile picture</p>
           </div>
         </div>
+      </div>
 
-        {errorMessage && (
-          <div className="bg-red-500/10 border border-red-500/20 rounded-xl p-4 mb-6 flex-shrink-0">
-            <p className="text-red-400 text-center">{errorMessage}</p>
-          </div>
-        )}
+      {errorMessage && (
+        <div className="mx-6 mt-4 bg-red-500/10 border border-red-500/20 rounded-lg p-3">
+          <p className="text-red-400 text-sm">{errorMessage}</p>
+        </div>
+      )}
 
-        <div className="flex-1 flex items-center justify-center">
-          <div className="bg-gray-800/50 rounded-2xl border border-gray-700 p-8 w-full max-w-md">
-            <form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-8">
-              
-              <div className="text-center">
-                <div className="relative inline-block">
+      <div className="flex-1 overflow-y-auto">
+        <div className="w-full">
+          <form onSubmit={handleSubmit(onSubmit)} noValidate>
+            
+            <div className="px-8 py-6 border-b border-gray-800">
+              <div className="flex items-start justify-between">
+                <div className="flex-1">
+                  <h3 className="text-base font-semibold text-white mb-1">Avatar</h3>
+                  <p className="text-sm text-gray-400">A picture helps people recognize you and shows up on your profile</p>
+                </div>
+                
+                <div className="flex items-center gap-4 ml-8">
                   <div className="relative">
                     <Image
                       src={watch('profileImage') || user?.profileImage || '/assets/person.jpg'}
-                      width={140}
-                      height={140}
+                      width={80}
+                      height={80}
                       alt="Profile Picture"
-                      className="w-40 h-40 rounded-full object-cover border-2 border-gray-600 shadow-xl"
+                      className="w-20 h-20 rounded-full object-cover"
                     />
-                    <div className="absolute inset-0 rounded-full bg-black/40 opacity-0 hover:opacity-100 transition-opacity flex items-center justify-center">
-                      <Camera className="w-8 h-8 text-white" />
+                    <div className="absolute inset-0 rounded-full bg-black/40 opacity-0 hover:opacity-100 transition-opacity flex items-center justify-center cursor-pointer">
+                      <Camera className="w-5 h-5 text-white" />
                     </div>
                   </div>
                   
@@ -131,54 +136,51 @@ const Profile = () => {
                     options={{ maxFiles: 1 }}
                     uploadPreset="nmkeeg8v"
                     onSuccess={handleUploadPfp}
-                    className="absolute -bottom-2 -right-2 bg-indigo-600 hover:bg-indigo-700 rounded-full p-3 shadow-lg transition-colors"
+                    className="inline-flex items-center gap-2 px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-sm rounded transition-colors font-medium"
                   >
-                    <Camera className="w-5 h-5 text-white" />
+                    Change Avatar
                   </CldUploadButton>
                 </div>
-                
-                <p className="text-gray-400 text-sm mt-4">Click the camera icon to change your photo</p>
               </div>
+            </div>
 
-              <div className="space-y-3">
-                <label className="block text-sm font-medium text-gray-300">
-                  Username
-                </label>
-                <Input
-                  {...register('username', {
-                    required: 'Username is required',
-                    validate: (value) =>
-                      value.length >= 3 || 'Username must be at least 3 characters',
-                  })}
-                  type="text"
-                  placeholder="Enter your username..."
-                  className="w-full bg-gray-800/50 border-gray-600 text-white placeholder-gray-400 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 rounded-xl h-12 text-lg"
-                />
-                {errors.username && (
-                  <p className="text-red-400 text-sm flex items-center gap-1">
+            <div className="px-8 py-6 border-b border-gray-800">
+              <div className="flex items-start justify-between">
+                <div className="flex-1">
+                  <h3 className="text-base font-semibold text-white mb-1">Display Name</h3>
+                  <p className="text-sm text-gray-400">This is how others will see you in chats. You can use special characters and emoji.</p>
+                </div>
+                
+                <div className="flex items-center gap-4 ml-8 min-w-0 flex-1 max-w-md">
+                  <Input
+                    {...register('username', {
+                      required: 'Username is required',
+                      validate: (value) =>
+                        value.length >= 3 || 'Username must be at least 3 characters',
+                    })}
+                    type="text"
+                    placeholder="Enter your display name..."
+                    className="bg-gray-800 border-gray-700 text-white placeholder-gray-400 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+                  />
+                </div>
+              </div>
+              {errors.username && (
+                <div className="flex justify-end mt-2">
+                  <p className="text-red-400 text-sm flex items-center gap-2 max-w-md">
                     <span className="w-4 h-4 rounded-full bg-red-500/20 flex items-center justify-center text-xs">!</span>
                     {typeof errors.username.message === 'string' && errors.username.message}
                   </p>
-                )}
-              </div>
-
-              <div className="bg-gray-800/30 rounded-xl p-4 border border-gray-700">
-                <div className="flex items-center gap-3">
-                  <div className="bg-indigo-500/20 rounded-full p-2">
-                    <User className="w-5 h-5 text-indigo-400" />
-                  </div>
-                  <div className="flex-1">
-                    <p className="text-sm font-medium text-gray-300">Account Status</p>
-                    <p className="text-xs text-gray-400">Active Member</p>
-                  </div>
                 </div>
-              </div>
+              )}
+            </div>
 
-              <div className="flex gap-4 pt-4">
+            <div className="px-8 py-8">
+              <div className="flex gap-4">
                 <Button
                   type="button"
                   onClick={() => router.back()}
-                  className="flex-1 bg-gray-700 hover:bg-gray-600 text-white rounded-xl h-12 font-medium"
+                  variant="outline"
+                  className="bg-transparent border-gray-600 text-gray-300 hover:bg-gray-700 hover:text-white px-6 py-3 h-auto"
                 >
                   Cancel
                 </Button>
@@ -186,7 +188,7 @@ const Profile = () => {
                 <Button
                   type="submit"
                   disabled={loading}
-                  className="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl h-12 font-medium shadow-lg hover:shadow-indigo-500/25 transition-all"
+                  className="bg-indigo-600 hover:bg-indigo-700 text-white shadow-lg hover:shadow-indigo-500/25 transition-all px-6 py-3 h-auto"
                 >
                   {loading ? (
                     <div className="flex items-center gap-2">
@@ -201,8 +203,9 @@ const Profile = () => {
                   )}
                 </Button>
               </div>
-            </form>
-          </div>
+            </div>
+
+          </form>
         </div>
       </div>
     </div>
