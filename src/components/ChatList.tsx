@@ -2,6 +2,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { Input } from './ui/input';
 import { Skeleton } from './ui/skeleton';
+import { ScrollArea } from './ui/scroll-area';
 import { useSession } from 'next-auth/react';
 import ChatBox from './ChatBox';
 import { pusherClient } from '@/lib/pusher';
@@ -157,9 +158,9 @@ const ChatList: React.FC<ChatListProps> = ({ currentChatId }) => {
         </div>
       </div>
 
-      <div className="flex-1 overflow-y-auto">
+      <ScrollArea className="flex-1 overflow-y-auto">
         <ChatSkeleton />
-      </div>
+      </ScrollArea>
     </div>
   ) : (
     <div className="flex flex-col h-full bg-gray-900/50 backdrop-blur-sm">
@@ -199,7 +200,7 @@ const ChatList: React.FC<ChatListProps> = ({ currentChatId }) => {
         </div>
       </div>
 
-      <div className="flex-1 overflow-y-auto">
+      <ScrollArea className="flex-1">
         {sortedChats?.length === 0 ? (
           <div className="flex flex-col items-center justify-center h-full px-6 py-12">
             <div className="p-4 bg-gray-800/30 rounded-full mb-4">
@@ -244,7 +245,7 @@ const ChatList: React.FC<ChatListProps> = ({ currentChatId }) => {
             ))}
           </div>
         )}
-      </div>
+      </ScrollArea>
     </div>
   );
 };

@@ -3,7 +3,11 @@ import '../globals.css';
 import SideBar from '@/components/SideBar';
 import ChatList from '@/components/ChatList';
 import { usePathname, useParams } from 'next/navigation';
-
+import {
+  ResizableHandle,
+  ResizablePanel,
+  ResizablePanelGroup,
+} from '@/components/ui/resizable';
 
 export default function RootLayout({
   children,
@@ -19,23 +23,30 @@ export default function RootLayout({
       <SideBar />
 
       <div className="flex flex-col sm:flex-row flex-grow min-h-screen w-full">
-        {!hideChatList && (
-          <div className="sm:w-96 bg-gray-800 bg-opacity-50 backdrop-blur-2xl overflow-y-auto sm:overflow-hidden sm:h-screen">
-            <ChatList currentChatId={Array.isArray(chatId) ? chatId[0] : chatId || null} />
+        {!hideChatList ? (
+          <ResizablePanelGroup direction="horizontal" className="flex-grow">
+            <ResizablePanel defaultSize={25} minSize={20} maxSize={35}>
+              <div className="h-full bg-gray-800 bg-opacity-50 backdrop-blur-2xl overflow-y-auto">
+                <ChatList
+                  currentChatId={
+                    Array.isArray(chatId) ? chatId[0] : chatId || null
+                  }
+                />
+              </div>
+            </ResizablePanel>
+
+            <ResizableHandle withHandle />
+
+            <ResizablePanel defaultSize={75} minSize={65}>
+              <div className="h-full overflow-auto">{children}</div>
+            </ResizablePanel>
+          </ResizablePanelGroup>
+        ) : (
+          <div className="flex-grow flex justify-center items-center h-screen overflow-auto">
+            {children}
           </div>
         )}
-
-        <div
-          className={`
-            flex-grow overflow-auto
-            ${hideChatList ? 'flex justify-center items-center h-screen' : ''}
-            ${!hideChatList ? 'sm:w-[calc(100%-24rem)]' : ''}
-          `}
-        >
-          {children}
-        </div>
       </div>
     </div>
   );
 }
-
