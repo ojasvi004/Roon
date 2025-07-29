@@ -93,25 +93,25 @@ const Contacts: React.FC = () => {
           <Users className="w-6 h-6 text-indigo-400" />
           Start New Chat
         </div>
-        <p className="text-gray-400 text-sm">
+        <p className="text-zinc-400 text-sm">
           Select contacts to start a conversation
         </p>
       </div>
 
       <div className="relative mb-4">
-        <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+        <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-zinc-400 w-4 h-4" />
         <Input
           placeholder="Search contacts..."
-          className="pl-10 bg-gray-800/50 border-gray-700 text-white placeholder-gray-400 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 rounded-xl h-12"
+          className="pl-10 bg-zinc-800/50 border-zinc-700 text-white placeholder-zinc-400 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 rounded-xl h-12"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
       </div>
 
       {selectedContacts.length > 0 && (
-        <div className="bg-gray-800/30 rounded-xl p-4 border border-gray-700 mb-4 h-24 overflow-y-auto flex-shrink-0 w-full">
+        <div className="bg-zinc-800/30 rounded-xl p-4 border border-zinc-700 mb-4 h-24 overflow-y-auto flex-shrink-0 w-full">
           <div className="flex items-center gap-2 mb-2">
-            <span className="text-sm font-medium text-gray-300">Selected:</span>
+            <span className="text-sm font-medium text-zinc-300">Selected:</span>
             <span className="bg-indigo-500 text-white text-xs px-2 py-1 rounded-full">
               {selectedContacts.length}
             </span>
@@ -143,37 +143,37 @@ const Contacts: React.FC = () => {
       )}
 
       {isGroup && (
-        <div className="bg-gray-800/30 rounded-xl p-4 border border-gray-700 mb-4 flex-shrink-0">
-          <label className="block text-sm font-medium text-gray-300 mb-2">
+        <div className="bg-zinc-800/30 rounded-xl p-4 border border-zinc-700 mb-4 flex-shrink-0">
+          <label className="block text-sm font-medium text-zinc-300 mb-2">
             Group Name
           </label>
           <Input
             placeholder="Enter group name..."
-            className="bg-gray-800/50 border-gray-600 text-white placeholder-gray-400 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 rounded-lg"
+            className="bg-zinc-800/50 border-zinc-600 text-white placeholder-zinc-400 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 rounded-lg"
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
         </div>
       )}
 
-      <div className="bg-gray-800/30 rounded-xl border border-gray-700 overflow-hidden flex-1 flex flex-col">
-        <div className="p-4 border-b border-gray-700 flex-shrink-0">
-          <h3 className="font-medium text-gray-300">Available Contacts</h3>
+      <div className="bg-zinc-800/30 rounded-xl border border-zinc-700 overflow-hidden flex-1 flex flex-col">
+        <div className="p-4 border-b border-zinc-700 flex-shrink-0">
+          <h3 className="font-medium text-zinc-300">Available Contacts</h3>
         </div>
 
         <div className="flex-1 overflow-y-auto">
           {contacts.length === 0 ? (
             <div className="p-8 text-center h-full flex flex-col justify-center">
-              <Users className="w-12 h-12 text-gray-600 mx-auto mb-3" />
-              <p className="text-gray-400">No contacts found</p>
-              <p className="text-gray-500 text-sm mt-1">
+              <Users className="w-12 h-12 text-zinc-600 mx-auto mb-3" />
+              <p className="text-zinc-400">No contacts found</p>
+              <p className="text-zinc-500 text-sm mt-1">
                 {search
                   ? 'Try adjusting your search'
                   : 'Add some friends to get started'}
               </p>
             </div>
           ) : (
-            <div className="divide-y divide-gray-700/50">
+            <div className="divide-y divide-zinc-700/50">
               {contacts.map((user) => {
                 const isSelected = selectedContacts.some(
                   (item) => item._id === user._id
@@ -181,7 +181,7 @@ const Contacts: React.FC = () => {
                 return (
                   <div
                     key={user._id}
-                    className={`p-4 cursor-pointer transition-all duration-200 hover:bg-gray-700/30 ${
+                    className={`p-4 cursor-pointer transition-all duration-200 hover:bg-zinc-700/30 ${
                       isSelected
                         ? 'bg-indigo-500/10 border-r-2 border-indigo-500'
                         : ''
@@ -193,7 +193,7 @@ const Contacts: React.FC = () => {
                         <Image
                           src={user.profileImage || '/assets/person.jpg'}
                           alt={user.username || user.name || 'User'}
-                          className="w-12 h-12 rounded-full object-cover ring-2 ring-gray-600"
+                          className="w-12 h-12 rounded-full object-cover ring-2 ring-zinc-600"
                           height={48}
                           width={48}
                         />
@@ -208,7 +208,7 @@ const Contacts: React.FC = () => {
                         <p className="font-medium text-white truncate">
                           {(user as any).username || user.name || 'User'}
                         </p>
-                        <p className="text-sm text-gray-400 truncate">
+                        <p className="text-sm text-zinc-400 truncate">
                           {(user as any).email || 'Available'}
                         </p>
                       </div>
@@ -217,7 +217,7 @@ const Contacts: React.FC = () => {
                         className={`w-5 h-5 rounded-full border-2 flex items-center justify-center transition-all ${
                           isSelected
                             ? 'bg-indigo-500 border-indigo-500'
-                            : 'border-gray-500 hover:border-indigo-400'
+                            : 'border-zinc-500 hover:border-indigo-400'
                         }`}
                       >
                         {isSelected && <Check className="w-3 h-3 text-white" />}
@@ -235,7 +235,7 @@ const Contacts: React.FC = () => {
         <button
           className={`w-full py-4 rounded-xl font-medium transition-all duration-200 flex items-center justify-center gap-2 ${
             selectedContacts.length === 0
-              ? 'bg-gray-700 text-gray-400 cursor-not-allowed'
+              ? 'bg-zinc-700 text-zinc-400 cursor-not-allowed'
               : 'bg-indigo-600 hover:bg-indigo-700 text-white shadow-lg hover:shadow-indigo-500/25'
           }`}
           onClick={createChat}

@@ -45,13 +45,13 @@ const LandingPage = () => {
         <div className="hidden md:flex items-center space-x-8">
           <Link
             href="#"
-            className="text-gray-300 hover:text-white transition-colors"
+            className="text-zinc-300 hover:text-white transition-colors"
           >
             Features
           </Link>
           <Link
             href="#"
-            className="text-gray-300 hover:text-white transition-colors"
+            className="text-zinc-300 hover:text-white transition-colors"
           >
             Contact
           </Link>
@@ -59,7 +59,7 @@ const LandingPage = () => {
 
         <a
           href="https://github.com/ojasvi004/Roon"
-          className="px-6 py-2 text-gray-300 font-medium"
+          className="px-6 py-2 text-zinc-300 font-medium"
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -85,7 +85,7 @@ const LandingPage = () => {
             </span>
           </h1>
 
-          <p className="text-xl md:text-2xl text-gray-400 mb-12 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-xl md:text-2xl text-zinc-400 mb-12 max-w-3xl mx-auto leading-relaxed">
             Experience seamless real-time messaging with advanced privacy
             controls. Keep your conversations secure while staying connected
             with what matters most.
@@ -105,9 +105,9 @@ const LandingPage = () => {
           {/* Laptop Frame */}
           <div className="relative bg-indigo-500/30 rounded-xl p-2 shadow-2xl">
             {/* Screen */}
-            <div className="bg-[#1e1f22] rounded-lg overflow-hidden border-2 border-gray-700 shadow-inner">
+            <div className="bg-[#1e1f22] rounded-lg overflow-hidden border-2 border-zinc-700 shadow-inner">
               {/* Browser Header */}
-              <div className="flex items-center justify-between px-4 py-3 bg-[#1e1f22] border-b border-gray-700">
+              <div className="flex items-center justify-between px-4 py-3 bg-[#1e1f22] border-b border-zinc-700">
                 {/* Traffic Lights */}
                 <div className="flex items-center space-x-2">
                   <div className="w-3 h-3 rounded-full bg-red-500 hover:bg-red-400 transition-colors"></div>
@@ -117,9 +117,9 @@ const LandingPage = () => {
 
                 {/* Address Bar */}
                 <div className="flex-1 max-w-md mx-4">
-                  <div className="bg-[#2b2d31] rounded-lg px-4 py-2 flex items-center space-x-3 border border-gray-600">
-                    <div className="w-4 text-gray-400">🔒</div>
-                    <span className="text-sm text-gray-300">
+                  <div className="bg-[#2b2d31] rounded-lg px-4 py-2 flex items-center space-x-3 border border-zinc-600">
+                    <div className="w-4 text-zinc-400">🔒</div>
+                    <span className="text-sm text-zinc-300">
                       https://roon-chat.vercel.app
                     </span>
                   </div>
@@ -127,8 +127,8 @@ const LandingPage = () => {
 
                 {/* Browser Controls */}
                 <div className="flex items-center space-x-2">
-                  <div className="w-6 h-6 bg-gray-700 rounded hover:bg-gray-600 transition-colors"></div>
-                  <div className="w-6 h-6 bg-gray-700 rounded hover:bg-gray-600 transition-colors"></div>
+                  <div className="w-6 h-6 bg-zinc-700 rounded hover:bg-zinc-600 transition-colors"></div>
+                  <div className="w-6 h-6 bg-zinc-700 rounded hover:bg-zinc-600 transition-colors"></div>
                 </div>
               </div>
 
@@ -155,7 +155,7 @@ const LandingPage = () => {
                         <PiCatFill className="w-4 h-4 mr-2" />
                         Messages
                       </div>
-                      <div className="text-xs text-gray-300 mt-1">
+                      <div className="text-xs text-zinc-300 mt-1">
                         5 conversations
                       </div>
                     </div>
@@ -163,8 +163,8 @@ const LandingPage = () => {
                     {/* Search Bar */}
                     <div className="px-2 py-2">
                       <div className="bg-[#1e1f22] rounded px-2 py-1 flex items-center">
-                        <div className="text-gray-400 text-xs mr-2"></div>
-                        <span className="text-gray-400 text-xs">
+                        <div className="text-zinc-400 text-xs mr-2"></div>
+                        <span className="text-zinc-400 text-xs">
                           Search conversations...
                         </span>
                       </div>
@@ -182,15 +182,15 @@ const LandingPage = () => {
                             <div className="text-sm font-medium truncate">
                               Ananya
                             </div>
-                            <div className="text-xs text-gray-300 truncate">
+                            <div className="text-xs text-zinc-300 truncate">
                               You: I knew you'd love Stephen King{' '}
                             </div>
                           </div>
-                          <div className="text-xs text-gray-400">2:15 PM</div>
+                          <div className="text-xs text-zinc-400">2:15 PM</div>
                         </div>
 
                         {/* Other Conversations */}
-                        <div className="flex items-center px-2 py-2 rounded hover:bg-[#35373c] text-gray-300 hover:text-white transition-colors">
+                        <div className="flex items-center px-2 py-2 rounded hover:bg-[#35373c] text-zinc-300 hover:text-white transition-colors">
                           <div className="w-8 h-8 bg-[#4ecdc4] rounded-full flex items-center justify-center text-xs font-bold mr-3 text-white">
                             O
                           </div>
@@ -198,14 +198,14 @@ const LandingPage = () => {
                             <div className="text-sm font-medium truncate">
                               Ojasvi
                             </div>
-                            <div className="text-xs text-gray-400 truncate">
+                            <div className="text-xs text-zinc-400 truncate">
                               See you tomorrow!
                             </div>
                           </div>
-                          <div className="text-xs text-gray-500">1:45 PM</div>
+                          <div className="text-xs text-zinc-500">1:45 PM</div>
                         </div>
 
-                        <div className="flex items-center px-2 py-2 rounded hover:bg-[#35373c] text-gray-300 hover:text-white transition-colors">
+                        <div className="flex items-center px-2 py-2 rounded hover:bg-[#35373c] text-zinc-300 hover:text-white transition-colors">
                           <div className="w-8 h-8 bg-[#45b7d1] rounded-full flex items-center justify-center text-xs font-bold mr-3 text-white">
                             P
                           </div>
@@ -213,14 +213,14 @@ const LandingPage = () => {
                             <div className="text-sm font-medium truncate">
                               Papa
                             </div>
-                            <div className="text-xs text-gray-400 truncate">
+                            <div className="text-xs text-zinc-400 truncate">
                               👍
                             </div>
                           </div>
-                          <div className="text-xs text-gray-500">12:30 PM</div>
+                          <div className="text-xs text-zinc-500">12:30 PM</div>
                         </div>
 
-                        <div className="flex items-center px-2 py-2 rounded hover:bg-[#35373c] text-gray-300 hover:text-white transition-colors">
+                        <div className="flex items-center px-2 py-2 rounded hover:bg-[#35373c] text-zinc-300 hover:text-white transition-colors">
                           <div className="w-8 h-8 bg-[#f39c12] rounded-full flex items-center justify-center text-xs font-bold mr-3 text-white">
                             S
                           </div>
@@ -228,14 +228,14 @@ const LandingPage = () => {
                             <div className="text-sm font-medium truncate">
                               Sneha
                             </div>
-                            <div className="text-xs text-gray-400 truncate">
+                            <div className="text-xs text-zinc-400 truncate">
                               Coffee plans?
                             </div>
                           </div>
-                          <div className="text-xs text-gray-500">11:20 AM</div>
+                          <div className="text-xs text-zinc-500">11:20 AM</div>
                         </div>
 
-                        <div className="flex items-center px-2 py-2 rounded hover:bg-[#35373c] text-gray-300 hover:text-white transition-colors">
+                        <div className="flex items-center px-2 py-2 rounded hover:bg-[#35373c] text-zinc-300 hover:text-white transition-colors">
                           <div className="w-8 h-8 bg-[#9b59b6] rounded-full flex items-center justify-center text-xs font-bold mr-3 text-white">
                             T
                           </div>
@@ -243,11 +243,11 @@ const LandingPage = () => {
                             <div className="text-sm font-medium truncate">
                               The Book Club
                             </div>
-                            <div className="text-xs text-gray-400 truncate">
+                            <div className="text-xs text-zinc-400 truncate">
                               Next read suggestions?
                             </div>
                           </div>
-                          <div className="text-xs text-gray-500">10:15 AM</div>
+                          <div className="text-xs text-zinc-500">10:15 AM</div>
                         </div>
                       </div>
                     </div>
@@ -262,7 +262,7 @@ const LandingPage = () => {
                       </div>
                       <div className="text-white font-semibold">Ananya</div>
                       <div className="ml-auto">
-                        <div className="text-gray-400 text-xs">⋮</div>
+                        <div className="text-zinc-400 text-xs">⋮</div>
                       </div>
                     </div>
 
@@ -278,7 +278,7 @@ const LandingPage = () => {
                             <span className="text-white font-medium text-sm">
                               Ananya
                             </span>
-                            <span className="text-gray-400 text-xs">
+                            <span className="text-zinc-400 text-xs">
                               2:10 PM
                             </span>
                           </div>
@@ -305,7 +305,7 @@ const LandingPage = () => {
                             <span className="text-white font-medium text-sm">
                               Ananya
                             </span>
-                            <span className="text-gray-400 text-xs">
+                            <span className="text-zinc-400 text-xs">
                               2:12 PM
                             </span>
                           </div>
@@ -329,11 +329,11 @@ const LandingPage = () => {
                     {/* Message Input */}
                     <div className="p-4">
                       <div className="bg-[#383a40] rounded-lg px-4 py-3 flex items-center">
-                        <div className="text-gray-400 mr-3"></div>
-                        <div className="flex-1 text-gray-400 text-sm">
+                        <div className="text-zinc-400 mr-3"></div>
+                        <div className="flex-1 text-zinc-400 text-sm">
                           Message Ananya...
                         </div>
-                        <div className="text-gray-400 ml-3">➤</div>
+                        <div className="text-zinc-400 ml-3">➤</div>
                       </div>
                     </div>
                   </div>
@@ -342,7 +342,7 @@ const LandingPage = () => {
             </div>
 
             {/* Laptop Base */}
-            <div className="h-4 bg-gray-700 rounded-b-xl mt-2 shadow-inner"></div>
+            <div className="h-4 bg-zinc-700 rounded-b-xl mt-2 shadow-inner"></div>
           </div>
         </div>
 

@@ -25,7 +25,7 @@ const ChatBox = ({ chat, currentUser, currentChatId }) => {
       className={`group cursor-pointer transition-all duration-300 ease-out rounded-xl p-3 mb-1 relative overflow-hidden ${
         isActive
           ? 'bg-indigo-600/15 border border-indigo-500/30 shadow-lg shadow-indigo-500/10 scale-[1.02]'
-          : 'hover:bg-gray-800/40 hover:shadow-md hover:shadow-gray-900/20 border border-transparent hover:border-gray-700/30'
+          : 'hover:bg-zinc-800/40 hover:shadow-md hover:shadow-zinc-900/20 border border-transparent hover:border-zinc-700/30'
       }`}
       onClick={() => router.push(`/chats/${chat._id}`)}
     >
@@ -45,11 +45,11 @@ const ChatBox = ({ chat, currentUser, currentChatId }) => {
                 className={`w-12 h-12 rounded-full object-cover transition-all duration-200 ${
                   isActive 
                     ? 'ring-2 ring-indigo-400/50 shadow-lg shadow-indigo-500/20' 
-                    : 'ring-2 ring-gray-600/50 group-hover:ring-gray-500/70'
+                    : 'ring-2 ring-zinc-600/50 group-hover:ring-zinc-500/70'
                 }`}
               />
               <div className={`absolute -bottom-1 -right-1 rounded-full p-1 transition-colors ${
-                isActive ? 'bg-indigo-600' : 'bg-gray-700 group-hover:bg-gray-600'
+                isActive ? 'bg-indigo-600' : 'bg-zinc-700 group-hover:bg-zinc-600'
               }`}>
                 <Users className={`w-3 h-3 ${isActive ? 'text-white' : 'text-indigo-400'}`} />
               </div>
@@ -64,7 +64,7 @@ const ChatBox = ({ chat, currentUser, currentChatId }) => {
                 className={`w-12 h-12 rounded-full object-cover transition-all duration-200 ${
                   isActive 
                     ? 'ring-2 ring-indigo-400/50 shadow-lg shadow-indigo-500/20' 
-                    : 'ring-2 ring-gray-600/50 group-hover:ring-gray-500/70'
+                    : 'ring-2 ring-zinc-600/50 group-hover:ring-zinc-500/70'
                 }`}
               />
 
@@ -76,7 +76,7 @@ const ChatBox = ({ chat, currentUser, currentChatId }) => {
           <div className="flex justify-between items-start mb-1">
             <h3
               className={`font-semibold truncate transition-colors ${
-                isActive ? 'text-white' : 'text-gray-200 group-hover:text-white'
+                isActive ? 'text-white' : 'text-zinc-200 group-hover:text-white'
               }`}
             >
               {chat?.isGroup ? chat?.name : otherMembers[0]?.username}
@@ -84,7 +84,7 @@ const ChatBox = ({ chat, currentUser, currentChatId }) => {
 
             <span
               className={`text-xs flex-shrink-0 ml-2 font-medium transition-colors ${
-                isActive ? 'text-indigo-300' : 'text-gray-400 group-hover:text-gray-300'
+                isActive ? 'text-indigo-300' : 'text-zinc-400 group-hover:text-zinc-300'
               }`}
             >
               {!lastMessage
@@ -97,12 +97,12 @@ const ChatBox = ({ chat, currentUser, currentChatId }) => {
             <div
               className={`text-sm truncate transition-colors ${
                 seen 
-                  ? 'text-gray-400 group-hover:text-gray-300' 
-                  : 'text-gray-300 font-medium group-hover:text-white'
+                  ? 'text-zinc-400 group-hover:text-zinc-300' 
+                  : 'text-zinc-300 font-medium group-hover:text-white'
               }`}
             >
               {!lastMessage ? (
-                <span className="text-gray-500 italic group-hover:text-gray-400">
+                <span className="text-zinc-500 italic group-hover:text-zinc-400">
                   Start a conversation
                 </span>
               ) : lastMessage?.photo ? (
@@ -117,7 +117,7 @@ const ChatBox = ({ chat, currentUser, currentChatId }) => {
               ) : (
                 <span className="line-clamp-1">
                   {lastMessage?.sender?._id === currentUser._id && (
-                    <span className="text-gray-400">You: </span>
+                    <span className="text-zinc-400">You: </span>
                   )}
                   {lastMessage?.text}
                 </span>

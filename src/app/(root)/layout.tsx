@@ -19,14 +19,14 @@ export default function RootLayout({
   const hideChatList = pathname === '/profile';
 
   return (
-    <div className="flex flex-col sm:h-screen sm:overflow-hidden sm:flex-row bg-gray-900 text-white overflow-hidden font-sans">
+    <div className="flex flex-col sm:h-screen sm:overflow-hidden sm:flex-row bg-zinc-900 text-white overflow-hidden font-sans">
       <SideBar />
 
       <div className="flex flex-col sm:flex-row flex-grow min-h-screen w-full">
         {!hideChatList ? (
           <ResizablePanelGroup direction="horizontal" className="flex-grow">
             <ResizablePanel defaultSize={25} minSize={20} maxSize={35}>
-              <div className="h-full bg-gray-800 bg-opacity-50 backdrop-blur-2xl overflow-y-auto">
+              <div className="h-full bg-zinc-800 bg-opacity-50 backdrop-blur-2xl overflow-y-auto">
                 <ChatList
                   currentChatId={
                     Array.isArray(chatId) ? chatId[0] : chatId || null

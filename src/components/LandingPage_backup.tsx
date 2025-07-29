@@ -45,13 +45,13 @@ const LandingPage = () => {
         <div className="hidden md:flex items-center space-x-8">
           <Link
             href="#"
-            className="text-gray-300 hover:text-white transition-colors"
+            className="text-zinc-300 hover:text-white transition-colors"
           >
             Features
           </Link>
           <Link
             href="#"
-            className="text-gray-300 hover:text-white transition-colors"
+            className="text-zinc-300 hover:text-white transition-colors"
           >
             Contact
           </Link>
@@ -59,7 +59,7 @@ const LandingPage = () => {
 
         <a
           href="https://github.com/ojasvi004/Roon"
-          className="px-6 py-2 text-gray-300 font-medium"
+          className="px-6 py-2 text-zinc-300 font-medium"
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -85,7 +85,7 @@ const LandingPage = () => {
             </span>
           </h1>
 
-          <p className="text-xl md:text-2xl text-gray-400 mb-12 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-xl md:text-2xl text-zinc-400 mb-12 max-w-3xl mx-auto leading-relaxed">
             Experience seamless real-time messaging with advanced privacy
             controls. Keep your conversations secure while staying connected
             with what matters most.
@@ -105,9 +105,9 @@ const LandingPage = () => {
           {/* Laptop Frame */}
           <div className="relative bg-indigo-500/30 rounded-xl p-2 shadow-2xl">
             {/* Screen */}
-            <div className="bg-[#1e1f22] rounded-lg overflow-hidden border-2 border-gray-700 shadow-inner">
+            <div className="bg-[#1e1f22] rounded-lg overflow-hidden border-2 border-zinc-700 shadow-inner">
               {/* Browser Header */}
-              <div className="flex items-center justify-between px-4 py-3 bg-[#1e1f22] border-b border-gray-700">
+              <div className="flex items-center justify-between px-4 py-3 bg-[#1e1f22] border-b border-zinc-700">
                 {/* Traffic Lights */}
                 <div className="flex items-center space-x-2">
                   <div className="w-3 h-3 rounded-full bg-red-500 hover:bg-red-400 transition-colors"></div>
@@ -117,9 +117,9 @@ const LandingPage = () => {
 
                 {/* Address Bar */}
                 <div className="flex-1 max-w-md mx-4">
-                  <div className="bg-[#2b2d31] rounded-lg px-4 py-2 flex items-center space-x-3 border border-gray-600">
-                    <div className="w-4 text-gray-400">🔒</div>
-                    <span className="text-sm text-gray-300">
+                  <div className="bg-[#2b2d31] rounded-lg px-4 py-2 flex items-center space-x-3 border border-zinc-600">
+                    <div className="w-4 text-zinc-400">🔒</div>
+                    <span className="text-sm text-zinc-300">
                       https://roon-chat.vercel.app
                     </span>
                   </div>
@@ -127,8 +127,8 @@ const LandingPage = () => {
 
                 {/* Browser Controls */}
                 <div className="flex items-center space-x-2">
-                  <div className="w-6 h-6 bg-gray-700 rounded hover:bg-gray-600 transition-colors"></div>
-                  <div className="w-6 h-6 bg-gray-700 rounded hover:bg-gray-600 transition-colors"></div>
+                  <div className="w-6 h-6 bg-zinc-700 rounded hover:bg-zinc-600 transition-colors"></div>
+                  <div className="w-6 h-6 bg-zinc-700 rounded hover:bg-zinc-600 transition-colors"></div>
                 </div>
               </div>
 
@@ -155,7 +155,7 @@ const LandingPage = () => {
                         <PiCatFill className="w-4 h-4 mr-2" />
                         Messages
                       </div>
-                      <div className="text-xs text-gray-300 mt-1">
+                      <div className="text-xs text-zinc-300 mt-1">
                         5 conversations
                       </div>
                     </div>
@@ -163,8 +163,8 @@ const LandingPage = () => {
                     {/* Search Bar */}
                     <div className="px-2 py-2">
                       <div className="bg-[#1e1f22] rounded px-2 py-1 flex items-center">
-                        <div className="text-gray-400 text-xs mr-2"></div>
-                        <span className="text-gray-400 text-xs">
+                        <div className="text-zinc-400 text-xs mr-2"></div>
+                        <span className="text-zinc-400 text-xs">
                           Search conversations...
                         </span>
                       </div>
@@ -182,15 +182,15 @@ const LandingPage = () => {
                             <div className="text-sm font-medium truncate">
                               Ananya
                             </div>
-                            <div className="text-xs text-gray-300 truncate">
+                            <div className="text-xs text-zinc-300 truncate">
                               You: I knew you'd love Stephen King{' '}
                             </div>
                           </div>
-                          <div className="text-xs text-gray-400">2:15 PM</div>
+                          <div className="text-xs text-zinc-400">2:15 PM</div>
                         </div>
 
                         {/* Other Conversations */}
-                        <div className="flex items-center px-2 py-2 rounded hover:bg-[#35373c] text-gray-300 hover:text-white transition-colors">
+                        <div className="flex items-center px-2 py-2 rounded hover:bg-[#35373c] text-zinc-300 hover:text-white transition-colors">
                           <div className="w-8 h-8 bg-[#4ecdc4] rounded-full flex items-center justify-center text-xs font-bold mr-3 text-white">
                             O
                           </div>
@@ -198,14 +198,14 @@ const LandingPage = () => {
                             <div className="text-sm font-medium truncate">
                               Ojasvi
                             </div>
-                            <div className="text-xs text-gray-400 truncate">
+                            <div className="text-xs text-zinc-400 truncate">
                               See you tomorrow!
                             </div>
                           </div>
-                          <div className="text-xs text-gray-500">1:45 PM</div>
+                          <div className="text-xs text-zinc-500">1:45 PM</div>
                         </div>
 
-                        <div className="flex items-center px-2 py-2 rounded hover:bg-[#35373c] text-gray-300 hover:text-white transition-colors">
+                        <div className="flex items-center px-2 py-2 rounded hover:bg-[#35373c] text-zinc-300 hover:text-white transition-colors">
                           <div className="w-8 h-8 bg-[#45b7d1] rounded-full flex items-center justify-center text-xs font-bold mr-3 text-white">
                             P
                           </div>
@@ -213,14 +213,14 @@ const LandingPage = () => {
                             <div className="text-sm font-medium truncate">
                               Papa
                             </div>
-                            <div className="text-xs text-gray-400 truncate">
+                            <div className="text-xs text-zinc-400 truncate">
                               👍
                             </div>
                           </div>
-                          <div className="text-xs text-gray-500">12:30 PM</div>
+                          <div className="text-xs text-zinc-500">12:30 PM</div>
                         </div>
 
-                        <div className="flex items-center px-2 py-2 rounded hover:bg-[#35373c] text-gray-300 hover:text-white transition-colors">
+                        <div className="flex items-center px-2 py-2 rounded hover:bg-[#35373c] text-zinc-300 hover:text-white transition-colors">
                           <div className="w-8 h-8 bg-[#f39c12] rounded-full flex items-center justify-center text-xs font-bold mr-3 text-white">
                             S
                           </div>
@@ -228,14 +228,14 @@ const LandingPage = () => {
                             <div className="text-sm font-medium truncate">
                               Sneha
                             </div>
-                            <div className="text-xs text-gray-400 truncate">
+                            <div className="text-xs text-zinc-400 truncate">
                               Coffee plans?
                             </div>
                           </div>
-                          <div className="text-xs text-gray-500">11:20 AM</div>
+                          <div className="text-xs text-zinc-500">11:20 AM</div>
                         </div>
 
-                        <div className="flex items-center px-2 py-2 rounded hover:bg-[#35373c] text-gray-300 hover:text-white transition-colors">
+                        <div className="flex items-center px-2 py-2 rounded hover:bg-[#35373c] text-zinc-300 hover:text-white transition-colors">
                           <div className="w-8 h-8 bg-[#9b59b6] rounded-full flex items-center justify-center text-xs font-bold mr-3 text-white">
                             T
                           </div>
@@ -243,11 +243,11 @@ const LandingPage = () => {
                             <div className="text-sm font-medium truncate">
                               The Book Club
                             </div>
-                            <div className="text-xs text-gray-400 truncate">
+                            <div className="text-xs text-zinc-400 truncate">
                               Next read suggestions?
                             </div>
                           </div>
-                          <div className="text-xs text-gray-500">10:15 AM</div>
+                          <div className="text-xs text-zinc-500">10:15 AM</div>
                         </div>
                       </div>
                     </div>
@@ -262,7 +262,7 @@ const LandingPage = () => {
                       </div>
                       <div className="text-white font-semibold">Ananya</div>
                       <div className="ml-auto">
-                        <div className="text-gray-400 text-xs">⋮</div>
+                        <div className="text-zinc-400 text-xs">⋮</div>
                       </div>
                     </div>
 
@@ -278,7 +278,7 @@ const LandingPage = () => {
                             <span className="text-white font-medium text-sm">
                               Ananya
                             </span>
-                            <span className="text-gray-400 text-xs">
+                            <span className="text-zinc-400 text-xs">
                               2:10 PM
                             </span>
                           </div>
@@ -305,7 +305,7 @@ const LandingPage = () => {
                             <span className="text-white font-medium text-sm">
                               Ananya
                             </span>
-                            <span className="text-gray-400 text-xs">
+                            <span className="text-zinc-400 text-xs">
                               2:12 PM
                             </span>
                           </div>
@@ -329,11 +329,11 @@ const LandingPage = () => {
                     {/* Message Input */}
                     <div className="p-4">
                       <div className="bg-[#383a40] rounded-lg px-4 py-3 flex items-center">
-                        <div className="text-gray-400 mr-3"></div>
-                        <div className="flex-1 text-gray-400 text-sm">
+                        <div className="text-zinc-400 mr-3"></div>
+                        <div className="flex-1 text-zinc-400 text-sm">
                           Message Ananya...
                         </div>
-                        <div className="text-gray-400 ml-3">➤</div>
+                        <div className="text-zinc-400 ml-3">➤</div>
                       </div>
                     </div>
                   </div>
@@ -342,7 +342,7 @@ const LandingPage = () => {
             </div>
 
             {/* Laptop Base */}
-            <div className="h-4 bg-gray-700 rounded-b-xl mt-2 shadow-inner"></div>
+            <div className="h-4 bg-zinc-700 rounded-b-xl mt-2 shadow-inner"></div>
           </div>
         </div>
 
@@ -367,7 +367,7 @@ const LandingPage = () => {
                   <div className="absolute -bottom-2 left-0 w-full h-0.5 bg-gradient-to-r from-indigo-400/60 via-purple-400/60 to-pink-400/60 rounded-full"></div>
                 </span>
               </h2>
-              <p className="text-xl text-gray-400 leading-relaxed">
+              <p className="text-xl text-zinc-400 leading-relaxed">
                 Every feature designed with intention. Every interaction crafted for humans.
               </p>
             </div>
@@ -380,7 +380,7 @@ const LandingPage = () => {
               {/* Hero Feature - Real-time Messaging */}
               <div className="lg:flex-1 group relative overflow-hidden">
                 <div className="absolute -inset-2 bg-gradient-to-br from-indigo-600/20 via-purple-600/20 to-pink-600/20 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-all duration-700"></div>
-                <div className="relative bg-gradient-to-br from-gray-900/80 to-gray-800/80 backdrop-blur-sm border border-gray-700/30 rounded-3xl p-10 h-80 flex flex-col justify-between hover:border-indigo-500/40 transition-all duration-500">
+                <div className="relative bg-gradient-to-br from-zinc-900/80 to-zinc-800/80 backdrop-blur-sm border border-zinc-700/30 rounded-3xl p-10 h-80 flex flex-col justify-between hover:border-indigo-500/40 transition-all duration-500">
                   <div>
                     <div className="flex items-center gap-4 mb-6">
                       <div className="relative">
@@ -396,7 +396,7 @@ const LandingPage = () => {
                         <div className="text-indigo-400 text-sm font-medium">Powered by Pusher</div>
                       </div>
                     </div>
-                    <p className="text-gray-300 text-lg leading-relaxed">
+                    <p className="text-zinc-300 text-lg leading-relaxed">
                       Messages appear instantly across all devices. No delays, no refresh needed. 
                       Just pure, real-time conversation.
                     </p>
@@ -413,7 +413,7 @@ const LandingPage = () => {
                 {/* Security */}
                 <div className="group relative">
                   <div className="absolute -inset-1 bg-gradient-to-r from-emerald-600/30 to-teal-600/30 rounded-2xl blur-lg opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
-                  <div className="relative bg-gray-900/70 backdrop-blur-sm border border-gray-700/40 rounded-2xl p-6 hover:border-emerald-500/40 transition-all duration-300">
+                  <div className="relative bg-zinc-900/70 backdrop-blur-sm border border-zinc-700/40 rounded-2xl p-6 hover:border-emerald-500/40 transition-all duration-300">
                     <div className="flex items-start gap-4">
                       <div className="w-12 h-12 bg-emerald-600/20 rounded-xl flex items-center justify-center flex-shrink-0">
                         <svg className="w-6 h-6 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -422,7 +422,7 @@ const LandingPage = () => {
                       </div>
                       <div>
                         <h4 className="text-lg font-semibold text-white mb-2">Bank-level Security</h4>
-                        <p className="text-gray-400 text-sm">JWT tokens, encrypted sessions, NextAuth protection</p>
+                        <p className="text-zinc-400 text-sm">JWT tokens, encrypted sessions, NextAuth protection</p>
                       </div>
                     </div>
                   </div>
@@ -431,7 +431,7 @@ const LandingPage = () => {
                 {/* Group Chats */}
                 <div className="group relative">
                   <div className="absolute -inset-1 bg-gradient-to-r from-purple-600/30 to-pink-600/30 rounded-2xl blur-lg opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
-                  <div className="relative bg-gray-900/70 backdrop-blur-sm border border-gray-700/40 rounded-2xl p-6 hover:border-purple-500/40 transition-all duration-300">
+                  <div className="relative bg-zinc-900/70 backdrop-blur-sm border border-zinc-700/40 rounded-2xl p-6 hover:border-purple-500/40 transition-all duration-300">
                     <div className="flex items-start gap-4">
                       <div className="w-12 h-12 bg-purple-600/20 rounded-xl flex items-center justify-center flex-shrink-0">
                         <svg className="w-6 h-6 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -440,7 +440,7 @@ const LandingPage = () => {
                       </div>
                       <div>
                         <h4 className="text-lg font-semibold text-white mb-2">Smart Groups</h4>
-                        <p className="text-gray-400 text-sm">Custom photos, member management, organized conversations</p>
+                        <p className="text-zinc-400 text-sm">Custom photos, member management, organized conversations</p>
                       </div>
                     </div>
                   </div>
@@ -450,14 +450,14 @@ const LandingPage = () => {
 
             {/* Second Row - Unique Media Feature */}
             <div className="relative">
-              <div className="absolute top-8 left-1/2 transform -translate-x-1/2 w-px h-20 bg-gradient-to-b from-transparent via-gray-600 to-transparent"></div>
+              <div className="absolute top-8 left-1/2 transform -translate-x-1/2 w-px h-20 bg-gradient-to-b from-transparent via-zinc-600 to-transparent"></div>
               
               <div className="flex flex-col lg:flex-row gap-8 items-stretch">
                 <div className="lg:w-96">
                   {/* Read Receipts with Visual */}
                   <div className="group relative h-full">
                     <div className="absolute -inset-2 bg-gradient-to-br from-blue-600/20 to-cyan-600/20 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-all duration-700"></div>
-                    <div className="relative bg-gray-900/60 backdrop-blur-sm border border-gray-700/40 rounded-3xl p-8 h-full flex flex-col justify-between hover:border-blue-500/40 transition-all duration-500">
+                    <div className="relative bg-zinc-900/60 backdrop-blur-sm border border-zinc-700/40 rounded-3xl p-8 h-full flex flex-col justify-between hover:border-blue-500/40 transition-all duration-500">
                       <div>
                         <div className="flex items-center gap-3 mb-6">
                           <div className="w-14 h-14 bg-blue-600/20 rounded-xl flex items-center justify-center">
@@ -470,7 +470,7 @@ const LandingPage = () => {
                             <div className="text-blue-400 text-sm">Smart delivery tracking</div>
                           </div>
                         </div>
-                        <p className="text-gray-300 mb-6">Know exactly when your messages are delivered and read. Visual indicators that actually make sense.</p>
+                        <p className="text-zinc-300 mb-6">Know exactly when your messages are delivered and read. Visual indicators that actually make sense.</p>
                       </div>
                       
                       {/* Visual Read Receipt Demo */}
@@ -493,7 +493,7 @@ const LandingPage = () => {
                 {/* Media Sharing - Large Feature */}
                 <div className="lg:flex-1 group relative">
                   <div className="absolute -inset-2 bg-gradient-to-br from-orange-600/20 via-red-600/20 to-pink-600/20 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-all duration-700"></div>
-                  <div className="relative bg-gradient-to-br from-gray-900/90 to-gray-800/90 backdrop-blur-sm border border-gray-700/40 rounded-3xl p-10 hover:border-orange-500/40 transition-all duration-500">
+                  <div className="relative bg-gradient-to-br from-zinc-900/90 to-zinc-800/90 backdrop-blur-sm border border-zinc-700/40 rounded-3xl p-10 hover:border-orange-500/40 transition-all duration-500">
                     <div className="flex flex-col md:flex-row items-start gap-8">
                       <div className="flex-1">
                         <div className="flex items-center gap-4 mb-6">
@@ -507,7 +507,7 @@ const LandingPage = () => {
                             <div className="text-orange-400 text-sm font-medium">Cloudinary-powered uploads</div>
                           </div>
                         </div>
-                        <p className="text-gray-300 text-lg leading-relaxed mb-6">
+                        <p className="text-zinc-300 text-lg leading-relaxed mb-6">
                           Drag, drop, share. Photos and images upload instantly and display beautifully across all conversations.
                         </p>
                         <div className="flex items-center gap-4 text-orange-400 text-sm">
@@ -523,8 +523,8 @@ const LandingPage = () => {
                       </div>
                       
                       {/* Visual Media Preview */}
-                      <div className="w-48 h-32 bg-gray-800/50 rounded-xl border border-gray-600/50 flex items-center justify-center">
-                        <div className="text-gray-500 text-sm">Image preview</div>
+                      <div className="w-48 h-32 bg-zinc-800/50 rounded-xl border border-zinc-600/50 flex items-center justify-center">
+                        <div className="text-zinc-500 text-sm">Image preview</div>
                       </div>
                     </div>
                   </div>
@@ -538,7 +538,7 @@ const LandingPage = () => {
                 {/* Search Feature */}
                 <div className="group relative">
                   <div className="absolute -inset-1 bg-gradient-to-r from-yellow-600/30 to-amber-600/30 rounded-2xl blur-lg opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
-                  <div className="relative bg-gray-900/70 backdrop-blur-sm border border-gray-700/40 rounded-2xl p-8 hover:border-yellow-500/40 transition-all duration-300">
+                  <div className="relative bg-zinc-900/70 backdrop-blur-sm border border-zinc-700/40 rounded-2xl p-8 hover:border-yellow-500/40 transition-all duration-300">
                     <div className="flex items-start gap-6">
                       <div className="w-14 h-14 bg-yellow-600/20 rounded-xl flex items-center justify-center flex-shrink-0">
                         <svg className="w-7 h-7 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -547,15 +547,15 @@ const LandingPage = () => {
                       </div>
                       <div className="flex-1">
                         <h4 className="text-xl font-bold text-white mb-3">Lightning Search</h4>
-                        <p className="text-gray-300 leading-relaxed">Find any conversation, contact, or message instantly. Advanced filtering that actually understands what you're looking for.</p>
+                        <p className="text-zinc-300 leading-relaxed">Find any conversation, contact, or message instantly. Advanced filtering that actually understands what you're looking for.</p>
                         
                         {/* Search Demo */}
-                        <div className="mt-4 bg-gray-800/50 rounded-lg p-3 border border-gray-600/30">
+                        <div className="mt-4 bg-zinc-800/50 rounded-lg p-3 border border-zinc-600/30">
                           <div className="flex items-center gap-2 text-sm">
                             <svg className="w-4 h-4 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                             </svg>
-                            <span className="text-gray-400">Search: "book club meeting"</span>
+                            <span className="text-zinc-400">Search: "book club meeting"</span>
                           </div>
                         </div>
                       </div>
@@ -566,7 +566,7 @@ const LandingPage = () => {
                 {/* Profile Management */}
                 <div className="group relative">
                   <div className="absolute -inset-1 bg-gradient-to-r from-rose-600/30 to-pink-600/30 rounded-2xl blur-lg opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
-                  <div className="relative bg-gray-900/70 backdrop-blur-sm border border-gray-700/40 rounded-2xl p-8 hover:border-rose-500/40 transition-all duration-300">
+                  <div className="relative bg-zinc-900/70 backdrop-blur-sm border border-zinc-700/40 rounded-2xl p-8 hover:border-rose-500/40 transition-all duration-300">
                     <div className="flex items-start gap-6">
                       <div className="w-14 h-14 bg-rose-600/20 rounded-xl flex items-center justify-center flex-shrink-0">
                         <svg className="w-7 h-7 text-rose-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -575,7 +575,7 @@ const LandingPage = () => {
                       </div>
                       <div>
                         <h4 className="text-xl font-bold text-white mb-3">Your Digital Identity</h4>
-                        <p className="text-gray-300 leading-relaxed">Customize your profile with photos, display names, and privacy settings. Make every conversation uniquely yours.</p>
+                        <p className="text-zinc-300 leading-relaxed">Customize your profile with photos, display names, and privacy settings. Make every conversation uniquely yours.</p>
                       </div>
                     </div>
                   </div>
@@ -585,7 +585,7 @@ const LandingPage = () => {
               {/* Cross-Platform - Vertical Feature */}
               <div className="lg:w-80 group relative">
                 <div className="absolute -inset-2 bg-gradient-to-b from-teal-600/20 to-cyan-600/20 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-all duration-700"></div>
-                <div className="relative bg-gray-900/80 backdrop-blur-sm border border-gray-700/40 rounded-3xl p-8 h-full flex flex-col justify-center hover:border-teal-500/40 transition-all duration-500">
+                <div className="relative bg-zinc-900/80 backdrop-blur-sm border border-zinc-700/40 rounded-3xl p-8 h-full flex flex-col justify-center hover:border-teal-500/40 transition-all duration-500">
                   <div className="text-center">
                     <div className="w-16 h-16 bg-teal-600/20 rounded-2xl flex items-center justify-center mx-auto mb-6">
                       <svg className="w-8 h-8 text-teal-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -593,7 +593,7 @@ const LandingPage = () => {
                       </svg>
                     </div>
                     <h4 className="text-2xl font-bold text-white mb-4">Everywhere You Are</h4>
-                    <p className="text-gray-300 leading-relaxed mb-6">Desktop, tablet, mobile. One conversation, perfectly synced across every device you use.</p>
+                    <p className="text-zinc-300 leading-relaxed mb-6">Desktop, tablet, mobile. One conversation, perfectly synced across every device you use.</p>
                     
                     {/* Device Icons */}
                     <div className="flex justify-center gap-4">

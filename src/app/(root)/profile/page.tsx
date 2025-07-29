@@ -76,26 +76,26 @@ const Profile = () => {
   };
 
   return loading ? (
-    <div className="flex justify-center items-center h-screen bg-gray-900">
+    <div className="flex justify-center items-center h-screen bg-zinc-900">
       <div className="flex flex-col items-center gap-3">
         <Loader2 className="animate-spin w-8 h-8 text-indigo-400" />
-        <p className="text-gray-400">Loading profile...</p>
+        <p className="text-zinc-400">Loading profile...</p>
       </div>
     </div>
   ) : (
-    <div className="h-screen bg-gray-900 flex flex-col">
-      <div className="flex-shrink-0 border-b border-gray-800">
+    <div className="h-screen bg-zinc-900 flex flex-col">
+      <div className="flex-shrink-0 border-b border-zinc-800">
         <div className="px-6 py-4">
           <div className="flex items-center gap-4">
             <button
               onClick={() => router.back()}
-              className="flex items-center justify-center w-10 h-10 rounded-full hover:bg-gray-800 transition-colors"
+              className="flex items-center justify-center w-10 h-10 rounded-full hover:bg-zinc-800 transition-colors"
             >
-              <ArrowLeft className="w-5 h-5 text-gray-400" />
+              <ArrowLeft className="w-5 h-5 text-zinc-400" />
             </button>
             <div>
               <h1 className="text-xl font-semibold text-white">Settings</h1>
-              <p className="text-sm text-gray-400">Manage your account settings</p>
+              <p className="text-sm text-zinc-400">Manage your account settings</p>
             </div>
           </div>
         </div>
@@ -111,11 +111,11 @@ const Profile = () => {
         <div className="w-full">
           <form onSubmit={handleSubmit(onSubmit)} noValidate>
             
-            <div className="px-8 py-6 border-b border-gray-800">
+            <div className="px-8 py-6 border-b border-zinc-800">
               <div className="flex items-start justify-between">
                 <div className="flex-1">
                   <h3 className="text-base font-semibold text-white mb-1">Avatar</h3>
-                  <p className="text-sm text-gray-400">A picture helps people recognize you and shows up on your profile</p>
+                  <p className="text-sm text-zinc-400">A picture helps people recognize you and shows up on your profile</p>
                 </div>
                 
                 <div className="flex items-center gap-4 ml-8">
@@ -144,11 +144,11 @@ const Profile = () => {
               </div>
             </div>
 
-            <div className="px-8 py-6 border-b border-gray-800">
+            <div className="px-8 py-6 border-b border-zinc-800">
               <div className="flex items-start justify-between">
                 <div className="flex-1">
                   <h3 className="text-base font-semibold text-white mb-1">Display Name</h3>
-                  <p className="text-sm text-gray-400">This is how others will see you in chats. You can use special characters and emoji.</p>
+                  <p className="text-sm text-zinc-400">This is how others will see you in chats. You can use special characters and emoji.</p>
                 </div>
                 
                 <div className="flex items-center gap-4 ml-8 min-w-0 flex-1 max-w-md">
@@ -160,7 +160,7 @@ const Profile = () => {
                     })}
                     type="text"
                     placeholder="Enter your display name..."
-                    className="bg-gray-800 border-gray-700 text-white placeholder-gray-400 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+                    className="bg-zinc-800 border-zinc-700 text-white placeholder-zinc-400 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
                   />
                 </div>
               </div>
@@ -180,7 +180,7 @@ const Profile = () => {
                   type="button"
                   onClick={() => router.back()}
                   variant="outline"
-                  className="bg-transparent border-gray-600 text-gray-300 hover:bg-gray-700 hover:text-white px-6 py-3 h-auto"
+                  className="bg-transparent border-zinc-600 text-zinc-300 hover:bg-zinc-700 hover:text-white px-6 py-3 h-auto"
                 >
                   Cancel
                 </Button>

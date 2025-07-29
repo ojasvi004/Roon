@@ -29,7 +29,7 @@ const MessageBox: React.FC<MessageBoxProps> = ({
               <Image
                 src={message?.sender?.profileImage || '/assets/person.jpg'}
                 alt="profile photo"
-                className="w-8 h-8 rounded-full object-cover ring-2 ring-gray-600"
+                className="w-8 h-8 rounded-full object-cover ring-2 ring-zinc-600"
                 height={32}
                 width={32}
               />
@@ -46,7 +46,7 @@ const MessageBox: React.FC<MessageBoxProps> = ({
             className={`px-4 py-2 rounded-2xl shadow-sm ${
               isOwnMessage
                 ? 'bg-indigo-600 text-white rounded-br-md'
-                : 'bg-gray-800 text-gray-100 rounded-bl-md border border-gray-700'
+                : 'bg-zinc-800 text-zinc-100 rounded-bl-md border border-zinc-700'
             } max-w-full break-words`}
           >
             {message?.text ? (
@@ -66,7 +66,7 @@ const MessageBox: React.FC<MessageBoxProps> = ({
 
           {showTimestamp && (
             <p
-              className={`text-xs text-gray-500 mt-1 px-1 ${isOwnMessage ? 'text-right' : 'text-left'}`}
+              className={`text-xs text-zinc-500 mt-1 px-1 ${isOwnMessage ? 'text-right' : 'text-left'}`}
             >
               {message?.createdAt
                 ? format(new Date(message.createdAt), 'p')

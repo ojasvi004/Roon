@@ -5,7 +5,7 @@ import { FaGithub, FaLinkedin, FaEnvelope } from 'react-icons/fa';
 
 const Footer = () => {
   return (
-    <footer className="w-full border-t border-gray-800 mt-20">
+    <footer className="w-full border-t border-zinc-800 mt-20">
       <div className="max-w-8xl mx-auto px-36 py-12">
         <div className="flex justify-between items-start mb-8">
           <div className="flex-shrink-0">
@@ -17,7 +17,7 @@ const Footer = () => {
                 Roon
               </span>
             </div>
-            <p className="text-gray-400 text-sm max-w-sm mb-6">
+            <p className="text-zinc-400 text-sm max-w-sm mb-6">
               Experience seamless real-time messaging with advanced privacy
               controls. Keep your conversations secure while staying connected.
             </p>
@@ -25,7 +25,7 @@ const Footer = () => {
             <div className="flex items-center space-x-4">
               <a
                 href="https://github.com/ojasvi004"
-                className="text-gray-400 hover:text-white transition-colors"
+                className="text-zinc-400 hover:text-white transition-colors"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="GitHub"
@@ -34,7 +34,7 @@ const Footer = () => {
               </a>
               <a
                 href="https://linkedin.com/in/ojasvidoye"
-                className="text-gray-400 hover:text-white transition-colors"
+                className="text-zinc-400 hover:text-white transition-colors"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="LinkedIn"
@@ -43,7 +43,7 @@ const Footer = () => {
               </a>
               <a
                 href="mailto:ojasviverma004@gmail.com"
-                className="text-gray-400 hover:text-white transition-colors"
+                className="text-zinc-400 hover:text-white transition-colors"
                 aria-label="Email"
               >
                 <FaEnvelope className="text-2xl" />
@@ -58,7 +58,7 @@ const Footer = () => {
                 <li>
                   <Link
                     href="#"
-                    className="text-gray-400 hover:text-white transition-colors"
+                    className="text-zinc-400 hover:text-white transition-colors"
                   >
                     Features
                   </Link>
@@ -66,7 +66,7 @@ const Footer = () => {
                 <li>
                   <Link
                     href="#"
-                    className="text-gray-400 hover:text-white transition-colors"
+                    className="text-zinc-400 hover:text-white transition-colors"
                   >
                     Security
                   </Link>
@@ -74,7 +74,7 @@ const Footer = () => {
                 <li>
                   <Link
                     href="#"
-                    className="text-gray-400 hover:text-white transition-colors"
+                    className="text-zinc-400 hover:text-white transition-colors"
                   >
                     Privacy
                   </Link>
@@ -82,7 +82,7 @@ const Footer = () => {
                 <li>
                   <Link
                     href="#"
-                    className="text-gray-400 hover:text-white transition-colors"
+                    className="text-zinc-400 hover:text-white transition-colors"
                   >
                     Downloads
                   </Link>
@@ -96,7 +96,7 @@ const Footer = () => {
                 <li>
                   <Link
                     href="#"
-                    className="text-gray-400 hover:text-white transition-colors"
+                    className="text-zinc-400 hover:text-white transition-colors"
                   >
                     Help Center
                   </Link>
@@ -104,7 +104,7 @@ const Footer = () => {
                 <li>
                   <Link
                     href="#"
-                    className="text-gray-400 hover:text-white transition-colors"
+                    className="text-zinc-400 hover:text-white transition-colors"
                   >
                     Contact
                   </Link>
@@ -112,7 +112,7 @@ const Footer = () => {
                 <li>
                   <Link
                     href="#"
-                    className="text-gray-400 hover:text-white transition-colors"
+                    className="text-zinc-400 hover:text-white transition-colors"
                   >
                     Community
                   </Link>
@@ -120,7 +120,7 @@ const Footer = () => {
                 <li>
                   <a
                     href="https://github.com/ojasvi004/Roon"
-                    className="text-gray-400 hover:text-white transition-colors"
+                    className="text-zinc-400 hover:text-white transition-colors"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -132,26 +132,26 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="flex flex-col md:flex-row items-center justify-between pt-8 border-t border-gray-800">
-          <div className="text-gray-400 text-sm mb-4 md:mb-0">
+        <div className="flex flex-col md:flex-row items-center justify-between pt-8 border-t border-zinc-800">
+          <div className="text-zinc-400 text-sm mb-4 md:mb-0">
             © 2025 Roon. All rights reserved.
           </div>
           <div className="flex items-center space-x-6 text-sm">
             <Link
               href="#"
-              className="text-gray-400 hover:text-white transition-colors"
+              className="text-zinc-400 hover:text-white transition-colors"
             >
               Privacy Policy
             </Link>
             <Link
               href="#"
-              className="text-gray-400 hover:text-white transition-colors"
+              className="text-zinc-400 hover:text-white transition-colors"
             >
               Terms of Service
             </Link>
             <Link
               href="#"
-              className="text-gray-400 hover:text-white transition-colors"
+              className="text-zinc-400 hover:text-white transition-colors"
             >
               Cookies
             </Link>

@@ -99,19 +99,19 @@ const GroupInfo = () => {
   };
 
   return loading ? (
-    <div className="flex justify-center items-center h-screen bg-gray-900">
+    <div className="flex justify-center items-center h-screen bg-zinc-900">
       <div className="flex flex-col items-center gap-3">
         <Loader2 className="animate-spin w-8 h-8 text-indigo-400" />
-        <p className="text-gray-400">Loading group details...</p>
+        <p className="text-zinc-400">Loading group details...</p>
       </div>
     </div>
   ) : (
-    <div className="h-screen bg-gray-900 flex flex-col overflow-hidden">
+    <div className="h-screen bg-zinc-900 flex flex-col overflow-hidden">
       <div className="max-w-2xl mx-auto w-full flex flex-col h-full p-4">
         <div className="flex-shrink-0 mb-6">
           <button
             onClick={() => router.back()}
-            className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors mb-4"
+            className="flex items-center gap-2 text-zinc-400 hover:text-white transition-colors mb-4"
           >
             <ArrowLeft className="w-5 h-5" />
             Back to Chat
@@ -121,7 +121,7 @@ const GroupInfo = () => {
             <div className="flex items-center justify-center gap-2 text-3xl font-bold text-white mb-2">
               Edit Group Info
             </div>
-            <p className="text-gray-400">Update your group name, photo, and view members</p>
+            <p className="text-zinc-400">Update your group name, photo, and view members</p>
           </div>
         </div>
 
@@ -131,7 +131,7 @@ const GroupInfo = () => {
           </div>
         )}
 
-        <div className="bg-gray-800/50 rounded-2xl border border-gray-700 overflow-hidden flex-1 flex flex-col">
+        <div className="bg-zinc-800/50 rounded-2xl border border-zinc-700 overflow-hidden flex-1 flex flex-col">
           <form onSubmit={handleSubmit(onSubmit)} noValidate className="p-6 flex flex-col h-full">
             
             <div className="text-center flex-shrink-0 mb-6">
@@ -142,7 +142,7 @@ const GroupInfo = () => {
                     width={120}
                     height={120}
                     alt="Group Photo"
-                    className="w-30 h-30 rounded-full object-cover border-4 border-gray-600 shadow-xl"
+                    className="w-30 h-30 rounded-full object-cover border-4 border-zinc-600 shadow-xl"
                   />
                   <div className="absolute inset-0 rounded-full bg-black/40 opacity-0 hover:opacity-100 transition-opacity flex items-center justify-center">
                     <Camera className="w-6 h-6 text-white" />
@@ -159,18 +159,18 @@ const GroupInfo = () => {
                 </CldUploadButton>
               </div>
               
-              <p className="text-gray-400 text-sm mt-3">Click the camera icon to change group photo</p>
+              <p className="text-zinc-400 text-sm mt-3">Click the camera icon to change group photo</p>
             </div>
 
             <div className="space-y-3 flex-shrink-0 mb-6">
-              <label className="block text-sm font-medium text-gray-300">
+              <label className="block text-sm font-medium text-zinc-300">
                 Group Name
               </label>
               <Input
                 {...register('name', { required: 'Group chat name is required' })}
                 type="text"
                 placeholder="Enter group name..."
-                className="w-full bg-gray-800/50 border-gray-600 text-white placeholder-gray-400 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 rounded-xl h-12 text-lg"
+                className="w-full bg-zinc-800/50 border-zinc-600 text-white placeholder-zinc-400 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 rounded-xl h-12 text-lg"
               />
               {errors.name && (
                 <p className="text-red-400 text-sm flex items-center gap-1">
@@ -188,9 +188,9 @@ const GroupInfo = () => {
                 </span>
               </div>
               
-              <div className="bg-gray-800/30 rounded-xl border border-gray-700 overflow-hidden flex-1 flex flex-col">
+              <div className="bg-zinc-800/30 rounded-xl border border-zinc-700 overflow-hidden flex-1 flex flex-col">
                 <div className="flex-1 overflow-y-auto">
-                  <div className="divide-y divide-gray-700/50">
+                  <div className="divide-y divide-zinc-700/50">
                     {chat?.members?.map((member, index) => (
                       <div key={index} className="p-4 flex items-center gap-3">
                         <div className="relative">
@@ -199,23 +199,23 @@ const GroupInfo = () => {
                             alt={member.username}
                             width={40}
                             height={40}
-                            className="w-10 h-10 rounded-full object-cover ring-2 ring-gray-600"
+                            className="w-10 h-10 rounded-full object-cover ring-2 ring-zinc-600"
                           />
-                          <div className="absolute -bottom-1 -right-1 bg-gray-800 rounded-full p-1">
+                          <div className="absolute -bottom-1 -right-1 bg-zinc-800 rounded-full p-1">
                             <User className="w-3 h-3 text-indigo-400" />
                           </div>
                         </div>
                         <div className="flex-1 min-w-0">
                           <p className="font-medium text-white truncate">{member.username}</p>
-                          <p className="text-sm text-gray-400">Member</p>
+                          <p className="text-sm text-zinc-400">Member</p>
                         </div>
                       </div>
                     ))}
                     
                     {(!chat?.members || chat.members.length === 0) && (
                       <div className="p-8 text-center">
-                        <Users className="w-12 h-12 text-gray-600 mx-auto mb-3" />
-                        <p className="text-gray-400">No members found</p>
+                        <Users className="w-12 h-12 text-zinc-600 mx-auto mb-3" />
+                        <p className="text-zinc-400">No members found</p>
                       </div>
                     )}
                   </div>
@@ -227,7 +227,7 @@ const GroupInfo = () => {
               <Button
                 type="button"
                 onClick={() => router.back()}
-                className="flex-1 bg-gray-700 hover:bg-gray-600 text-white rounded-xl h-12 font-medium"
+                className="flex-1 bg-zinc-700 hover:bg-zinc-600 text-white rounded-xl h-12 font-medium"
               >
                 Cancel
               </Button>

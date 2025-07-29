@@ -24,7 +24,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({
         </span>
       </h1>
 
-      <p className="text-xl md:text-2xl text-gray-400 mb-12 max-w-3xl mx-auto leading-relaxed">
+      <p className="text-xl md:text-2xl text-zinc-400 mb-12 max-w-3xl mx-auto leading-relaxed">
         Experience seamless real-time messaging with advanced privacy controls.
         Keep your conversations secure while staying connected with what matters
         most.

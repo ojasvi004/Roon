@@ -15,13 +15,13 @@ const Navbar = () => {
       <div className="hidden md:flex items-center space-x-8 text-md">
         <Link
           href="#features"
-          className="text-gray-300 hover:text-white transition-colors"
+          className="text-zinc-300 hover:text-white transition-colors"
         >
           Features
         </Link>
         <Link
           href="#footer"
-          className="text-gray-300 hover:text-white transition-colors"
+          className="text-zinc-300 hover:text-white transition-colors"
         >
           Contact
         </Link>
@@ -29,7 +29,7 @@ const Navbar = () => {
 
       <a
         href="https://github.com/ojasvi004/Roon"
-        className="px-6 py-2 text-gray-300 font-medium"
+        className="px-6 py-2 text-zinc-300 font-medium"
         target="_blank"
         rel="noopener noreferrer"
       >

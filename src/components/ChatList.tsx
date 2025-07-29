@@ -138,8 +138,8 @@ const ChatList: React.FC<ChatListProps> = ({ currentChatId }) => {
   }, [currentUser]);
 
   return loading ? (
-    <div className="flex flex-col h-full bg-gray-900/50 backdrop-blur-sm">
-      <div className="flex-shrink-0 px-4 py-4 border-b border-gray-800/50">
+    <div className="flex flex-col h-full bg-zinc-900/50 backdrop-blur-sm">
+      <div className="flex-shrink-0 px-4 py-4 border-b border-zinc-800/50">
         <div className="flex items-center gap-3 mb-4">
           <div className="p-2 bg-indigo-600/10 rounded-lg">
             <MessageCircle className="w-5 h-5 text-indigo-400" />
@@ -152,7 +152,7 @@ const ChatList: React.FC<ChatListProps> = ({ currentChatId }) => {
 
         <div className="relative">
           <div className="absolute inset-y-0 left-3 flex items-center pointer-events-none">
-            <Search className="h-4 w-4 text-gray-400" />
+            <Search className="h-4 w-4 text-zinc-400" />
           </div>
           <Skeleton className="h-10 w-full rounded-xl" />
         </div>
@@ -163,15 +163,15 @@ const ChatList: React.FC<ChatListProps> = ({ currentChatId }) => {
       </ScrollArea>
     </div>
   ) : (
-    <div className="flex flex-col h-full bg-gray-900/50 backdrop-blur-sm">
-      <div className="flex-shrink-0 px-4 py-4 border-b border-gray-800/50">
+    <div className="flex flex-col h-full bg-zinc-900/50 backdrop-blur-sm">
+      <div className="flex-shrink-0 px-4 py-4 border-b border-zinc-800/50">
         <div className="flex items-center gap-3 mb-4">
           <div className="p-2 bg-indigo-600/10 rounded-lg">
             <MessageCircle className="w-5 h-5 text-indigo-400" />
           </div>
           <div>
             <h2 className="text-lg font-semibold text-white">Messages</h2>
-            <p className="text-xs text-gray-400">
+            <p className="text-xs text-zinc-400">
               {sortedChats.length}{' '}
               {sortedChats.length === 1 ? 'conversation' : 'conversations'}
             </p>
@@ -180,19 +180,19 @@ const ChatList: React.FC<ChatListProps> = ({ currentChatId }) => {
 
         <div className="relative">
           <div className="absolute inset-y-0 left-3 flex items-center pointer-events-none">
-            <Search className="h-4 w-4 text-gray-400" />
+            <Search className="h-4 w-4 text-zinc-400" />
           </div>
           <Input
             type="text"
             placeholder="Search conversations..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="pl-10 pr-10 py-2.5 bg-gray-800/60 border-gray-700/50 text-white placeholder-gray-400 rounded-xl focus:bg-gray-800/80 focus:border-indigo-500/50 focus:ring-1 focus:ring-indigo-500/25 transition-all duration-200"
+            className="pl-10 pr-10 py-2.5 bg-zinc-800/60 border-zinc-700/50 text-white placeholder-zinc-400 rounded-xl focus:bg-zinc-800/80 focus:border-indigo-500/50 focus:ring-1 focus:ring-indigo-500/25 transition-all duration-200"
           />
           {search && (
             <button
               onClick={() => setSearch('')}
-              className="absolute inset-y-0 right-3 flex items-center text-gray-400 hover:text-white transition-colors"
+              className="absolute inset-y-0 right-3 flex items-center text-zinc-400 hover:text-white transition-colors"
             >
               <X className="h-4 w-4" />
             </button>
@@ -203,17 +203,17 @@ const ChatList: React.FC<ChatListProps> = ({ currentChatId }) => {
       <ScrollArea className="flex-1">
         {sortedChats?.length === 0 ? (
           <div className="flex flex-col items-center justify-center h-full px-6 py-12">
-            <div className="p-4 bg-gray-800/30 rounded-full mb-4">
+            <div className="p-4 bg-zinc-800/30 rounded-full mb-4">
               {search ? (
-                <Search className="w-8 h-8 text-gray-500" />
+                <Search className="w-8 h-8 text-zinc-500" />
               ) : (
-                <Users className="w-8 h-8 text-gray-500" />
+                <Users className="w-8 h-8 text-zinc-500" />
               )}
             </div>
-            <h3 className="text-lg font-medium text-gray-300 mb-2">
+            <h3 className="text-lg font-medium text-zinc-300 mb-2">
               {search ? 'No matches found' : 'No conversations yet'}
             </h3>
-            <p className="text-sm text-gray-500 text-center max-w-xs">
+            <p className="text-sm text-zinc-500 text-center max-w-xs">
               {search
                 ? `No conversations match "${search}". Try a different search term.`
                 : 'Start chatting by creating a new conversation or joining an existing group.'}
@@ -230,7 +230,7 @@ const ChatList: React.FC<ChatListProps> = ({ currentChatId }) => {
         ) : (
           <div className="px-3 py-2 space-y-1">
             {search && (
-              <div className="px-3 py-2 text-sm text-gray-400 border-b border-gray-800/30 mb-2">
+              <div className="px-3 py-2 text-sm text-zinc-400 border-b border-zinc-800/30 mb-2">
                 {sortedChats.length} result{sortedChats.length !== 1 ? 's' : ''}{' '}
                 for "{search}"
               </div>
