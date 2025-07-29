@@ -98,12 +98,8 @@ const ChatDemo = () => {
                         P
                       </div>
                       <div className="flex-1 min-w-0">
-                        <div className="text-sm font-medium truncate">
-                          Papa
-                        </div>
-                        <div className="text-xs text-gray-400 truncate">
-                          👍
-                        </div>
+                        <div className="text-sm font-medium truncate">Papa</div>
+                        <div className="text-xs text-gray-400 truncate">👍</div>
                       </div>
                       <div className="text-xs text-gray-500">12:30 PM</div>
                     </div>
@@ -162,9 +158,7 @@ const ChatDemo = () => {
                         <span className="text-white font-medium text-sm">
                           Ananya
                         </span>
-                        <span className="text-gray-400 text-xs">
-                          2:10 PM
-                        </span>
+                        <span className="text-gray-400 text-xs">2:10 PM</span>
                       </div>
                       <div className="text-white text-sm">
                         OMG! I just finished The Stand!!
@@ -187,13 +181,10 @@ const ChatDemo = () => {
                         <span className="text-white font-medium text-sm">
                           Ananya
                         </span>
-                        <span className="text-gray-400 text-xs">
-                          2:12 PM
-                        </span>
+                        <span className="text-gray-400 text-xs">2:12 PM</span>
                       </div>
                       <div className="text-white text-sm">
-                        It was INCREDIBLE! Thank you so much for
-                        recommending it
+                        It was INCREDIBLE! Thank you so much for recommending it
                       </div>
                     </div>
                   </div>

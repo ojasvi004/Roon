@@ -6,7 +6,10 @@ interface HeroSectionProps {
   showCursor: boolean;
 }
 
-const HeroSection: React.FC<HeroSectionProps> = ({ displayText, showCursor }) => {
+const HeroSection: React.FC<HeroSectionProps> = ({
+  displayText,
+  showCursor,
+}) => {
   return (
     <div className="relative z-10 text-center max-w-4xl mx-auto mb-16">
       <h1 className="text-5xl md:text-7xl font-bold mb-8 leading-tight mt-28">
@@ -22,9 +25,9 @@ const HeroSection: React.FC<HeroSectionProps> = ({ displayText, showCursor }) =>
       </h1>
 
       <p className="text-xl md:text-2xl text-gray-400 mb-12 max-w-3xl mx-auto leading-relaxed">
-        Experience seamless real-time messaging with advanced privacy
-        controls. Keep your conversations secure while staying connected
-        with what matters most.
+        Experience seamless real-time messaging with advanced privacy controls.
+        Keep your conversations secure while staying connected with what matters
+        most.
       </p>
 
       <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">

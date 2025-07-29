@@ -1,12 +1,13 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import Navbar from './Navbar';
 import BackgroundEffects from './BackgroundEffects';
 import HeroSection from './HeroSection';
 import ChatDemo from './ChatDemo';
 import FeaturesSection from './FeaturesSection';
 import Footer from './Footer';
+import AnimatedSection from './AnimatedSection';
 
 const LandingPage = () => {
   const [displayText, setDisplayText] = useState('');
@@ -36,21 +37,31 @@ const LandingPage = () => {
 
   return (
     <div className="min-h-screen bg-black text-white overflow-hidden">
-      <Navbar />
+      <AnimatedSection animationType="immediate">
+        <Navbar />
+      </AnimatedSection>
 
       <div className="relative min-h-screen flex flex-col items-center justify-center px-8 pt-20">
         <BackgroundEffects />
-        
-        <HeroSection displayText={displayText} showCursor={showCursor} />
-        
-        <ChatDemo />
 
-        <FeaturesSection />
+        <AnimatedSection animationType="immediate" delay={0.2}>
+          <HeroSection displayText={displayText} showCursor={showCursor} />
+        </AnimatedSection>
+
+        <AnimatedSection className="w-full">
+          <ChatDemo />
+        </AnimatedSection>
+
+        <AnimatedSection id="features">
+          <FeaturesSection />
+        </AnimatedSection>
 
         <div className="h-20"></div>
       </div>
 
-      <Footer />
+      <AnimatedSection id="footer">
+        <Footer />
+      </AnimatedSection>
     </div>
   );
 };
