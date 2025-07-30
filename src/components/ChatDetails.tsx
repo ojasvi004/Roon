@@ -222,7 +222,7 @@ const ChatDetails: React.FC<ChatDetailsProps> = ({ chatId }) => {
       </div>
     </div>
   ) : (
-    <div className="flex flex-col w-full h-screen bg-zinc-900">
+    <div className="flex flex-col w-full h-screen bg-zinc-950/10">
       <div className="flex items-center justify-between px-4 py-3 bg-zinc-800/80 backdrop-blur-sm border-b border-zinc-700 sticky top-0 z-50">
         <div className="flex items-center gap-2">
           <button

@@ -138,7 +138,7 @@ const ChatList: React.FC<ChatListProps> = ({ currentChatId }) => {
   }, [currentUser]);
 
   return loading ? (
-    <div className="flex flex-col h-full bg-zinc-900/50 backdrop-blur-sm">
+    <div className="flex flex-col h-full bg-zinc-90/50 backdrop-blur-sm">
       <div className="flex-shrink-0 px-4 py-4 border-b border-zinc-800/50">
         <div className="flex items-center gap-3 mb-4">
           <div className="p-2 bg-indigo-600/10 rounded-lg">
@@ -163,7 +163,7 @@ const ChatList: React.FC<ChatListProps> = ({ currentChatId }) => {
       </ScrollArea>
     </div>
   ) : (
-    <div className="flex flex-col h-full bg-zinc-900/50 backdrop-blur-sm">
+    <div className="flex flex-col h-full bg-zinc-950/50 backdrop-blur-sm">
       <div className="flex-shrink-0 px-4 py-4 border-b border-zinc-800/50">
         <div className="flex items-center gap-3 mb-4">
           <div className="p-2 bg-indigo-600/10 rounded-lg">

@@ -4,6 +4,7 @@ import React from 'react';
 import { format } from 'date-fns';
 import { useRouter } from 'next/navigation';
 import { Users, Camera } from 'lucide-react';
+import { Badge } from '@/components/ui/badge';
 
 const ChatBox = ({ chat, currentUser, currentChatId }) => {
   const otherMembers = chat?.members?.filter(
@@ -17,6 +18,12 @@ const ChatBox = ({ chat, currentUser, currentChatId }) => {
   const seen =
     lastMessage?.seenBy?.some((member) => member._id === currentUser._id) ||
     false;
+
+  const unreadCount = chat?.messages?.filter(
+    (message) => 
+      message.sender._id !== currentUser._id && 
+      !message.seenBy?.some((member) => member._id === currentUser._id)
+  ).length || 0;
 
   const isActive = chat._id === currentChatId;
 
@@ -124,13 +131,17 @@ const ChatBox = ({ chat, currentUser, currentChatId }) => {
               )}
             </div>
 
-            {!seen &&
-              lastMessage &&
-              lastMessage?.sender?._id !== currentUser._id && (
-                <div className={`w-2 h-2 rounded-full flex-shrink-0 ml-2 transition-all duration-200 ${
-                  isActive ? 'bg-white shadow-lg' : 'bg-indigo-500 group-hover:bg-indigo-400'
-                }`}></div>
-              )}
+            {unreadCount > 0 && (
+              <Badge 
+                className={`flex-shrink-0 ml-2 min-w-[1.25rem] h-5 px-1.5 text-xs font-bold transition-all duration-200 ${
+                  isActive 
+                    ? 'bg-white text-zinc-900 shadow-lg' 
+                    : 'bg-indigo-500 text-white group-hover:bg-indigo-400'
+                }`}
+              >
+                {unreadCount > 99 ? '99+' : unreadCount}
+              </Badge>
+            )}
           </div>
         </div>
       </div>
