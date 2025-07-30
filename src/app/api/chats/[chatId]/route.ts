@@ -45,8 +45,7 @@ export const POST = async (req: NextRequest, { params }: { params: Promise<{ cha
 
     await Message.updateMany(
       { chat: chatId },
-      { $addToSet: { seenBy: currentUserId } },
-      { new: true }
+      { $addToSet: { seenBy: currentUserId } }
     )
       .populate({
         path: 'sender seenBy',
