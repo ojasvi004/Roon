@@ -1,5 +1,7 @@
+import React, { useState } from 'react';
 import { format } from 'date-fns';
 import Image from 'next/image';
+import { X } from 'lucide-react';
 
 interface MessageBoxProps {
   message: any;
@@ -15,7 +17,7 @@ const MessageBox: React.FC<MessageBoxProps> = ({
   showAvatar = true,
 }) => {
   const isOwnMessage = message?.sender?._id === currentUser._id;
-
+  const [expandImage, setExpandImage] = useState(false);
   return (
     <div
       className={`flex ${isOwnMessage ? 'justify-end' : 'justify-start'} ${showTimestamp ? 'mb-3' : 'mb-0.5'}`}
@@ -43,9 +45,9 @@ const MessageBox: React.FC<MessageBoxProps> = ({
           className={`flex flex-col ${isOwnMessage ? 'items-end' : 'items-start'}`}
         >
           <div
-            className={`px-4 py-2 rounded-2xl shadow-sm ${
+            className={`px-2 py-2 rounded-2xl shadow-sm ${
               isOwnMessage
-                ? 'bg-indigo-600 text-white rounded-br-md'
+                ? 'bg-indigo-600/75 text-white rounded-br-md'
                 : 'bg-zinc-800 text-zinc-100 rounded-bl-md border border-zinc-700'
             } max-w-full break-words`}
           >
@@ -56,10 +58,32 @@ const MessageBox: React.FC<MessageBoxProps> = ({
                 <Image
                   src={message?.photo}
                   alt="message"
-                  className="max-w-[280px] max-h-[280px] object-cover rounded-xl"
+                  className="max-w-[280px] p-0.5 max-h-[280px] object-cover rounded-xl cursor-pointer"
                   height={280}
                   width={280}
+                  onClick={() => setExpandImage(true)}
                 />
+                {expandImage && (
+                  <div
+                    className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50"
+                    onClick={() => setExpandImage(false)}
+                  >
+                    <X
+                      className="absolute top-4 right-4 text-white cursor-pointer w-8 h-8"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setExpandImage(false);
+                      }}
+                    />
+                    <Image
+                      src={message?.photo}
+                      alt="expanded message"
+                      className="max-w-[90vw] max-h-[90vh] object-contain"
+                      height={700}
+                      width={700}
+                    />
+                  </div>
+                )}
               </div>
             )}
           </div>
