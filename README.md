@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="public/image.png" alt="Roon" width="600" height="360" style="object-fit: cover; object-position: center;"/>
+  <img src="public/image-readme.png" alt="Roon" width="600" height="360" style="object-fit: cover; object-position: center;"/>
   
   # Roon
   
