@@ -317,6 +317,7 @@ const ChatDetails: React.FC<ChatDetailsProps> = ({ chatId }) => {
                 key={index}
                 message={message}
                 currentUser={currentUser}
+                isGroupChat={chat?.isGroup}
                 showTimestamp={shouldShowTimestamp(
                   message,
                   chat?.messages?.[index + 1],

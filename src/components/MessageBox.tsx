@@ -8,6 +8,7 @@ interface MessageBoxProps {
   currentUser: any;
   showTimestamp?: boolean;
   showAvatar?: boolean;
+  isGroupChat?: boolean;
 }
 
 const MessageBox: React.FC<MessageBoxProps> = ({
@@ -15,6 +16,7 @@ const MessageBox: React.FC<MessageBoxProps> = ({
   currentUser,
   showTimestamp = true,
   showAvatar = true,
+  isGroupChat = false,
 }) => {
   const isOwnMessage = message?.sender?._id === currentUser._id;
   const [expandImage, setExpandImage] = useState(false);
@@ -44,6 +46,12 @@ const MessageBox: React.FC<MessageBoxProps> = ({
         <div
           className={`flex flex-col ${isOwnMessage ? 'items-end' : 'items-start'}`}
         >
+          {!isOwnMessage && isGroupChat && showAvatar && (
+            <p className="text-xs text-zinc-400 mb-1 px-2 font-medium">
+              {message?.sender?.username || 'Unknown User'}
+            </p>
+          )}
+          
           <div
             className={`px-2 py-2 rounded-2xl shadow-sm ${
               isOwnMessage

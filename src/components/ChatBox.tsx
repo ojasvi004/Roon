@@ -118,7 +118,7 @@ const ChatBox = ({ chat, currentUser, currentChatId }) => {
                   <span>
                     {lastMessage?.sender?._id === currentUser._id
                       ? 'You sent a photo'
-                      : 'Received a photo'}
+                      : `${(lastMessage?.sender?.username || 'Someone').split(' ')[0]}: sent you a photo`}
                   </span>
                 </div>
               ) : (
