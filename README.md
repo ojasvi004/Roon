@@ -1,112 +1,135 @@
-# Roon
+<div align="center">
+  <img src="public/image.png" alt="Roon" width="600" height="360" style="object-fit: cover; object-position: center;"/>
+  
+  # Roon
+  
+  *A real-time messaging app built with Next.js 15*
+  
+  Chat instantly with friends, create group conversations and share images - all with a clean, modern interface.
+</div>
 
-Roon is a real-time messaging app designed to make communication seamless and engaging. It supports features like instant messaging, group chats, and read receipts, ensuring users stay connected effortlessly and never miss a beat. With a focus on reliability and ease of use, Roon brings people together in real-time, whether for work or personal conversations :)
-## Table of Contents
+## Table of contents
 
 - [Roon](#roon)
-  - [Table of Contents](#table-of-contents)
+  - [Table of contents](#table-of-contents)
   - [Features](#features)
-  - [Tech Stack](#tech-stack)
-  - [Installation](#installation)
-  - [Docker Support](#docker-support)
-  - [Usage](#usage)
-  - [Contact](#contact)
-
----
+  - [Tech stack](#tech-stack)
+  - [Getting started](#getting-started)
+    - [What you need](#what-you-need)
+    - [Quick setup](#quick-setup)
+  - [Development](#development)
+    - [Commands](#commands)
+    - [Project structure](#project-structure)
+  - [Contributing](#contributing)
+  - [Need help?](#need-help)
+  - [License](#license)
 
 ## Features
 
-- **User Authentication**: Secure user authentication using NextAuth.
-- **Real-Time Messaging**: Instant chat updates powered by Pusher.
-- **Database**: MongoDB integration with Mongoose for schema and data handling.
-- **Responsive Design**: Optimized for desktop and mobile usage.
+- Real-time messaging with instant delivery
+- Group chats and direct messages
+- Edit Group information and personal profile
+- Image sharing with drag-and-drop
+- Read receipts and message status
+- User authentication and profiles
+- Search and add contacts
 
-## Tech Stack
+## Tech stack
 
-- **Frontend**: Next.js, TypeScript, Tailwind CSS, ShadCN
-- **Backend**: Next.js API Routes, Node.js, Pusher
-- **Database**: MongoDB & Mongoose (ORM)
-- **Schema Declaration & Validation**: Zod
-- **Authentication**: NextAuth (JWT)
-- **Real-Time Updates**: Pusher
-- **Containerization**: Docker 
+- **Frontend**: Next.js 15, TypeScript, Tailwind CSS, ShadCN UI
+- **Backend**: Next.js API Routes, NextAuth, MongoDB, Mongoose
+- **Real-time**: Pusher for WebSocket connections
+- **Images**: Cloudinary for uploads
+- **Validation**: Zod schemas
 
-## Installation
+## Getting started
 
-1. **Clone the repository:**
+### What you need
 
-    ```bash
-    git clone https://github.com/ojasvi004/Roon.git
-    ```
+- Node.js 18+ and npm
+- MongoDB Atlas account (free)
+- Pusher account (free tier available)
+- Cloudinary account (for images)
 
-2. **Navigate to the project directory:**
+### Quick setup
 
-    ```bash
-    cd Roon
-    ```
+1. **Clone and install:**
+   ```bash
+   git clone https://github.com/ojasvi004/Roon.git
+   cd Roon
+   npm install
+   ```
 
-3. **Install dependencies:**
+2. **Environment setup:**
+   
+   Create `.env` in the root directory:
+   ```env
+   NEXTAUTH_SECRET=your_random_secret_string
+   NEXTAUTH_URL=http://localhost:3000
+   DATABASE_URL=mongodb+srv://username:password@cluster.mongodb.net/roon
+   PUSHER_APP_ID=your_pusher_app_id
+   PUSHER_KEY=your_pusher_key
+   PUSHER_SECRET=your_pusher_secret
+   PUSHER_CLUSTER=your_pusher_cluster
+   NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME=your_cloud_name
+   ```
 
-    ```bash
-    npm install
-    ```
+3. **Get your API keys:**
+   - **MongoDB**: Sign up at [MongoDB Atlas](https://www.mongodb.com/cloud/atlas), create a cluster, get connection string
+   - **Pusher**: Sign up at [Pusher](https://pusher.com/), create an app, copy credentials
+   - **Cloudinary**: Sign up at [Cloudinary](https://cloudinary.com/), get cloud name from dashboard
 
-4. **Set up environment variables:**
+4. **Start the app:**
+   ```bash
+   npm run dev
+   ```
+   
+   Open [http://localhost:3000](http://localhost:3000) and start chatting :)
 
-    - Create a `.env` file in the root directory and configure the following:
+## Development
 
-    ```env
-    NEXTAUTH_SECRET=your_secret
-    NEXTAUTH_URL=http://localhost:3000
-    DATABASE_URL=mongodb+srv://username:password@cluster.mongodb.net/chatapp
-    PUSHER_APP_ID=your_pusher_app_id
-    PUSHER_KEY=your_pusher_key
-    PUSHER_SECRET=your_pusher_secret
-    PUSHER_CLUSTER=your_pusher_cluster
-    ```
+### Commands
+- `npm run dev` - Development server with hot reload
+- `npm run build` - Build for production
+- `npm run start` - Start production server
 
-5. **Run the application:**
+### Project structure
+```
+src/
+├── app/                 # Pages and API routes
+│   ├── (auth)/         # Login/register pages
+│   ├── (root)/         # Main app (chats, contacts, profile)
+│   └── api/            # Backend API endpoints
+├── components/         # UI components
+├── models/            # Database schemas (User, Chat, Message)
+└── lib/               # Utilities and configurations
+```
 
-    ```bash
-    npm run dev
-    ```
+## Contributing
 
-6. **Open your browser and visit [http://localhost:3000](http://localhost:3000).**
+Want to help improve Roon? Here's how:
 
----
+1. Fork the repo and create a branch: `git checkout -b feature/cool-feature`
+2. Make your changes (follow the existing code style)
+3. Test everything works
+4. Submit a pull request
 
-## Docker Support
+**Ideas for contributions:**
+- Better mobile experience
+- New messaging features (reactions, threads)
+- Performance improvements
+- UI/UX enhancements
+- Bug fixes
 
-To run the application using Docker, follow these steps:
+## Need help?
 
-1. **Ensure Docker is installed**: Make sure you have Docker installed on your machine. You can download it from [here](https://www.docker.com/get-started).
+Having trouble? Here's what to do:
 
-2. **Build the Docker image**:
+- Create an issue with details about the problem
+- Include your environment (Node version, OS)
+- Describe what you expected vs what happened
+- Reach out: ojasvidoye@gmail.com
 
-    In the root directory of the project, run:
+## License
 
-    ```bash
-    docker build -t roon .
-    ```
-
-3. **Run the application in a Docker container**:
-
-    ```bash
-    docker run -p 3000:3000 --env-file .env roon
-    ```
-
-4. **Open your browser and visit [http://localhost:3000](http://localhost:3000).**
-
----
-
-## Usage
-
-- **Register**: Create a new account or log in using existing credentials
-- **Start a chat**: Select a contact or group to start chatting. You can also send images
-- **Real-time messaging**: Enjoy instant updates as you send or receive messages
-- **Profile management**: Update your profile or group profile from the profile page
-
-
-## Contact
-
-For any questions, please contact `ojasvidoye@gmail.com`
+MIT License
