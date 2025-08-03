@@ -90,7 +90,6 @@ const Contacts: React.FC = () => {
     <div className="max-w-2xl mx-auto p-6 max-h-[800px] h-[800px] flex flex-col w-full overflow-hidden">
       <div className="text-center space-y-2 mb-6">
         <div className="flex items-center justify-center gap-2 text-2xl font-semibold text-white">
-          <Users className="w-6 h-6 text-indigo-400" />
           Start New Chat
         </div>
         <p className="text-zinc-400 text-sm">
@@ -129,7 +128,7 @@ const Contacts: React.FC = () => {
                   height={16}
                   width={16}
                 />
-                <span className="truncate max-w-20">{contact.username || contact.name}</span>
+                <span className="truncate max-w-24">{contact.username || contact.name}</span>
                 <button
                   onClick={() => handleSelect(contact)}
                   className="hover:bg-indigo-400/20 rounded-full p-0.5 flex-shrink-0"
@@ -149,7 +148,7 @@ const Contacts: React.FC = () => {
           </label>
           <Input
             placeholder="Enter group name..."
-            className="bg-zinc-800/50 border-zinc-600 text-white placeholder-zinc-400 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 rounded-lg"
+            className="bg-zinc-800/50 border-zinc-600 text-white placeholder-zinc-400 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 rounded-lg truncate"
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
@@ -242,9 +241,11 @@ const Contacts: React.FC = () => {
           disabled={selectedContacts.length === 0}
         >
           <MessageCircle className="w-5 h-5" />
-          {selectedContacts.length === 0
-            ? 'Select contacts to continue'
-            : `Start ${isGroup ? 'Group ' : ''}Chat${selectedContacts.length > 1 ? ` (${selectedContacts.length})` : ''}`}
+          <span className="truncate">
+            {selectedContacts.length === 0
+              ? 'Select contacts to continue'
+              : `Start ${isGroup ? 'Group ' : ''}Chat${selectedContacts.length > 1 ? ` (${selectedContacts.length})` : ''}`}
+          </span>
         </button>
       </div>
     </div>
