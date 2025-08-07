@@ -6,8 +6,8 @@ import { FaGithub, FaLinkedin, FaEnvelope } from 'react-icons/fa';
 const Footer = () => {
   return (
     <footer className="w-full border-t border-zinc-800 mt-20">
-      <div className="max-w-8xl mx-auto px-36 py-12">
-        <div className="flex justify-between items-start mb-8">
+      <div className="max-w-8xl mx-auto px-4 md:px-8 lg:px-36 py-12">
+        <div className="flex flex-col lg:flex-row lg:justify-between lg:items-start mb-8 space-y-8 lg:space-y-0">
           <div className="flex-shrink-0">
             <div className="flex items-center space-x-2 mb-4">
               <div className="flex items-center justify-center w-8 h-8 rounded-lg">
@@ -51,7 +51,7 @@ const Footer = () => {
             </div>
           </div>
 
-          <div className="flex space-x-16">
+          <div className="flex flex-col sm:flex-row space-y-8 sm:space-y-0 sm:space-x-8 lg:space-x-16">
             <div>
               <h3 className="text-white font-semibold mb-4">Product</h3>
               <ul className="space-y-2 text-sm">
@@ -136,7 +136,7 @@ const Footer = () => {
           <div className="text-zinc-400 text-sm mb-4 md:mb-0">
             © 2025 Roon. All rights reserved.
           </div>
-          <div className="flex items-center space-x-6 text-sm">
+          <div className="flex flex-wrap items-center justify-center md:justify-end gap-4 md:gap-6 text-sm">
             <Link
               href="#"
               className="text-zinc-400 hover:text-white transition-colors"

@@ -41,7 +41,7 @@ const LandingPage = () => {
         <Navbar />
       </AnimatedSection>
 
-      <div className="relative min-h-screen flex flex-col items-center justify-center px-8 pt-20">
+      <div className="relative min-h-screen flex flex-col items-center justify-center px-4 md:px-8 pt-20">
         <BackgroundEffects />
 
         <AnimatedSection animationType="immediate" delay={0.2}>

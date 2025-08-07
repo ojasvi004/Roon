@@ -52,13 +52,13 @@ const FeaturesSection = () => {
   ];
 
   return (
-    <div className="relative z-10 w-full max-w-7xl mx-auto mt-32 px-4">
+    <div className="relative z-10 w-full max-w-7xl mx-auto mt-16 md:mt-32 px-4">
       {/* Header Section */}
-      <div className="relative mb-20">
+      <div className="relative mb-12 md:mb-20">
         <div className="text-left max-w-2xl">
-          <h2 className="text-3xl md:text-6xl font-bold text-white mb-6 leading-tight">
+          <h2 className="text-2xl md:text-3xl lg:text-6xl font-bold text-white mb-6 leading-tight">
             Built for{' '}
-            <span className="text-indigo-400 font-playwrite">
+            <span className="text-indigo-500/90 font-playwrite">
               real conversations.
             </span>
           </h2>
@@ -66,7 +66,7 @@ const FeaturesSection = () => {
       </div>
 
       {/* Features Grid */}
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {features.map((feature, index) => (
           <div key={index} className="relative group">
             <Badge 
