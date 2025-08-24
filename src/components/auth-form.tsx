@@ -13,6 +13,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import PostLoginLoader from "@/components/PostLoginLoader"
 
 interface FormProps {
   type: "login" | "register"
@@ -28,6 +29,7 @@ interface FormData {
 export default function AuthForm({ type }: FormProps) {
   const [showPassword, setShowPassword] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
+  const [isRedirecting, setIsRedirecting] = useState(false)
 
   const {
     register,
@@ -68,8 +70,10 @@ export default function AuthForm({ type }: FormProps) {
         redirect: false,
       })
       if (res?.ok) {
+        sessionStorage.setItem("justLoggedIn", "true")
+        setIsRedirecting(true)
         toast.success("Login successful!")
-        router.push("/chats")
+        router.replace("/chats")
       } else {
         toast.error("Invalid email or password")
       }
@@ -80,6 +84,7 @@ export default function AuthForm({ type }: FormProps) {
 
   return (
     <div className="min-h-screen bg-transparent flex items-center justify-center p-6 relative z-10">
+      {isRedirecting && <PostLoginLoader />}
       <Card className="mx-auto w-full max-w-lg bg-zinc-800/60 backdrop-blur-lg border-zinc-600/70 shadow-2xl shadow-black/50">
         <CardHeader className="space-y-3 pb-6">
           <CardTitle className="text-3xl text-zinc-200 text-center">{type === "register" ? "Create Account" : "Sign In"}</CardTitle>

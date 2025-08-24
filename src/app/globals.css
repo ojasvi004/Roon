@@ -125,3 +125,47 @@ scrollbar-thumb {
 .scrollbar-custom::-webkit-scrollbar-track {
   background: transparent;
 }
+
+.post-login-loader {
+  width: 50px;
+  aspect-ratio: 1;
+  color: #dc1818;
+  background: radial-gradient(circle at 60% 65%, currentColor 62%, #0000 65%) top left,
+              radial-gradient(circle at 40% 65%, currentColor 62%, #0000 65%) top right,
+              linear-gradient(to bottom left, currentColor 42%, #0000 43%) bottom left,
+              linear-gradient(to bottom right, currentColor 42%, #0000 43%) bottom right;
+  background-size: 50% 50%;
+  background-repeat: no-repeat;
+  position: relative;
+}
+
+.post-login-loader:after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: inherit;
+  opacity: 0.4;
+  animation: postLoginLoaderAnimation 1s infinite;
+}
+
+@keyframes postLoginLoaderAnimation {
+  to {
+    transform: scale(1.8);
+    opacity: 0;
+  }
+}
+
+.roon-cat-loader {
+  position: relative;
+  z-index: 10;
+  animation: roonCatBounce 1.5s ease-in-out infinite;
+}
+
+@keyframes roonCatBounce {
+  0%, 100% {
+    transform: translateY(0px) scale(1);
+  }
+  50% {
+    transform: translateY(-10px) scale(1.1);
+  }
+}

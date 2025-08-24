@@ -3,7 +3,7 @@ import Image from 'next/image';
 
 const ChatDemo = () => {
   return (
-    <div className="flex justify-center items-center w-full py-8 md:py-12 px-4">
+    <div className="flex justify-center items-center w-full py-5 md:py-12 px-4">
       <div className="relative max-w-7xl w-full">
         <div className="relative w-full h-[300px] md:h-auto rounded-2xl">
           <Image
